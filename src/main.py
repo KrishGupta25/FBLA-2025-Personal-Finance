@@ -1,8 +1,8 @@
-#import all required dependencies
+#Import all required dependencies
 import tkinter as tk
 import customtkinter as ctk
 from pymongo import MongoClient
-import pyglet
+from tkextrafont import Font
 
 #set up connections with the database
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -12,21 +12,19 @@ loginInfo = db["login_info"]
 #import custom font
 pyglet.font.add_file('assets/Quicksand-Bold.ttf')
 
+
+#Setting up the GUI
 #creates main home gui
-root= ctk.CTk()
+root= ctk.CTk() 
 root.geometry("1000x500+100+100")
 
 
-loginLabel = ctk.CTkLabel(root, text="login", font=("Quicksand",50))
-loginLabel.place(relx=0.5, rely=0.2, anchor="center")
+font = Font(file="./assets/Quicksand-Bold.ttf", family="Quicksand")
 
-def done():
-    loginInfo.insert_one()
-randomButton = ctk.Ctkbutton(root, text="click me", command= done, )
-randomButton.place(relx= 0.5, rely= 0.4)
+login_label = ctk.CTkLabel(root, text="login", font=(font,50))
+login_label.place(relx=0.5, rely=0.2, anchor="center")
 
 
-#keeps application running 
 if __name__ == "__main__":
     root.mainloop()
 
