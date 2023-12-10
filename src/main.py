@@ -20,10 +20,10 @@ root.geometry("1000x500+100+100")
 
 
 
-login_label = ctk.CTkLabel(root, text="login", font=("Quicksand",50))
-login_label.place(relx=0.5, rely=0.2, anchor="center")
+loginLabel = ctk.CTkLabel(root, text="login", font=("Quicksand",50))
+loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
-
+#keeps gui running
 if __name__ == "__main__":
     root.mainloop()
 
