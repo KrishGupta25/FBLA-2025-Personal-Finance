@@ -3,6 +3,7 @@ import tkinter as tk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
+import string
 
 # Import all commands
 from error import error
@@ -41,11 +42,50 @@ def signUp(root):
     passEntry = ctk.CTkEntry(newFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
     passEntry.place(relx= 0.5, rely= 0.7, anchor= "center")
 
+    #Checking to see a valid username and password
     def enter():
+
+        #Checking password for at least one uppercase letter, one lowercase letter, one special character, and one number, and at least 8 characters
+        #Checking password for "@" symbol 
+        #Checking both for no spaces and making sure they arent blank
+
+        #Getting the input from the user
         email= emailEntry.get()
         password = passEntry.get()
-        if email.find(" ") != -1 or password.find(" ") != -1 or email == "" or password == "":
-            error("one or more of the required fields are empty/entries cannot contain spaces", newFrame)
+
+        #Checking to see if either entry is empty
+        if email == "" or password == "":
+            error("Either one or more of the required fields are empty or your entry has spaces", newFrame)
+
+        #Checking to see if either entry has spaces
+        elif email.find(" ") > -1 or password.find(" ") > -1:
+            error("Either one or more of the required fields are empty or your entry has spaces", newFrame)
+
+        #Makeing sure there is a "@" sign in the email entry field 
+        elif email.find("@") == -1:
+            error("There is no '@' in your email, please try again!", newFrame)
+
+        #Checking to see if there is at least one uppercase character in the password
+        elif any(ele.isupper() for ele in password) == False:
+            error("There is no uppercase letter in your password, please try again!", newFrame)
+        
+        #Checking to see if there is at least one lowercase character in the password
+        elif any(ele.islower() for ele in password) == False:
+            error("There is no lowercase letter in your password, please try again!", newFrame)
+       
+        #Checking to see if there is at least one special character in the password
+        elif (password.isalnum()) == True:
+            error("There is no special characters in your password, please try again!", newFrame)
+
+        #Checking to see if there is at least one number in the password
+        elif any(ele.isdigit() for ele in password) == False:
+            error("There is no number in your password, please try again!", newFrame)
+        
+        #Checking to see if there is at least 8 characters in the password
+        elif len(password) <= 8:
+            error("There arent 8 characters in your password, please try again!", newFrame)
+
+        #If all of those checks are passed then add the username and password to our database
         else:
             temp = {"email": email, "password": password}
             loginInfo.insert_one(temp)
@@ -55,4 +95,3 @@ def signUp(root):
     enterButton = ctk.CTkButton(newFrame, text="Sign up", font=font(25), command= enter, fg_color= color)
     enterButton.place(relx=0.5, rely=0.85, anchor="center")
 
-    
