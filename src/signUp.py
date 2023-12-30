@@ -26,25 +26,25 @@ color = "#1e1e1e"
 #Instantiatation of a new page for the signup
 def signUp(root):
     #Create new sign up frame over login page
-    newFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
-    newFrame.place(relx= 0, rely= 0)
+    signupFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
+    signupFrame.place(relx= 0, rely= 0)
 
     #Creates signup to xxxx label
-    loginLabel = ctk.CTkLabel(newFrame, text="Sign up for xxxx", font=font(50))
+    loginLabel = ctk.CTkLabel(signupFrame, text="Sign up for xxxx", font=font(50))
     loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
 #=========================== Email ======================================================================================================================================================
    
-    emailLabel = ctk.CTkLabel(newFrame, text="Email", font=font(15))
+    emailLabel = ctk.CTkLabel(signupFrame, text="Email", font=font(15))
     emailLabel.place(relx=0.335, rely=0.41, anchor="nw")
-    emailEntry = ctk.CTkEntry(newFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center")
+    emailEntry = ctk.CTkEntry(signupFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center")
     emailEntry.place(relx= 0.5, rely= 0.5, anchor= "center")
 
 #=========================== Password ======================================================================================================================================================
    
-    passLabel = ctk.CTkLabel(newFrame, text="Password", font=font(15))
+    passLabel = ctk.CTkLabel(signupFrame, text="Password", font=font(15))
     passLabel.place(relx=0.335, rely=0.61, anchor="nw")
-    passEntry = ctk.CTkEntry(newFrame, font = font(15), placeholder_text = "Password", width = 400, height= 40, justify = "center", show = "*")
+    passEntry = ctk.CTkEntry(signupFrame, font = font(15), placeholder_text = "Password", width = 400, height= 40, justify = "center", show = "*")
     passEntry.place(relx= 0.5, rely= 0.7, anchor= "center")
 
 #=========================== Password Checkbox ======================================================================================================================================================
@@ -55,7 +55,7 @@ def signUp(root):
         else:
             passEntry.configure(show='')
 
-    showPasswordCheckbox = ctk.CTkCheckBox(newFrame, text="Show Password", command = showPasswordCommand)
+    showPasswordCheckbox = ctk.CTkCheckBox(signupFrame, text="Show Password", command = showPasswordCommand)
     showPasswordCheckbox.place(relx = 0.335, rely = 0.75)
 
 #=========================== Checking to see a valid username and password ======================================================================================================================================================        
@@ -72,50 +72,51 @@ def signUp(root):
 
         #Checking to see if either entry is empty
         if email == "" or password == "":
-            error("Either one or more of the required fields are empty or your entry has spaces", newFrame)
+            error("Either one or more of the required fields are empty or your entry has spaces", signupFrame)
 
         #Checking to see if either entry has spaces
         elif email.find(" ") > -1 or password.find(" ") > -1:
-            error("Either one or more of the required fields are empty or your entry has spaces", newFrame)
+            error("Either one or more of the required fields are empty or your entry has spaces", signupFrame)
 
         #Makeing sure there is a "@" sign in the email entry field 
         elif email.find("@") == -1:
-            error("There is no '@' in your email, please try again!", newFrame)
+            error("There is no '@' in your email, please try again!", signupFrame)
 
         #Checking to see if there is at least one uppercase character in the password
         elif any(ele.isupper() for ele in password) == False:
-            error("There is no uppercase letter in your password, please try again!", newFrame)
+            error("There is no uppercase letter in your password, please try again!", signupFrame)
         
         #Checking to see if there is at least one lowercase character in the password
         elif any(ele.islower() for ele in password) == False:
-            error("There is no lowercase letter in your password, please try again!", newFrame)
+            error("There is no lowercase letter in your password, please try again!", signupFrame)
        
         #Checking to see if there is at least one special character in the password
         elif (password.isalnum()) == True:
-            error("There is no special characters in your password, please try again!", newFrame)
+            error("There is no special characters in your password, please try again!", signupFrame)
 
         #Checking to see if there is at least one number in the password
         elif any(ele.isdigit() for ele in password) == False:
-            error("There is no number in your password, please try again!", newFrame)
+            error("There is no number in your password, please try again!", signupFrame)
         
         #Checking to see if there is at least 8 characters in the password
         elif len(password) <= 8:
-            error("There arent 8 characters in your password, please try again!", newFrame)
+            error("There arent 8 characters in your password, please try again!", signupFrame)
 
         #If all of those checks are passed then add the username and password to our database
         else:
             temp = {"email": email, "password": password}
             loginInfo.insert_one(temp)
-            newFrame.place_forget()
+            signupFrame.place_forget()
 
 #=========================== Sign Up Button ======================================================================================================================================================
     
-    signUpButton = ctk.CTkButton(newFrame, text="Sign up", font=font(25), command= enter, fg_color= color)
+    signUpButton = ctk.CTkButton(signupFrame, text="Sign up", font=font(25), command= enter, fg_color= color)
     signUpButton.place(relx=0.5, rely=0.85, anchor="center")
 
+#=========================== Back Button ======================================================================================================================================================
 
-    backButton = ctk.CTkButton(newFrame, text="Login in to xxxx", font=font(25), command= newFrame.place_forget, fg_color=color)
-    backButton.place(relx=0.825, rely=0.825, anchor="center")
+    backButton = ctk.CTkButton(signupFrame, text="Back to Login Page", font=font(25), command= signupFrame.place_forget, fg_color=color)
+    backButton.place(relx=0.105, rely=0.05, anchor="center")
 
 
 
