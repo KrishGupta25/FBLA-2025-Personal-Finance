@@ -44,16 +44,16 @@ def signUp(root):
    
     passLabel = ctk.CTkLabel(newFrame, text="Password", font=font(15))
     passLabel.place(relx=0.335, rely=0.61, anchor="nw")
-    passEntry = ctk.CTkEntry(newFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
+    passEntry = ctk.CTkEntry(newFrame, font = font(15), placeholder_text = "Password", width = 400, height= 40, justify = "center", show = "*")
     passEntry.place(relx= 0.5, rely= 0.7, anchor= "center")
 
 #=========================== Password Checkbox ======================================================================================================================================================
     
     def showPasswordCommand():
-        if passEntry.cget('show') == '*':
-            passEntry.configure(show="")
-        else:
+        if passEntry.cget('show') == '':
             passEntry.configure(show='*')
+        else:
+            passEntry.configure(show='')
 
     showPasswordCheckbox = ctk.CTkCheckBox(newFrame, text="Show Password", command = showPasswordCommand)
     showPasswordCheckbox.place(relx = 0.335, rely = 0.75)
