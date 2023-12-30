@@ -38,7 +38,7 @@ loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
 usernameLabel = ctk.CTkLabel(loginFrame, text="Email", font=font(15))
 usernameLabel.place(relx=0.335, rely=0.36, anchor="nw")
-usernameEntry = ctk.CTkEntry(loginFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center", show= "*")
+usernameEntry = ctk.CTkEntry(loginFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center")
 usernameEntry.place(relx= 0.5, rely= 0.45, anchor= "center")
 
 passLabel = ctk.CTkLabel(loginFrame, text="Password", font=font(15))
@@ -47,12 +47,16 @@ passEntry = ctk.CTkEntry(loginFrame, font= font(15), placeholder_text= "Password
 passEntry.place(relx= 0.5, rely= 0.6, anchor= "center")
 
 def login():
+    count = 0
     temp = loginInfo.find()
     for item in temp:
-        if item['email'] == usernameEntry.get() and item['password'] == passEntry.get():
-            loginFrame.place_forget()
-        else:
-            error("Wrong password or username!", loginFrame)
+        if str(item['email']) == str(usernameEntry.get()) and str(item['password']) == str(passEntry.get()):
+            count +=1  
+            
+    if count == 1:
+        loginFrame.place_forget()
+    else:
+        error("Wrong password or username!", loginFrame)
 
 
 #Creates log in up button
