@@ -114,5 +114,9 @@ def signUp(root):
     signUpButton.place(relx=0.5, rely=0.85, anchor="center")
 
 
+    backButton = ctk.CTkButton(newFrame, text="Login in to xxxx", font=font(25), command= newFrame.place_forget, fg_color=color)
+    backButton.place(relx=0.825, rely=0.825, anchor="center")
+
+
 
 
