@@ -20,9 +20,10 @@ pyglet.font.add_file('assets/circular-std-medium-500.ttf')
 def font(size):
     return ("circular",size)
 
-#set default color
+#Setting the default color
 color = "#1e1e1e"
 
+#Instantiatation of a new page for the signup
 def signUp(root):
     #Create new sign up frame over login page
     newFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
@@ -32,17 +33,33 @@ def signUp(root):
     loginLabel = ctk.CTkLabel(newFrame, text="Sign up for xxxx", font=font(50))
     loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
+#=========================== Email ======================================================================================================================================================
+   
     emailLabel = ctk.CTkLabel(newFrame, text="Email", font=font(15))
     emailLabel.place(relx=0.335, rely=0.41, anchor="nw")
     emailEntry = ctk.CTkEntry(newFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center")
     emailEntry.place(relx= 0.5, rely= 0.5, anchor= "center")
 
+#=========================== Password ======================================================================================================================================================
+   
     passLabel = ctk.CTkLabel(newFrame, text="Password", font=font(15))
     passLabel.place(relx=0.335, rely=0.61, anchor="nw")
     passEntry = ctk.CTkEntry(newFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
     passEntry.place(relx= 0.5, rely= 0.7, anchor= "center")
 
-    #Checking to see a valid username and password
+#=========================== Password Checkbox ======================================================================================================================================================
+    
+    def showPasswordCommand():
+        if passEntry.cget('show') == '*':
+            passEntry.configure(show="")
+        else:
+            passEntry.configure(show='*')
+
+    showPasswordCheckbox = ctk.CTkCheckBox(newFrame, text="Show Password", command = showPasswordCommand)
+    showPasswordCheckbox.place(relx = 0.335, rely = 0.75)
+
+#=========================== Checking to see a valid username and password ======================================================================================================================================================        
+    
     def enter():
 
         #Checking password for at least one uppercase letter, one lowercase letter, one special character, and one number, and at least 8 characters
@@ -91,7 +108,11 @@ def signUp(root):
             loginInfo.insert_one(temp)
             newFrame.place_forget()
 
-        
-    enterButton = ctk.CTkButton(newFrame, text="Sign up", font=font(25), command= enter, fg_color= color)
-    enterButton.place(relx=0.5, rely=0.85, anchor="center")
+#=========================== Sign Up Button ======================================================================================================================================================
+    
+    signUpButton = ctk.CTkButton(newFrame, text="Sign up", font=font(25), command= enter, fg_color= color)
+    signUpButton.place(relx=0.5, rely=0.85, anchor="center")
+
+
+
 
