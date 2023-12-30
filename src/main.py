@@ -26,9 +26,9 @@ def font(size):
 
 #Setting up the GUI
 #Creates main home gui
-root = ctk.CTk(fg_color = color) 
-root.geometry("1200x600+180+120")
-loginFrame = ctk.CTkFrame(root, width = 1200, height = 600, fg_color = color)
+mainFrame = ctk.CTk(fg_color = color) 
+mainFrame.geometry("1200x600+180+120")
+loginFrame = ctk.CTkFrame(mainFrame, width = 1200, height = 600, fg_color = color)
 loginFrame.place(relx = 0, rely = 0)
 
 
@@ -59,15 +59,28 @@ def login():
         error("Wrong password or username!", loginFrame)
 
 
+
+
+
 #Creates log in up button
 loginButton = ctk.CTkButton(loginFrame, text="Login in to xxxx", font=font(25), command= lambda:(login()), fg_color=color)
-loginButton.place(relx=0.5, rely=0.75, anchor="center")
+loginButton.place(relx=0.5, rely=0.825, anchor="center")
 
 #Creates sign up button
 signupButton = ctk.CTkButton(loginFrame, text="Sign up for xxxx", font=font(25), command= lambda:(signUp(loginFrame)), fg_color=color)
 signupButton.place(relx=0.5, rely=0.9, anchor="center")
 
 
+#=========================== Password Checkbox ======================================================================================================================================================
+    
+def showPasswordCommand():
+    if passEntry.cget('show') == '':
+        passEntry.configure(show='*')
+    else:
+        passEntry.configure(show='')
+
+showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command = showPasswordCommand)
+showPasswordCheckbox.place(relx = 0.335, rely = 0.65)
 
 
 
@@ -75,7 +88,7 @@ signupButton.place(relx=0.5, rely=0.9, anchor="center")
 
 #Keeps gui running
 if __name__ == "__main__":
-    root.mainloop()
+    mainFrame.mainloop()
 
 
 
