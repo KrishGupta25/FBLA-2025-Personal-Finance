@@ -33,7 +33,7 @@ def on_leave(e):
 #Instantiatation of a new page for the signup
 def info(root,email,password):
 
-    #Create new info frame over "root" which in this case is "signupFrame"
+    #Create new info frame over "root" which in this case is "loginFrame"
     infoFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
     infoFrame.place(relx= 0, rely= 0)
 
@@ -67,10 +67,9 @@ def info(root,email,password):
             first = firstNameEntry.get()
             last = lastNameEntry.get()
             prefferedName = prefferedNameEntry.get()
-            temp = {"email": email, "password": password, "firstName": first, "lastname": last, "preffered name": prefferedName}
-            loginInfo.insert_one(temp)
+            databaseInformation = {"email": email, "password": password, "firstName": first, "lastname": last, "preffered name": prefferedName}
+            loginInfo.insert_one(databaseInformation)
             infoFrame.place_forget()
-            print("hi")
             
     
 

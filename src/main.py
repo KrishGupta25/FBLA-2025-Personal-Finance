@@ -7,6 +7,7 @@ import pyglet
 #Import all commands
 from error import error
 from signUp import signUp
+#from pickingOrganization import picking 
 
 #Set up connections with the database
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -86,9 +87,11 @@ def login():
             count +=1  
             
     if count == 1:
-        loginFrame.place_forget()
+        pickingOrganization(loginButton)
     else:
         error("Wrong email or password!", loginFrame)
+
+    
 
 #=========================== Login Button ======================================================================================================================================================
 
