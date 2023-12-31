@@ -78,6 +78,11 @@ def signUp(root):
         email= emailEntry.get()
         password = passwordEntry.get()
 
+        # for testing
+        if email == "1" and password == "1":
+            signupFrame.place_forget()
+            info(root,email,password)
+
         #Checking to see if either entry is empty
         if email == "" or password == "":
             error("Either one or more of the required fields are empty or your entry has spaces", signupFrame)
@@ -112,9 +117,8 @@ def signUp(root):
 
         #If all of those checks are passed then add the username and password to our database
         else:
-            temp = {"email": email, "password": password}
-            loginInfo.insert_one(temp)
             signupFrame.place_forget()
+            info(root, email, password)
           
     
         
@@ -134,9 +138,3 @@ def signUp(root):
     backButton.bind("<Leave>", on_leave) 
 
     #=========================== FOR TESTINGGGGG    ======================================================================================================================================================        
-
-    testButton = ctk.CTkButton(signupFrame, text = "test", font=font(18), command = lambda:(info(signupFrame)), fg_color = color, border_width=0, width=0, hover_color=color)
-    testButton.place(relx=0.9, rely=0.9, anchor="w")
-
-    def forget():
-        signupFrame.place_forget()

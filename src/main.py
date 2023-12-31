@@ -5,9 +5,8 @@ from pymongo import MongoClient
 import pyglet
 
 #Import all commands
-from signUp import signUp
 from error import error
-from infoPage import info
+from signUp import signUp
 
 #Set up connections with the database
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -97,9 +96,9 @@ loginButton = ctk.CTkButton(loginFrame, text="Log in to PartnerPro", font=font(2
 loginButton.place(relx=0.5, rely=0.825, anchor="center")
 
 
-#=========================== Sign in Button ======================================================================================================================================================
+#=========================== Sign up Button ======================================================================================================================================================
 
-signupButton = ctk.CTkButton(loginFrame, text="Sign up for PartnerPro", font=font(18), command = lambda:(info(loginFrame))  lambda:(signUp(loginFrame)), fg_color=color, hover_color=color)
+signupButton = ctk.CTkButton(loginFrame, text="Sign up for PartnerPro", font=font(18), command = lambda:(signUp(loginFrame)), fg_color=color, hover_color=color)
 signupButton.place(relx=0.5, rely=0.92, anchor="center")
 signupButton.bind("<Enter>", on_enter)
 signupButton.bind("<Leave>", on_leave)
