@@ -14,14 +14,21 @@ db = cluster["main"]
 loginInfo = db["loginInfo"]
 
 #Import custom font
-pyglet.font.add_file('assets/circular-std-medium-500.ttf')
+pyglet.font.add_file('./assets/Quicksand-Bold.ttf')
 
 #Function to simplify font size
 def font(size):
-    return ("circular",size)
+    return ("Quicksand",size)
 
 #Setting the default color
-color = "#1e1e1e"
+color = "#121414"
+accent = "#3cb371"
+
+def on_enter(e):
+    e.widget['foreground'] = accent
+
+def on_leave(e):
+    e.widget['foreground'] = 'white'
 
 #Instantiatation of a new page for the signup
 def signUp(root):
@@ -36,16 +43,16 @@ def signUp(root):
 #=========================== Email ======================================================================================================================================================
    
     emailLabel = ctk.CTkLabel(signupFrame, text="Email", font=font(15))
-    emailLabel.place(relx=0.335, rely=0.41, anchor="nw")
+    emailLabel.place(relx=0.335, rely=0.36, anchor="nw")
     emailEntry = ctk.CTkEntry(signupFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center")
-    emailEntry.place(relx= 0.5, rely= 0.5, anchor= "center")
+    emailEntry.place(relx= 0.5, rely= 0.45, anchor= "center")
 
 #=========================== Password ======================================================================================================================================================
    
     passLabel = ctk.CTkLabel(signupFrame, text="Password", font=font(15))
-    passLabel.place(relx=0.335, rely=0.61, anchor="nw")
+    passLabel.place(relx=0.335, rely=0.56, anchor="nw")
     passEntry = ctk.CTkEntry(signupFrame, font = font(15), placeholder_text = "Password", width = 400, height= 40, justify = "center", show = "*")
-    passEntry.place(relx= 0.5, rely= 0.7, anchor= "center")
+    passEntry.place(relx= 0.5, rely= 0.65, anchor= "center")
 
 #=========================== Password Checkbox ======================================================================================================================================================
     
@@ -56,7 +63,7 @@ def signUp(root):
             passEntry.configure(show='')
 
     showPasswordCheckbox = ctk.CTkCheckBox(signupFrame, text="Show Password", command = showPasswordCommand)
-    showPasswordCheckbox.place(relx = 0.335, rely = 0.75)
+    showPasswordCheckbox.place(relx = 0.335, rely = 0.7)
 
 #=========================== Checking to see a valid username and password ======================================================================================================================================================        
     
@@ -110,13 +117,20 @@ def signUp(root):
 
 #=========================== Sign Up Button ======================================================================================================================================================
     
-    signUpButton = ctk.CTkButton(signupFrame, text="Sign up", font=font(25), command= enter, fg_color= color)
-    signUpButton.place(relx=0.5, rely=0.85, anchor="center")
+    signUpButton = ctk.CTkButton(signupFrame, text="Sign up", font=font(25), command= enter, fg_color= accent, hover_color="#63C28D", text_color=color )
+    signUpButton.place(relx=0.5, rely=0.8, anchor="center")
 
 #=========================== Back Button ======================================================================================================================================================
 
-    backButton = ctk.CTkButton(signupFrame, text="Back to Login Page", font=font(25), command= signupFrame.place_forget, fg_color=color)
-    backButton.place(relx=0.105, rely=0.05, anchor="center")
+    backButtonText = ctk.CTkLabel(signupFrame, text="Already have an account?", font=font(18), fg_color=color, text_color="#A7A7A7")
+    backButtonText.place(relx=0.54, rely=0.9, anchor="e")
+
+    backButton = ctk.CTkButton(signupFrame, text = "log in here", font=font(18), command = signupFrame.place_forget, fg_color = color, border_width=0, width=0, hover_color=color)
+    backButton.place(relx=0.54, rely=0.9, anchor="w")
+    backButton.bind("<Enter>", on_enter)
+    backButton.bind("<Leave>", on_leave) 
+
+
 
 
 

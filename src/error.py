@@ -5,13 +5,14 @@ from pymongo import MongoClient
 import pyglet
 
 #set default color
-color = "#1e1e1e"
+color = "#121414"
+
 #Import custom font
-pyglet.font.add_file('assets/circular-std-medium-500.ttf')
+pyglet.font.add_file('./assets/Quicksand-Bold.ttf')
 
 #Function to simplify font size
 def font(size):
-    return ("circular",size)
+    return ("Quicksand",size)
 
 def error(message, root):
     newError = ctk.CTkFrame(root, width = 1200, height = 600, fg_color= color)

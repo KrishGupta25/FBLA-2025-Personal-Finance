@@ -18,11 +18,11 @@ color = "#121414"
 accent = "#3cb371"
 
 #Import custom font
-pyglet.font.add_file('assets/circular-std-medium-500.ttf')
+pyglet.font.add_file('./assets/Quicksand-Bold.ttf')
 
 #Function to simplify font size
 def font(size):
-    return ("circular",size)
+    return ("Quicksand",size)
 
 #Creates main page or "frame" for the gui
 mainFrame = ctk.CTk(fg_color = color) 
@@ -53,7 +53,7 @@ loginFrame.place(relx = 0, rely = 0)
 
 #=========================== Creating title text that says "Login to CTE PartnerPro" ======================================================================================================================================================
 
-loginLabel = ctk.CTkLabel(loginFrame, text="Login to CTE PartnerPro", font=font(50))
+loginLabel = ctk.CTkLabel(loginFrame, text="Log in to CTE PartnerPro", font=font(50))
 loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
 #=========================== Creating a email entry box and the text above it ======================================================================================================================================================
@@ -92,7 +92,7 @@ def login():
 
 #=========================== Login Button ======================================================================================================================================================
 
-loginButton = ctk.CTkButton(loginFrame, text="Login in to PartnerPro", font=font(25), command= lambda:(login()), fg_color=color, hover_color=accent)
+loginButton = ctk.CTkButton(loginFrame, text="Log in to PartnerPro", font=font(25), command= lambda:(login()), fg_color=accent, hover_color="#63C28D", text_color= color)
 loginButton.place(relx=0.5, rely=0.825, anchor="center")
 
 
