@@ -8,7 +8,6 @@ import string
 # Import all commands
 from error import error
 from infoPage import info
-from main import
 
 #Creates connection to database
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -115,9 +114,8 @@ def signUp(root):
         else:
             temp = {"email": email, "password": password}
             loginInfo.insert_one(temp)
-            signupFrame.place_forget()
-            info(loginFrame)
-            print("hi")
+            info(signupFrame)
+    
         
 
 #=========================== Sign Up Button ======================================================================================================================================================
