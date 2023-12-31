@@ -41,27 +41,27 @@ def signUp(root):
     loginLabel = ctk.CTkLabel(signupFrame, text="Sign up for xxxx", font=font(50))
     loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
-#=========================== Email ======================================================================================================================================================
+#=========================== Email entry box and text above entry box  ======================================================================================================================================================
    
     emailLabel = ctk.CTkLabel(signupFrame, text="Email", font=font(15))
     emailLabel.place(relx=0.335, rely=0.36, anchor="nw")
     emailEntry = ctk.CTkEntry(signupFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center")
     emailEntry.place(relx= 0.5, rely= 0.45, anchor= "center")
 
-#=========================== Password ======================================================================================================================================================
+#=========================== Password entry box and text above entry box ======================================================================================================================================================
    
-    passLabel = ctk.CTkLabel(signupFrame, text="Password", font=font(15))
-    passLabel.place(relx=0.335, rely=0.56, anchor="nw")
-    passEntry = ctk.CTkEntry(signupFrame, font = font(15), placeholder_text = "Password", width = 400, height= 40, justify = "center", show = "*")
-    passEntry.place(relx= 0.5, rely= 0.65, anchor= "center")
+    passwordLabel = ctk.CTkLabel(signupFrame, text="Password (must include 1 uppercase letter, 1 lowercase letter, 1 special character and 1 number)", font=font(15))
+    passwordLabel.place(relx=0.335, rely=0.56, anchor="nw")
+    passwordEntry = ctk.CTkEntry(signupFrame, font = font(15), placeholder_text = "Password (must have at least 8 characters)", width = 400, height= 40, justify = "center", show = "*")
+    passwordEntry.place(relx= 0.5, rely= 0.65, anchor= "center")
 
 #=========================== Password Checkbox ======================================================================================================================================================
     
     def showPasswordCommand():
-        if passEntry.cget('show') == '':
-            passEntry.configure(show='*')
+        if passwordEntry.cget('show') == '':
+            passwordEntry.configure(show='*')
         else:
-            passEntry.configure(show='')
+            passwordEntry.configure(show='')
 
     showPasswordCheckbox = ctk.CTkCheckBox(signupFrame, text="Show Password", command = showPasswordCommand)
     showPasswordCheckbox.place(relx = 0.335, rely = 0.7)
@@ -76,7 +76,7 @@ def signUp(root):
 
         #Getting the input from the user
         email= emailEntry.get()
-        password = passEntry.get()
+        password = passwordEntry.get()
 
         #Checking to see if either entry is empty
         if email == "" or password == "":
@@ -114,13 +114,13 @@ def signUp(root):
         else:
             temp = {"email": email, "password": password}
             loginInfo.insert_one(temp)
-            info(signupFrame)
+            signupFrame.place_forget()
+          
     
         
-
 #=========================== Sign Up Button ======================================================================================================================================================
     
-    signUpButton = ctk.CTkButton(signupFrame, text="Sign up", font=font(25), command= enter, fg_color= accent, hover_color="#63C28D", text_color=color )
+    signUpButton = ctk.CTkButton(signupFrame, text="Next", font=font(25), command= enter, fg_color= accent, hover_color="#63C28D", text_color=color )
     signUpButton.place(relx=0.5, rely=0.8, anchor="center")
 
 #=========================== Back Button ======================================================================================================================================================
@@ -128,14 +128,15 @@ def signUp(root):
     backButtonText = ctk.CTkLabel(signupFrame, text="Already have an account?", font=font(18), fg_color=color, text_color="#A7A7A7")
     backButtonText.place(relx=0.54, rely=0.9, anchor="e")
 
-    backButton = ctk.CTkButton(signupFrame, text = "log in here", font=font(18), command = signupFrame.place_forget, fg_color = color, border_width=0, width=0, hover_color=color)
+    backButton = ctk.CTkButton(signupFrame, text = "Log in here", font=font(18), command = signupFrame.place_forget, fg_color = color, border_width=0, width=0, hover_color=color)
     backButton.place(relx=0.54, rely=0.9, anchor="w")
     backButton.bind("<Enter>", on_enter)
     backButton.bind("<Leave>", on_leave) 
 
+    #=========================== FOR TESTINGGGGG    ======================================================================================================================================================        
 
+    testButton = ctk.CTkButton(signupFrame, text = "test", font=font(18), command = lambda:(info(signupFrame)), fg_color = color, border_width=0, width=0, hover_color=color)
+    testButton.place(relx=0.9, rely=0.9, anchor="w")
 
-
-
-
-
+    def forget():
+        signupFrame.place_forget()
