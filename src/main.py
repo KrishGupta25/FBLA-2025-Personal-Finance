@@ -14,7 +14,8 @@ db = cluster["main"]
 loginInfo = db["loginInfo"]
 
 #set default color
-color = "#1e1e1e"
+color = "#121414"
+accent = "#3cb371"
 
 #Import custom font
 pyglet.font.add_file('assets/circular-std-medium-500.ttf')
@@ -27,6 +28,11 @@ def font(size):
 mainFrame = ctk.CTk(fg_color = color) 
 mainFrame.geometry("1200x600+180+120")
 
+def on_enter(e):
+    e.widget['foreground'] = accent
+
+def on_leave(e):
+    e.widget['foreground'] = 'white'
 
 
 
@@ -86,13 +92,16 @@ def login():
 
 #=========================== Login Button ======================================================================================================================================================
 
-loginButton = ctk.CTkButton(loginFrame, text="Login in to PartnerPro", font=font(25), command= lambda:(login()), fg_color=color)
+loginButton = ctk.CTkButton(loginFrame, text="Login in to PartnerPro", font=font(25), command= lambda:(login()), fg_color=color, hover_color=accent)
 loginButton.place(relx=0.5, rely=0.825, anchor="center")
+
 
 #=========================== Sign in Button ======================================================================================================================================================
 
-signupButton = ctk.CTkButton(loginFrame, text="Sign up for PartnerPro", font=font(25), command= lambda:(signUp(loginFrame)), fg_color=color)
-signupButton.place(relx=0.5, rely=0.9, anchor="center")
+signupButton = ctk.CTkButton(loginFrame, text="Sign up for PartnerPro", font=font(18), command= lambda:(signUp(loginFrame)), fg_color=color, hover_color=color)
+signupButton.place(relx=0.5, rely=0.92, anchor="center")
+signupButton.bind("<Enter>", on_enter)
+signupButton.bind("<Leave>", on_leave)
 
 #=========================== Password Checkbox ======================================================================================================================================================
     
