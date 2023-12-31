@@ -13,9 +13,9 @@ cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.e
 db = cluster["main"]
 loginInfo = db["loginInfo"]
 
-
 #set default color
 color = "#1e1e1e"
+
 #Import custom font
 pyglet.font.add_file('assets/circular-std-medium-500.ttf')
 
@@ -23,70 +23,89 @@ pyglet.font.add_file('assets/circular-std-medium-500.ttf')
 def font(size):
     return ("circular",size)
 
-
-#Setting up the GUI
-#Creates main home gui
+#Creates main page or "frame" for the gui
 mainFrame = ctk.CTk(fg_color = color) 
 mainFrame.geometry("1200x600+180+120")
+
+
+
+
+
+
+#========================================================================================================================================================================================================================================================================
+#========================================================================================================================================================================================================================================================================
+#=========================== ALL OF THE LOGIN PAGE STUFF ======================================================================================================================================================
+#========================================================================================================================================================================================================================================================================
+#========================================================================================================================================================================================================================================================================
+#========================================================================================================================================================================================================================================================================
+
+
+#=========================== Creating a blank page or "frame" on top of the main one to work on for the login page ======================================================================================================================================================
+
 loginFrame = ctk.CTkFrame(mainFrame, width = 1200, height = 600, fg_color = color)
 loginFrame.place(relx = 0, rely = 0)
 
+#=========================== Creating title text that says "Login to CTE PartnerPro" ======================================================================================================================================================
 
-#Creates login to xxxx label
-loginLabel = ctk.CTkLabel(loginFrame, text="Login to xxxx", font=font(50))
+loginLabel = ctk.CTkLabel(loginFrame, text="Login to CTE PartnerPro", font=font(50))
 loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
-usernameLabel = ctk.CTkLabel(loginFrame, text="Email", font=font(15))
-usernameLabel.place(relx=0.335, rely=0.36, anchor="nw")
-usernameEntry = ctk.CTkEntry(loginFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center")
-usernameEntry.place(relx= 0.5, rely= 0.45, anchor= "center")
+#=========================== Creating a email entry box and the text above it ======================================================================================================================================================
 
-passLabel = ctk.CTkLabel(loginFrame, text="Password", font=font(15))
-passLabel.place(relx=0.335, rely=0.51, anchor="nw")
-passEntry = ctk.CTkEntry(loginFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
-passEntry.place(relx= 0.5, rely= 0.6, anchor= "center")
+#Text box
+emailEntry = ctk.CTkEntry(loginFrame, font= font(15), placeholder_text= "Name@domain.com", width= 400, height= 40, justify= "center")
+emailEntry.place(relx= 0.5, rely= 0.45, anchor= "center")
+
+#Text above text box
+emailLabel = ctk.CTkLabel(loginFrame, text="Email", font=font(15))
+emailLabel.place(relx=0.335, rely=0.36, anchor="nw")
+
+#=========================== Creating a password entry box and the text above it ======================================================================================================================================================
+
+#Text box
+passwordEntry = ctk.CTkEntry(loginFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
+passwordEntry.place(relx= 0.5, rely= 0.6, anchor= "center")
+
+#Text above text box
+passwordLabel = ctk.CTkLabel(loginFrame, text="Password", font=font(15))
+passwordLabel.place(relx=0.335, rely=0.51, anchor="nw")
+
+#============ Making sure that the email and the password is valid in our database =============================================================================================================================
 
 def login():
     count = 0
     temp = loginInfo.find()
     for item in temp:
-        if str(item['email']) == str(usernameEntry.get()) and str(item['password']) == str(passEntry.get()):
+        if str(item['email']) == str(emailEntry.get()) and str(item['password']) == str(passwordEntry.get()):
             count +=1  
             
     if count == 1:
         loginFrame.place_forget()
     else:
-        error("Wrong password or username!", loginFrame)
+        error("Wrong email or password!", loginFrame)
 
+#=========================== Login Button ======================================================================================================================================================
 
-
-
-
-#Creates log in up button
-loginButton = ctk.CTkButton(loginFrame, text="Login in to xxxx", font=font(25), command= lambda:(login()), fg_color=color)
+loginButton = ctk.CTkButton(loginFrame, text="Login in to PartnerPro", font=font(25), command= lambda:(login()), fg_color=color)
 loginButton.place(relx=0.5, rely=0.825, anchor="center")
 
-#Creates sign up button
-signupButton = ctk.CTkButton(loginFrame, text="Sign up for xxxx", font=font(25), command= lambda:(signUp(loginFrame)), fg_color=color)
-signupButton.place(relx=0.5, rely=0.9, anchor="center")
+#=========================== Sign in Button ======================================================================================================================================================
 
+signupButton = ctk.CTkButton(loginFrame, text="Sign up for PartnerPro", font=font(25), command= lambda:(signUp(loginFrame)), fg_color=color)
+signupButton.place(relx=0.5, rely=0.9, anchor="center")
 
 #=========================== Password Checkbox ======================================================================================================================================================
     
 def showPasswordCommand():
-    if passEntry.cget('show') == '':
-        passEntry.configure(show='*')
+    if passwordEntry.cget('show') == '':
+        passwordEntry.configure(show='*')
     else:
-        passEntry.configure(show='')
+        passwordEntry.configure(show='')
 
 showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command = showPasswordCommand)
 showPasswordCheckbox.place(relx = 0.335, rely = 0.65)
 
-
-
-
-
-#Keeps gui running
+#=========================== Keeps GUI Running ======================================================================================================================================================
 if __name__ == "__main__":
     mainFrame.mainloop()
 
