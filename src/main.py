@@ -3,7 +3,9 @@ import tkinter as tk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
-print("hello")
+
+print("helllloooo")
+
 #Import all commands
 from errorPage import error
 from signUp import signUp
