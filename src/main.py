@@ -107,6 +107,7 @@ signupButton.place(relx=0.5, rely=0.92, anchor="center")
 signupButton.bind("<Enter>", on_enter)
 signupButton.bind("<Leave>", on_leave)
 
+
 #=========================== Password Checkbox ======================================================================================================================================================
     
 def showPasswordCommand():

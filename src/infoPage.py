@@ -67,7 +67,7 @@ def info(root,email,password):
             first = firstNameEntry.get()
             last = lastNameEntry.get()
             prefferedName = prefferedNameEntry.get()
-            databaseInformation = {"email": email, "password": password, "firstName": first, "lastname": last, "preffered name": prefferedName}
+            databaseInformation = {"email": email, "password": password, "firstName": first, "lastName": last, "prefferedName": prefferedName}
             loginInfo.insert_one(databaseInformation)
             infoFrame.place_forget()
             
