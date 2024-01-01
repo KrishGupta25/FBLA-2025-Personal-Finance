@@ -4,7 +4,7 @@ import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
 
-print("helllloooo")
+print("hello wrld")
 
 #Import all commands
 from errorPage import error
