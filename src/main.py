@@ -7,7 +7,6 @@ import pyglet
 #Import all commands
 from errorPage import error
 from signUp import signUp
-from aboutPage import about
 from pickingOrganization import pickingOrg 
 
 #Set up connections with the database
