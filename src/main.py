@@ -88,7 +88,7 @@ def login():
             
     if count == 1:
         loginFrame.place_forget
-        pickingOrg(mainFrame)
+        pickingOrg(mainFrame, emailEntry.get())
     else:
         error("Wrong email or password!", loginFrame)
 
