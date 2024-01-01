@@ -6,7 +6,7 @@ import pyglet
 import string
 
 # Import all commands
-from error import error
+from errorPage import error
 
 #Creates connection to database
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")

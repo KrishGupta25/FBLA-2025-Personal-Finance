@@ -5,8 +5,9 @@ from pymongo import MongoClient
 import pyglet
 
 #Import all commands
-from error import error
+from errorPage import error
 from signUp import signUp
+from aboutPage import about
 from pickingOrganization import pickingOrg 
 
 #Set up connections with the database
@@ -87,10 +88,13 @@ def login():
             count +=1  
             
     if count == 1:
-        loginFrame.place_forget
-        pickingOrg(mainFrame, emailEntry.get())
+        pickingOrg(loginFrame, emailEntry.get())
+        emailEntry.delete(0,"end")
+        passwordEntry.delete(0,"end")
     else:
         error("Wrong email or password!", loginFrame)
+        emailEntry.delete(0,"end")
+        passwordEntry.delete(0,"end")
 
     
 

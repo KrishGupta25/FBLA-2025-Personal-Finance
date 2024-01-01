@@ -6,7 +6,7 @@ import pyglet
 import string
 
 # Import all commands
-from error import error
+from errorPage import error
 from infoPage import info
 
 #Creates connection to database

@@ -7,7 +7,8 @@ import pyglet
 import string
 
 # Import all commands
-from error import error
+from errorPage import error
+from aboutPage import about
 
 #Creates connection to database
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -70,15 +71,31 @@ def pickingOrg(root, email):
 
     def more():
 
-        accountButton = ctk.CTkButton(moreFrame, text="acount", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50)
+        accountButton = ctk.CTkButton(moreFrame, text="   Account", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
         accountButton.place(relx=0, rely=0, anchor="nw")
+
+        settingsButton = ctk.CTkButton(moreFrame, text="   Settings", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
+        settingsButton.place(relx=0, rely=.2, anchor="nw")
+
+        aboutButton = ctk.CTkButton(moreFrame, text="   about", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=lambda:(about(pickingFrame, moreFrame)))
+        aboutButton.place(relx=0, rely=.4, anchor="nw")
+
+        supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
+        supportButton.place(relx=0, rely=.6, anchor="nw")
+
+        def logout():
+            moreFrame.place_forget()
+            pickingFrame.place_forget()
+
+        logOutButton = ctk.CTkButton(moreFrame, text="   Log out", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= logout)
+        logOutButton.place(relx=0, rely=.8, anchor="nw")
 
         if moreFrame.winfo_ismapped():
             moreFrame.place_forget()
         else:
             moreFrame.place(relx= .975, rely= .08, anchor= "ne")
 
-    moreFrame = ctk.CTkFrame(pickingFrame, width= 200, height= 300, fg_color= "#1e2121")    
+    moreFrame = ctk.CTkFrame(pickingFrame, width= 187.5, height= 250, fg_color= "#1e2121")    
 
     moreButton = ctk.CTkButton(pickingFrame, text=name, font=font(18), command= more, fg_color=color, hover_color=color, width=0)
     moreButton.place(relx=.975, rely=0.05, anchor="e")
