@@ -63,7 +63,7 @@ def signUp(root):
         else:
             passwordEntry.configure(show='')
 
-    showPasswordCheckbox = ctk.CTkCheckBox(signupFrame, text="Show Password", command = showPasswordCommand)
+    showPasswordCheckbox = ctk.CTkCheckBox(signupFrame, text="Show Password", command = showPasswordCommand, hover_color=accent, checkmark_color=accent)
     showPasswordCheckbox.place(relx = 0.335, rely = 0.7)
 
 #=========================== Checking to see a valid username and password ======================================================================================================================================================        

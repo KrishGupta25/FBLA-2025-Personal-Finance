@@ -115,7 +115,7 @@ def showPasswordCommand():
     else:
         passwordEntry.configure(show='')
 
-showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command = showPasswordCommand)
+showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command = showPasswordCommand, hover_color=accent, checkmark_color=accent)
 showPasswordCheckbox.place(relx = 0.335, rely = 0.65)
 
 #=========================== Keeps GUI Running ======================================================================================================================================================
