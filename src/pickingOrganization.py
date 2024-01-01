@@ -51,7 +51,7 @@ def pickingOrg(root, email):
     style.configure("Treeview.Heading", background = color, foreground= "white", borderwidth= 0, font= ("Quicksand", 12))
     style.map('Treeview', background=[('selected', '#292929')])
 
-    listbox = ttk.Treeview(pickingFrame, selectmode="extended",columns=("c1", "c2", "c3"),show="headings", height= 4)
+    listbox = ttk.Treeview(pickingFrame, selectmode="extended",columns=("c1", "c2", "c3"),show="headings", height= 5)
     listbox.column("# 1", anchor="center", width = 480)
     listbox.heading("# 1", text="Name")
     listbox.column("# 2", anchor="center", width = 480)
