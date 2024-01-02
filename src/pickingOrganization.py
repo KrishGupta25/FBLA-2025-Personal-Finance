@@ -69,8 +69,55 @@ def pickingOrg(root, email):
 
 
     def more():
+        def account():
+            moreFrame.place_forget()
 
-        accountButton = ctk.CTkButton(moreFrame, text="   Account", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
+            accountFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
+            accountFrame.place(relx= 0, rely= 0, anchor= "nw")
+
+            accountlabel = ctk.CTkLabel(accountFrame, text="Acount Details", font=font(35))
+            accountlabel.place(relx=0.5, rely=0.02, anchor="n")
+
+            backButton = ctk.CTkButton(accountFrame, text="⌂", font=font(40), command= accountFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
+            backButton.place(relx=.02, rely=0.001, anchor="nw")
+            backButton.bind("<Enter>", on_enter)
+            backButton.bind("<Leave>", on_leave)
+
+            securityFrame = ctk.CTkFrame(accountFrame, width=1200, height=600, fg_color= color, bg_color= color)
+            securityFrame.place(relx= 0, rely= 0, anchor= "nw")
+
+            back1Button = ctk.CTkButton(securityFrame, text="⌂", font=font(40), command= lambda: [securityFrame.place_forget(), accountFrame.place_forget()], fg_color=color, hover_color=color, width=0, height=0)
+            back1Button.place(relx=.02, rely=0.001, anchor="nw")
+            back1Button.bind("<Enter>", on_enter)
+            back1Button.bind("<Leave>", on_leave)
+
+            securityFramelabel = ctk.CTkLabel(securityFrame, text="Please Confirm Your Identity", font=font(35))
+            securityFramelabel.place(relx=0.5, rely=0.02, anchor="n")
+
+
+            securitylabel = ctk.CTkLabel(securityFrame, text="password", font=font(15))
+            securitylabel.place(relx=0.34, rely=0.42, anchor="nw")
+
+            passwordEntry = ctk.CTkEntry(securityFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
+            passwordEntry.place(relx= 0.5, rely= 0.5, anchor= "center")
+
+            def submit():
+                entry = passwordEntry.get()
+                values = loginInfo.find({'email': email})
+                for x in values:
+                    if x['password'] == entry:
+                        securityFrame.place_forget()
+                    else:
+                        error("Incorrect password please try again", securityFrame)
+
+            submitButton = ctk.CTkButton(securityFrame, text="submit", font=font(18), command = submit, fg_color=color, hover_color=color)
+            submitButton.place(relx=0.5, rely=0.6, anchor="center")
+            submitButton.bind("<Enter>", on_enter)
+            submitButton.bind("<Leave>", on_leave)
+
+
+
+        accountButton = ctk.CTkButton(moreFrame, text="   Account", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command = account)
         accountButton.place(relx=0, rely=0, anchor="nw")
 
         def settings():
@@ -81,6 +128,11 @@ def pickingOrg(root, email):
 
             settingslabel = ctk.CTkLabel(settingFrame, text="Settings", font=font(35))
             settingslabel.place(relx=0.5, rely=0.02, anchor="n")
+
+            backButton = ctk.CTkButton(settingFrame, text="⌂", font=font(40), command= settingFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
+            backButton.place(relx=.02, rely=0.001, anchor="nw")
+            backButton.bind("<Enter>", on_enter)
+            backButton.bind("<Leave>", on_leave)
 
         settingsButton = ctk.CTkButton(moreFrame, text="   Settings", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=settings)
         settingsButton.place(relx=0, rely=.2, anchor="nw")
@@ -93,8 +145,8 @@ def pickingOrg(root, email):
             AboutUslabel = ctk.CTkLabel(aboutFrame, text="About Us ", font=font(35))
             AboutUslabel.place(relx=0.5, rely=0.02, anchor="n")
 
-            backButton = ctk.CTkButton(aboutFrame, text="<-", font=font(40), command= aboutFrame.place_forget, fg_color=color, hover_color=color, width=0)
-            backButton.place(relx=.02, rely=0.01, anchor="nw")
+            backButton = ctk.CTkButton(aboutFrame, text="⌂", font=font(40), command= aboutFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
+            backButton.place(relx=.02, rely=0.001, anchor="nw")
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
 
