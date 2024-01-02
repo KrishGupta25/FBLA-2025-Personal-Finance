@@ -3,6 +3,7 @@ import tkinter as tk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
+import keyboard
 
 #Import all commands
 from errorPage import error
@@ -17,7 +18,7 @@ loginInfo = db["loginInfo"]
 #set default color
 color = "#121414"
 accent = "#3cb371"
-white = "#FFFFFF"
+
 
 #Import custom font
 pyglet.font.add_file('./assets/Quicksand-Bold.ttf')
@@ -81,6 +82,7 @@ passwordLabel.place(relx=0.335, rely=0.51, anchor="nw")
 #============ Making sure that the email and the password is valid in our database =============================================================================================================================
 
 def login():
+    #if emailEntry.get() != '' and passwordEntry.get() != '':
     count = 0
     temp = loginInfo.find()
     for item in temp:
@@ -96,27 +98,37 @@ def login():
         emailEntry.delete(0,"end")
         passwordEntry.delete(0,"end")
 
+
+
+
     
 
 #=========================== Login Button ======================================================================================================================================================
+        
 
 loginButton = ctk.CTkButton(loginFrame, text="Log in to PartnerPro", font=font(25), command= lambda:(login()), fg_color=accent, hover_color="#63C28D", text_color= color)
 loginButton.place(relx=0.5, rely=0.825, anchor="center")
 
+
+
+''' - WORK IN PROGRESS
 #=========================== Light and Dark Mode Button ======================================================================================================================================================
+switch_var = ctk.StringVar(value="on")
+def backgroundColor(root):
 
-def backgroundColor():
-
-    if loginFrame.cget('fg_color') == white:
-        loginFrame.configure(fg_color = color)
-        print(1)
-    elif loginFrame.cget('fg_color') == color:
-        loginFrame.configure(fg_color = white)
+    if switch_var.get() == "on": #root.cget('fg_color') == "#121414":
+        color = "white"     
+        print(1)   
+    elif switch_var.get() == "off":  #root.cget('fg_color') == "white":
+        color = "#121414"
         print(0)
+    
+    root.configure(fg_color = color)     
+        
 
-lightAndDarkSwitch = ctk.CTkSwitch(loginFrame, command = backgroundColor())
+lightAndDarkSwitch = ctk.CTkSwitch(loginFrame, command = lambda:(backgroundColor(loginFrame)), onvalue= "on", offvalue= "off", variable= switch_var, text = "hola")
 lightAndDarkSwitch.place(relx = 0.5, rely = 0.5)
-
+'''
 #=========================== Sign up Button ======================================================================================================================================================
 
 signupButton = ctk.CTkButton(loginFrame, text="Sign up for PartnerPro", font=font(18), command = lambda:(signUp(loginFrame)), fg_color=color, hover_color=color)
@@ -139,6 +151,6 @@ showPasswordCheckbox.place(relx = 0.335, rely = 0.65)
 #=========================== Keeps GUI Running ======================================================================================================================================================
 if __name__ == "__main__":
     mainFrame.mainloop()
-
+    
 
 
