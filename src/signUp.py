@@ -1,37 +1,38 @@
-#Import all required dependencies
+#=========================== import all required packages ======================================================================================================================================================
 import tkinter as tk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
 import string
 
-# Import all commands
+#=========================== import all required functions ======================================================================================================================================================
 from errorPage import error
 from infoPage import info
 
-#Creates connection to database
+#=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
 
-#Import custom font
+#=========================== import custom font ======================================================================================================================================================
 pyglet.font.add_file('./assets/Quicksand-Bold.ttf')
 
-#Function to simplify font size
+#=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
     return ("Quicksand",size)
 
-#Setting the default color
+#=========================== set default colors ======================================================================================================================================================
 color = "#121414"
 accent = "#3cb371"
 
+#=========================== cunction for button highliting ======================================================================================================================================================
 def on_enter(e):
     e.widget['foreground'] = accent
 
 def on_leave(e):
     e.widget['foreground'] = 'white'
 
-#Instantiatation of a new page for the signup
+#=========================== creates new page for signing up ======================================================================================================================================================
 def signUp(root):
     #Create new sign up frame over login page
     signupFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
@@ -78,11 +79,6 @@ def signUp(root):
         email= emailEntry.get()
         password = passwordEntry.get()
 
-        # for testing
-        if email == "1" and password == "1":
-            signupFrame.place_forget()
-            info(root,email,password)
-
         #Checking to see if either entry is empty
         if email == "" or password == "":
             error("Either one or more of the required fields are empty or your entry has spaces", signupFrame)
@@ -117,8 +113,7 @@ def signUp(root):
 
         #If all of those checks are passed then add the username and password to our database
         else:
-            signupFrame.place_forget()
-            info(root, email, password)
+            info(root, email, password, signupFrame)
           
     
         

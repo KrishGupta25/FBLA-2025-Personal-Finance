@@ -35,7 +35,7 @@ def on_leave(e):
     e.widget['foreground'] = 'white'
 
 #=========================== creates new page for personal info ======================================================================================================================================================
-def info(root,email,password):
+def info(root,email,password, delete):
 
     infoFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
     infoFrame.place(relx= 0, rely= 0)
@@ -61,6 +61,11 @@ def info(root,email,password):
     prefferedNameEntry = ctk.CTkEntry(infoFrame, font = font(15), placeholder_text = "Preffered Name", width = 400, height= 40, justify = "center")
     prefferedNameEntry.place(relx= 0.5, rely= 0.725, anchor= "center")
 
+    backButton = ctk.CTkButton(infoFrame, text="⌂", font=font(40), command= lambda: [infoFrame.place_forget(), delete.place_forget()], fg_color=color, hover_color=color, width=0, height=0)
+    backButton.place(relx=.02, rely=0.001, anchor="nw")
+    backButton.bind("<Enter>", on_enter)
+    backButton.bind("<Leave>", on_leave)
+
 
 #=========================== function to insert data input form the user into the database ======================================================================================================================================================
     def exit():
@@ -70,6 +75,7 @@ def info(root,email,password):
             databaseInformation = {"email": email, "password": password, "firstName": first, "lastName": last, "prefferedName": prefferedName}
             loginInfo.insert_one(databaseInformation)
             infoFrame.place_forget()
+            delete.place_forget()
             
     
 #=========================== create sign up button ======================================================================================================================================================
