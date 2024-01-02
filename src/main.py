@@ -6,6 +6,12 @@ from pymongo import MongoClient
 import pyglet
 import string
 
+import os
+filename = 'Quicksand-Bold.ttf' 
+if '_MEIPASS2' in os.environ:
+    filename = os.path.join(os.environ['_MEIPASS2'], filename)
+fd = open(filename, 'rb')
+
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
