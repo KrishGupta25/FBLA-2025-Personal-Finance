@@ -73,7 +73,12 @@ def pickingOrg(root, email):
         accountButton = ctk.CTkButton(moreFrame, text="   Account", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
         accountButton.place(relx=0, rely=0, anchor="nw")
 
-        settingsButton = ctk.CTkButton(moreFrame, text="   Settings", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
+        def settings():
+            moreFrame.place_forget()
+            settingFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
+            settingFrame.place(relx= 0, rely= 0, anchor= "nw")
+
+        settingsButton = ctk.CTkButton(moreFrame, text="   Settings", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=settings)
         settingsButton.place(relx=0, rely=.2, anchor="nw")
 
         def about():
