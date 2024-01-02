@@ -6,12 +6,6 @@ from pymongo import MongoClient
 import pyglet
 import string
 
-import os
-filename = 'Quicksand-Bold.ttf' 
-if '_MEIPASS2' in os.environ:
-    filename = os.path.join(os.environ['_MEIPASS2'], filename)
-fd = open(filename, 'rb')
-
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
@@ -156,6 +150,3 @@ showPasswordCheckbox.place(relx = 0.335, rely = 0.65)
 #=========================== Keeps GUI Running ======================================================================================================================================================
 if __name__ == "__main__":
     mainFrame.mainloop()
-    
-
-
