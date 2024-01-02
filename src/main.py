@@ -17,6 +17,7 @@ loginInfo = db["loginInfo"]
 #set default color
 color = "#121414"
 accent = "#3cb371"
+white = "#FFFFFF"
 
 #Import custom font
 pyglet.font.add_file('./assets/Quicksand-Bold.ttf')
@@ -102,6 +103,19 @@ def login():
 loginButton = ctk.CTkButton(loginFrame, text="Log in to PartnerPro", font=font(25), command= lambda:(login()), fg_color=accent, hover_color="#63C28D", text_color= color)
 loginButton.place(relx=0.5, rely=0.825, anchor="center")
 
+#=========================== Light and Dark Mode Button ======================================================================================================================================================
+
+def backgroundColor():
+
+    if loginFrame.cget('fg_color') == white:
+        loginFrame.configure(fg_color = color)
+        print(1)
+    elif loginFrame.cget('fg_color') == color:
+        loginFrame.configure(fg_color = white)
+        print(0)
+
+lightAndDarkSwitch = ctk.CTkSwitch(loginFrame, command = backgroundColor())
+lightAndDarkSwitch.place(relx = 0.5, rely = 0.5)
 
 #=========================== Sign up Button ======================================================================================================================================================
 
