@@ -1,19 +1,20 @@
-#Import all required dependencies
+#=========================== import all required packages ======================================================================================================================================================
 import tkinter as tk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
 
-#set default color
+#=========================== set default colors ======================================================================================================================================================
 color = "#121414"
 
-#Import custom font
+#=========================== import custom font ======================================================================================================================================================
 pyglet.font.add_file('./assets/Quicksand-Bold.ttf')
 
-#Function to simplify font size
+#=========================== function to simplify font size ======================================================================================================================================================
 def font(size):
     return ("Quicksand",size)
 
+#=========================== function for error page ======================================================================================================================================================
 def error(message, root):
     newError = ctk.CTkFrame(root, width = 1200, height = 600, fg_color= color)
     newError.place(relx = 0, rely = 0, anchor = "nw")

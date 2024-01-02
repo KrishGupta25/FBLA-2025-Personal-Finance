@@ -1,36 +1,34 @@
-#Import all required dependencies
+#=========================== import all required packages ======================================================================================================================================================
 import tkinter as tk
+from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
-import keyboard
+import string
 
-#Import all commands
+#=========================== import all required functions ======================================================================================================================================================
+
 from errorPage import error
 from signUp import signUp
-from pickingOrganization import pickingOrg 
+from pickingOrganization import pickingOrg
 
-#Set up connections with the database
+#=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
 
-#set default color
-color = "#121414"
-accent = "#3cb371"
-
-
-#Import custom font
+#=========================== import custom font ======================================================================================================================================================
 pyglet.font.add_file('./assets/Quicksand-Bold.ttf')
 
-#Function to simplify font size
+#=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
     return ("Quicksand",size)
 
-#Creates main page or "frame" for the gui
-mainFrame = ctk.CTk(fg_color = color) 
-mainFrame.geometry("1200x600+180+120")
+#=========================== set default colors ======================================================================================================================================================
+color = "#121414"
+accent = "#3cb371"
 
+#=========================== cunction for button highliting ======================================================================================================================================================
 def on_enter(e):
     e.widget['foreground'] = accent
 
@@ -38,7 +36,9 @@ def on_leave(e):
     e.widget['foreground'] = 'white'
 
 
-
+#=========================== creates main frame ======================================================================================================================================================
+mainFrame = ctk.CTk(fg_color = color) 
+mainFrame.geometry("1200x600+180+120")
 
 
 #========================================================================================================================================================================================================================================================================
@@ -82,7 +82,6 @@ passwordLabel.place(relx=0.335, rely=0.51, anchor="nw")
 #============ Making sure that the email and the password is valid in our database =============================================================================================================================
 
 def login():
-    #if emailEntry.get() != '' and passwordEntry.get() != '':
     count = 0
     temp = loginInfo.find()
     for item in temp:
