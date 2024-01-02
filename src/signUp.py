@@ -31,6 +31,7 @@ def on_enter(e):
 
 def on_leave(e):
     e.widget['foreground'] = 'white'
+    
 
 #=========================== creates new page for signing up ======================================================================================================================================================
 def signUp(root):
@@ -55,6 +56,18 @@ def signUp(root):
     passwordLabel.place(relx=0.335, rely=0.56, anchor="nw")
     passwordEntry = ctk.CTkEntry(signupFrame, font = font(15), placeholder_text = "Password (must have at least 8 characters)", width = 400, height= 40, justify = "center", show = "*")
     passwordEntry.place(relx= 0.5, rely= 0.65, anchor= "center")
+
+    def display(e):
+        tooltipFrame.place(relx = .7, rely = 0.76, anchor = "nw")
+    def hide(e):
+        tooltipFrame.place_forget()
+
+    tooltipFrame = ctk.CTkFrame(signupFrame, width= 100, height= 50, fg_color= color)
+    tooltipLabel = ctk.CTkLabel(signupFrame, text="ⓘ", font=font(15))
+    tooltipLabel.place(relx = 0.68, rely = 0.65, anchor = "center")
+
+    tooltipLabel.bind("<Enter>", display)
+    tooltipLabel.bind("<Leave>", hide) 
 
 #=========================== Password Checkbox ======================================================================================================================================================
     

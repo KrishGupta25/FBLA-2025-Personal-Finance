@@ -72,10 +72,16 @@ def info(root,email,password, delete):
             first = firstNameEntry.get()
             last = lastNameEntry.get()
             prefferedName = prefferedNameEntry.get()
-            databaseInformation = {"email": email, "password": password, "firstName": first, "lastName": last, "prefferedName": prefferedName}
-            loginInfo.insert_one(databaseInformation)
-            infoFrame.place_forget()
-            delete.place_forget()
+            first = first.capitalize()
+            last = last.capitalize()
+            prefferedName = prefferedName.capitalize()
+            if first == "" or last == "" or prefferedName == "":
+                error("one or more of the required fields are empty", infoFrame)
+            else:
+                databaseInformation = {"email": email, "password": password, "firstName": first, "lastName": last, "prefferedName": prefferedName}
+                loginInfo.insert_one(databaseInformation)
+                infoFrame.place_forget()
+                delete.place_forget()
             
     
 #=========================== create sign up button ======================================================================================================================================================
