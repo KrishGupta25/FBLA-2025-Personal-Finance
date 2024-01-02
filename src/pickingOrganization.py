@@ -75,8 +75,12 @@ def pickingOrg(root, email):
 
         def settings():
             moreFrame.place_forget()
+
             settingFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
             settingFrame.place(relx= 0, rely= 0, anchor= "nw")
+
+            settingslabel = ctk.CTkLabel(settingFrame, text="Settings", font=font(35))
+            settingslabel.place(relx=0.5, rely=0.02, anchor="n")
 
         settingsButton = ctk.CTkButton(moreFrame, text="   Settings", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=settings)
         settingsButton.place(relx=0, rely=.2, anchor="nw")
