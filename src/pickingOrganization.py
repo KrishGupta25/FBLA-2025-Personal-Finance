@@ -4,7 +4,7 @@ from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
-import string
+import time
 
 #=========================== import all required functions ======================================================================================================================================================
 
@@ -79,6 +79,14 @@ def pickingOrg(root, email):
         def account():
             moreFrame.place_forget()
 
+#=========================== get all user data ======================================================================================================================================================
+            temp = loginInfo.find({"email": email})
+            for item in temp:
+                first = item["firstName"]
+                last = item["lastName"]
+                preferred = item["prefferedName"]
+                password = item["password"]
+                
 #=========================== create account frame ======================================================================================================================================================
             accountFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
             accountFrame.place(relx= 0, rely= 0, anchor= "nw")
@@ -86,10 +94,89 @@ def pickingOrg(root, email):
             accountlabel = ctk.CTkLabel(accountFrame, text="Acount Details", font=font(35))
             accountlabel.place(relx=0.5, rely=0.02, anchor="n")
 
+#=========================== password entry ======================================================================================================================================================
+            passwordLabel2 = ctk.CTkLabel(accountFrame, text="Password", font=font(15))
+            passwordLabel2.place(relx=0.335, rely=0.16, anchor="nw")
+            
+            passwordEntry2 = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
+            passwordEntry2.place(relx= 0.5, rely= 0.25, anchor= "center")
+            passwordEntry2.insert(0, first)
+            passwordEntry2.bind('<FocusIn>', lambda x: passwordEntry2.select_range(0, "end"))
+
+#=========================== first name entry ======================================================================================================================================================
+            firstNameLabel = ctk.CTkLabel(accountFrame, text="First Name", font=font(15))
+            firstNameLabel.place(relx=0.335, rely=0.33, anchor="nw")
+            
+            firstNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
+            firstNameEntry.place(relx= 0.5, rely= 0.42, anchor= "center")
+            firstNameEntry.insert(0, first)
+            firstNameEntry.bind('<FocusIn>', lambda x: firstNameEntry.select_range(0, "end"))
+
+#=========================== last name entry ======================================================================================================================================================
+            lastNameLabel = ctk.CTkLabel(accountFrame, text="Last Name", font=font(15))
+            lastNameLabel.place(relx=0.335, rely=0.5, anchor="nw")
+            
+            lastNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
+            lastNameEntry.place(relx= 0.5, rely= 0.59, anchor= "center")
+            lastNameEntry.insert(0, last)
+            lastNameEntry.bind('<FocusIn>', lambda x: lastNameEntry.select_range(0, "end"))
+
+#=========================== preffered name entry ======================================================================================================================================================
+            preferredNameLabel = ctk.CTkLabel(accountFrame, text="Preferred Name", font=font(15))
+            preferredNameLabel.place(relx=0.335, rely=0.67, anchor="nw")
+            
+            preferredNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
+            preferredNameEntry.place(relx= 0.5, rely= 0.76, anchor= "center")
+            preferredNameEntry.insert(0, preferred)
+            preferredNameEntry.bind('<FocusIn>', lambda x: preferredNameEntry.select_range(0, "end"))
+
             backButton = ctk.CTkButton(accountFrame, text="⌂", font=font(40), command= accountFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
             backButton.place(relx=.02, rely=0.001, anchor="nw")
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
+
+            def confirm():
+                print(passwordEntry2.get())
+                #Checking to see if either entry is empty
+                if passwordEntry2.get() == "":
+                    error("Either one or more of the required fields are empty or your entry has spaces", accountFrame)
+
+                #Checking to see if either entry has spaces
+                elif passwordEntry2.get().find(" ") > -1:
+                    error("Either one or more of the required fields are empty or your entry has spaces", accountFrame)
+
+                #Checking to see if there is at least one uppercase character in the password
+                elif any(ele.isupper() for ele in passwordEntry2.get()) == False:
+                    error("There is no uppercase letter in your password, please try again!", accountFrame)
+                
+                #Checking to see if there is at least one lowercase character in the password
+                elif any(ele.islower() for ele in passwordEntry2.get()) == False:
+                    error("There is no lowercase letter in your password, please try again!", accountFrame)
+            
+                #Checking to see if there is at least one special character in the password
+                elif (passwordEntry2.get().isalnum()) == True:
+                    error("There is no special characters in your password, please try again!", accountFrame)
+
+                #Checking to see if there is at least one number in the password
+                elif any(ele.isdigit() for ele in passwordEntry2.get()) == False:
+                    error("There is no number in your password, please try again!", accountFrame)
+                
+                #Checking to see if there is at least 8 characters in the password
+                elif len(passwordEntry2.get()) <= 8:
+                    error("There arent 8 characters in your password, please try again!", accountFrame)
+
+                #If all of those checks are passed then replace all the changed values
+                else:
+                    loginInfo.replace_one({"email": email}, {"email": email, "password": passwordEntry2.get(), "firstName": firstNameEntry.get(), "lastName": lastNameEntry.get(), "prefferedName": preferredNameEntry.get()})
+                    confirmLabel = ctk.CTkLabel(accountFrame, text="*all changes have been saved", font=font(15), text_color=accent)
+                    confirmLabel.place(relx=0.5, rely=.83, anchor="center")
+                
+
+
+            confirmButton = ctk.CTkButton(accountFrame, text="confirm", font=font(25), command = confirm, fg_color=color, hover_color=color)
+            confirmButton.place(relx=0.5, rely=0.9, anchor="center")
+            confirmButton.bind("<Enter>", on_enter)
+            confirmButton.bind("<Leave>", on_leave)
 
 #=========================== create security frame over account frame ======================================================================================================================================================
             securityFrame = ctk.CTkFrame(accountFrame, width=1200, height=600, fg_color= color, bg_color= color)
