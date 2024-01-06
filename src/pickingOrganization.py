@@ -9,6 +9,7 @@ import time
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
+from addItem import addItem
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -52,7 +53,7 @@ def pickingOrg(root, email):
 #=========================== listbox style ======================================================================================================================================================
     style = ttk.Style()
     style.theme_use("clam")
-    style.configure("Treeview", fieldbackground= color, background = color, foreground= "white", font= ("Quicksand", 12), rowheight= 120, highlightbackground = color, highlightcolor= accent)
+    style.configure("Treeview", fieldbackground= color, background = color, foreground= "white", font= ("Quicksand", 12), rowheight= 100, highlightbackground = color, highlightcolor= accent)
     style.configure("Treeview.Heading", background = color, foreground= "white", borderwidth= 0, font= ("Quicksand", 12))
     style.map('Treeview', background=[('selected', '#292929')])
 
@@ -65,7 +66,13 @@ def pickingOrg(root, email):
     listbox.column("# 3", anchor="center", width = 480)
     listbox.heading("# 3", text="Contact")
 
-    listbox.place(relx=.5, rely=.53, anchor="center")
+    listbox.place(relx=.5, rely=.5, anchor="center")
+
+    addOrgButton = ctk.CTkButton(pickingFrame, text="Add Organization", font=font(18), command = lambda:(addItem(pickingFrame)), fg_color=color, hover_color=color)
+    addOrgButton.place(relx=0.5, rely=0.91, anchor="center")
+    addOrgButton.bind("<Enter>", on_enter)
+    addOrgButton.bind("<Leave>", on_leave)
+    
 
 #=========================== find users first and last name ======================================================================================================================================================
     temp = loginInfo.find({"email": email})
@@ -173,7 +180,7 @@ def pickingOrg(root, email):
                 
 
 
-            confirmButton = ctk.CTkButton(accountFrame, text="confirm", font=font(25), command = confirm, fg_color=color, hover_color=color)
+            confirmButton = ctk.CTkButton(accountFrame, text="Confirm", font=font(25), command = confirm, fg_color=color, hover_color=color)
             confirmButton.place(relx=0.5, rely=0.9, anchor="center")
             confirmButton.bind("<Enter>", on_enter)
             confirmButton.bind("<Leave>", on_leave)
@@ -191,7 +198,7 @@ def pickingOrg(root, email):
             securityFramelabel.place(relx=0.5, rely=0.02, anchor="n")
 
 
-            securitylabel = ctk.CTkLabel(securityFrame, text="password", font=font(15))
+            securitylabel = ctk.CTkLabel(securityFrame, text="Password", font=font(15))
             securitylabel.place(relx=0.34, rely=0.42, anchor="nw")
 
             passwordEntry = ctk.CTkEntry(securityFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
@@ -208,7 +215,7 @@ def pickingOrg(root, email):
                         error("Incorrect password please try again", securityFrame)
 
 #=========================== create submittion button ======================================================================================================================================================
-            submitButton = ctk.CTkButton(securityFrame, text="submit", font=font(18), command = submit, fg_color=color, hover_color=color)
+            submitButton = ctk.CTkButton(securityFrame, text="Submit", font=font(18), command = submit, fg_color=color, hover_color=color)
             submitButton.place(relx=0.5, rely=0.6, anchor="center")
             submitButton.bind("<Enter>", on_enter)
             submitButton.bind("<Leave>", on_leave)
