@@ -10,11 +10,14 @@ import time
 
 from errorPage import error
 from addItem import addItem
+from editItem import editItem
+from removeItem import removeItem
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
+orgInfo = db["orgInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
 pyglet.font.add_file('Quicksand-Bold.ttf')
@@ -39,6 +42,7 @@ def pickingOrg(root, email):
 
 #=========================== find users preffered name ======================================================================================================================================================
     temp = loginInfo.find({"email": email})
+    orgs = orgInfo.find()
     for item in temp:
         user = item["prefferedName"]
 
@@ -58,20 +62,42 @@ def pickingOrg(root, email):
     style.map('Treeview', background=[('selected', '#292929')])
 
 #=========================== create listbox ======================================================================================================================================================
-    listbox = ttk.Treeview(pickingFrame, selectmode="extended",columns=("c1", "c2", "c3"),show="headings", height= 5)
-    listbox.column("# 1", anchor="center", width = 480)
+    listbox = ttk.Treeview(pickingFrame, selectmode="extended",columns=("c1", "c2", "c3", "c4"),show="headings", height= 5)
+    listbox.column("# 1", anchor="center", width = 360)
     listbox.heading("# 1", text="Name")
-    listbox.column("# 2", anchor="center", width = 480)
-    listbox.heading("# 2", text="Type")
-    listbox.column("# 3", anchor="center", width = 480)
-    listbox.heading("# 3", text="Contact")
+    listbox.column("# 2", anchor="center", width = 360)
+    listbox.heading("# 2", text="Resources")
+    listbox.column("# 3", anchor="center", width = 360)
+    listbox.heading("# 3", text="Location")
+    listbox.column("# 4", anchor="center", width = 360)
+    listbox.heading("# 4", text="Contact")
 
     listbox.place(relx=.5, rely=.5, anchor="center")
 
-    addOrgButton = ctk.CTkButton(pickingFrame, text="Add Organization", font=font(18), command = lambda:(addItem(pickingFrame)), fg_color=color, hover_color=color)
-    addOrgButton.place(relx=0.5, rely=0.91, anchor="center")
+#=========================== add/edit/remove organization buttons ======================================================================================================================================================
+    addOrgButton = ctk.CTkButton(pickingFrame, text="Add Organization", font=font(18), command = lambda:[addItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
+    addOrgButton.place(relx=0.25, rely=0.91, anchor="center")
     addOrgButton.bind("<Enter>", on_enter)
     addOrgButton.bind("<Leave>", on_leave)
+
+    editOrgButton = ctk.CTkButton(pickingFrame, text="Edit Organization", font=font(18), command = lambda:[editItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
+    editOrgButton.place(relx=0.5, rely=0.91, anchor="center")
+    editOrgButton.bind("<Enter>", on_enter)
+    editOrgButton.bind("<Leave>", on_leave)
+
+    removeOrgButton = ctk.CTkButton(pickingFrame, text="Remove Organization", font=font(18), command = lambda:[removeItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
+    removeOrgButton.place(relx=0.75, rely=0.91, anchor="center")
+    removeOrgButton.bind("<Enter>", on_enter)
+    removeOrgButton.bind("<Leave>", on_leave)
+
+    count = 0
+    for item in listbox.get_children():
+        listbox.delete(item)
+    for item in orgs:
+        listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
+        count+= 1
+            
+
     
 
 #=========================== find users first and last name ======================================================================================================================================================

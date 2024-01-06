@@ -4,7 +4,6 @@ from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
-import string
 
 #=========================== import all required functions ======================================================================================================================================================
 
