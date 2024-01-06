@@ -34,15 +34,24 @@ def on_enter(e):
 def on_leave(e):
     e.widget['foreground'] = 'white'
 
+check = 0
 
 #=========================== function to create add item frame ======================================================================================================================================================
 def addItem(root, listbox):
 #=========================== add organization frame ======================================================================================================================================================
+    global check
+    if check == 0:
+        check = 1
         addItemFrame = ctk.CTkFrame(root, width= 500, height= 600, fg_color= color, border_color= "#1e2121", border_width=4)
         addItemFrame.place(relx= 1, rely= 0, anchor= "ne")
         addItemFrame.focus_set()
 
-        backButton = ctk.CTkButton(addItemFrame, text="x", font=font(20), command= addItemFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
+        def back():
+            global check
+            addItemFrame.place_forget()
+            check = 0
+
+        backButton = ctk.CTkButton(addItemFrame, text="x", font=font(20), command= back, fg_color=color, hover_color=color, width=0, height=0)
         backButton.place(relx=.04, rely=0.02, anchor="nw")
         backButton.bind("<Enter>", on_enter)
         backButton.bind("<Leave>", on_leave)
@@ -75,10 +84,12 @@ def addItem(root, listbox):
         contactEntry.place(relx= 0.5, rely= 0.8, anchor= "center")
 
         def submit():
+            global check
             orgs = orgInfo.find()
             if  orgNameEntry.get() == "" or loacationEntry.get() == "" or resourceEntry.get() == "" or contactEntry.get() == "":
                 error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
             else:
+                check = 0
                 orgInfo.insert_one({"orgName": orgNameEntry.get(), "resources": resourceEntry.get(), "location": loacationEntry.get(), "contactInfo": contactEntry.get()})
                 addItemFrame.place_forget()
                 count = 0
@@ -93,3 +104,6 @@ def addItem(root, listbox):
         submitButton.place(relx=0.5, rely=0.9, anchor="center")
         submitButton.bind("<Enter>", on_enter)
         submitButton.bind("<Leave>", on_leave)
+    else:
+        error("please close the existing 'add organization' page first", root)
+
