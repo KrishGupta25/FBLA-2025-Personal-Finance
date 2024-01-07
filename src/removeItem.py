@@ -52,8 +52,8 @@ def removeItem(root, listbox):
                     
         for item in delete:
             orgInfo.delete_one(item)
-            
-        count = 0
+            count = 0
+
         for item in listbox.get_children():
             listbox.delete(item)
         for item in orgs:
