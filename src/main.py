@@ -91,6 +91,7 @@ def login():
         pickingOrg(loginFrame, emailEntry.get())
         emailEntry.delete(0,"end")
         passwordEntry.delete(0,"end")
+        
     else:
         error("Wrong email or password!", loginFrame)
         emailEntry.delete(0,"end")
@@ -143,7 +144,7 @@ def showPasswordCommand():
     else:
         passwordEntry.configure(show='')
 
-showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command = showPasswordCommand, hover_color=accent, checkmark_color=accent)
+showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command = showPasswordCommand, hover_color=accent, checkmark_color=accent, font= font(12))
 showPasswordCheckbox.place(relx = 0.335, rely = 0.65)
 
 #=========================== Keeps GUI Running ======================================================================================================================================================

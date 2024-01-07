@@ -12,6 +12,7 @@ from errorPage import error
 from addItem import addItem
 from editItem import editItem
 from removeItem import removeItem
+from searchpage import searchPage
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -96,6 +97,45 @@ def pickingOrg(root, email):
     for item in orgs:
         listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
         count+= 1
+
+    searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20))
+    searchLabel.place(relx=0.31, rely=0.075, anchor="center")
+
+    searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="search by name")
+    searchEntry.place(relx= 0.5, rely= 0.075, anchor= "center")
+    final = list()
+
+    def on_key_press(event):
+        check = 0
+        orgs = orgInfo.find()
+        search= searchEntry.get()
+        if len(list(search)) > 0:
+            final.clear()
+            for item in orgs:
+                name = item["orgName"]
+                newName = name[:len(list(search))]
+                if len(list(search)) <= len(list(name)):
+                    if search == newName:
+                        final.append(item)
+
+                count = 0
+                for item in listbox.get_children():
+                    listbox.delete(item)
+                for item in final:
+                    listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
+                    count+= 1
+        else:
+            orgs = orgInfo.find()
+            count = 0
+            for item in listbox.get_children():
+                listbox.delete(item)
+            for item in orgs:
+                listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
+                count+= 1
+
+    
+    searchEntry.bind("<KeyRelease>", on_key_press)
+    
             
 
     
