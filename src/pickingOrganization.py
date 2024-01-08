@@ -52,7 +52,7 @@ def pickingOrg(root, email):
     pickingFrame.place(relx= 0, rely= 0)
 
 #=========================== welcomes user to home page ======================================================================================================================================================
-    labelText = ctk.CTkLabel(pickingFrame, text="Welcome " + user, font=font(30))
+    labelText = ctk.CTkLabel(pickingFrame, text="Welcome " + user, font=font(30), fg_color=color, text_color="white")
     labelText.place(relx=0.02, rely=0.05, anchor="w")
 
 #=========================== listbox style ======================================================================================================================================================
@@ -98,7 +98,7 @@ def pickingOrg(root, email):
         listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
         count+= 1
 
-    searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20))
+    searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
     searchLabel.place(relx=0.31, rely=0.075, anchor="center")
 
     searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by name")
@@ -164,11 +164,11 @@ def pickingOrg(root, email):
             accountFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
             accountFrame.place(relx= 0, rely= 0, anchor= "nw")
 
-            accountlabel = ctk.CTkLabel(accountFrame, text="Acount Details", font=font(35))
+            accountlabel = ctk.CTkLabel(accountFrame, text="Acount Details", font=font(35), fg_color=color, text_color="white")
             accountlabel.place(relx=0.5, rely=0.02, anchor="n")
 
 #=========================== password entry ======================================================================================================================================================
-            passwordLabel2 = ctk.CTkLabel(accountFrame, text="Password", font=font(15))
+            passwordLabel2 = ctk.CTkLabel(accountFrame, text="Password", font=font(15), fg_color=color, text_color="white")
             passwordLabel2.place(relx=0.335, rely=0.16, anchor="nw")
             
             passwordEntry2 = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
@@ -177,7 +177,7 @@ def pickingOrg(root, email):
             passwordEntry2.bind('<FocusIn>', lambda x: passwordEntry2.select_range(0, "end"))
 
 #=========================== first name entry ======================================================================================================================================================
-            firstNameLabel = ctk.CTkLabel(accountFrame, text="First Name", font=font(15))
+            firstNameLabel = ctk.CTkLabel(accountFrame, text="First Name", font=font(15), fg_color=color, text_color="white")
             firstNameLabel.place(relx=0.335, rely=0.33, anchor="nw")
             
             firstNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
@@ -186,7 +186,7 @@ def pickingOrg(root, email):
             firstNameEntry.bind('<FocusIn>', lambda x: firstNameEntry.select_range(0, "end"))
 
 #=========================== last name entry ======================================================================================================================================================
-            lastNameLabel = ctk.CTkLabel(accountFrame, text="Last Name", font=font(15))
+            lastNameLabel = ctk.CTkLabel(accountFrame, text="Last Name", font=font(15), fg_color=color, text_color="white")
             lastNameLabel.place(relx=0.335, rely=0.5, anchor="nw")
             
             lastNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
@@ -195,7 +195,7 @@ def pickingOrg(root, email):
             lastNameEntry.bind('<FocusIn>', lambda x: lastNameEntry.select_range(0, "end"))
 
 #=========================== preffered name entry ======================================================================================================================================================
-            preferredNameLabel = ctk.CTkLabel(accountFrame, text="Preferred Name", font=font(15))
+            preferredNameLabel = ctk.CTkLabel(accountFrame, text="Preferred Name", font=font(15), fg_color=color, text_color="white")
             preferredNameLabel.place(relx=0.335, rely=0.67, anchor="nw")
             
             preferredNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
@@ -241,7 +241,7 @@ def pickingOrg(root, email):
                 #If all of those checks are passed then replace all the changed values
                 else:
                     loginInfo.replace_one({"email": email}, {"email": email, "password": passwordEntry2.get(), "firstName": firstNameEntry.get(), "lastName": lastNameEntry.get(), "prefferedName": preferredNameEntry.get()})
-                    confirmLabel = ctk.CTkLabel(accountFrame, text="*all changes have been saved", font=font(15), text_color=accent)
+                    confirmLabel = ctk.CTkLabel(accountFrame, text="*all changes have been saved", font=font(15), text_color=accent, fg_color=color)
                     confirmLabel.place(relx=0.5, rely=.83, anchor="center")
                 
 
@@ -260,11 +260,11 @@ def pickingOrg(root, email):
             back1Button.bind("<Enter>", on_enter)
             back1Button.bind("<Leave>", on_leave)
 
-            securityFramelabel = ctk.CTkLabel(securityFrame, text="Please Confirm Your Identity", font=font(35))
+            securityFramelabel = ctk.CTkLabel(securityFrame, text="Please Confirm Your Identity", font=font(35), fg_color=color, text_color="white")
             securityFramelabel.place(relx=0.5, rely=0.02, anchor="n")
 
 
-            securitylabel = ctk.CTkLabel(securityFrame, text="Password", font=font(15))
+            securitylabel = ctk.CTkLabel(securityFrame, text="Password", font=font(15), fg_color=color, text_color="white")
             securitylabel.place(relx=0.34, rely=0.42, anchor="nw")
 
             passwordEntry = ctk.CTkEntry(securityFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
@@ -298,7 +298,7 @@ def pickingOrg(root, email):
             settingFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
             settingFrame.place(relx= 0, rely= 0, anchor= "nw")
 
-            settingslabel = ctk.CTkLabel(settingFrame, text="Settings", font=font(35))
+            settingslabel = ctk.CTkLabel(settingFrame, text="Settings", font=font(35), fg_color=color, text_color="white")
             settingslabel.place(relx=0.5, rely=0.02, anchor="n")
 
             backButton = ctk.CTkButton(settingFrame, text="⌂", font=font(40), command= settingFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
@@ -316,7 +316,7 @@ def pickingOrg(root, email):
             aboutFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
             aboutFrame.place(relx= 0, rely= 0, anchor= "nw")
 
-            AboutUslabel = ctk.CTkLabel(aboutFrame, text="About Us ", font=font(35))
+            AboutUslabel = ctk.CTkLabel(aboutFrame, text="About Us ", font=font(35), fg_color=color, text_color="white")
             AboutUslabel.place(relx=0.5, rely=0.02, anchor="n")
 
             backButton = ctk.CTkButton(aboutFrame, text="⌂", font=font(40), command= aboutFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)

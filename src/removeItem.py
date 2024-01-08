@@ -21,7 +21,7 @@ class CustomTkinter(tk.Tk):
 
 #=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
-    return ("Quicksand",size)
+    return ("Quicksand", size)
 
 #=========================== set default colors ======================================================================================================================================================
 color = "#121414"
@@ -49,7 +49,7 @@ def removeItem(root, listbox):
         for select in selection:
             for org in orgs:
                 if select[0] == org["orgName"] and select[1] == org["resources"] and select[2] == org["location"] and select[3] == org["contactInfo"]:
-                    delete.append({"orgName":select[0],"resources":select[1],"location":select[2],"contactInfo":select[3]})
+                    delete.append({"orgName": select[0], "resources": select[1], "location": select[2], "contactInfo": select[3]})
                     
         for item in delete:
             orgInfo.delete_one(item)
@@ -58,5 +58,5 @@ def removeItem(root, listbox):
         for item in listbox.get_children():
             listbox.delete(item)
         for item in orgs:
-            listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
-            count+= 1        
+            listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["location"], item["resources"], item["contactInfo"]))
+            count += 1  
