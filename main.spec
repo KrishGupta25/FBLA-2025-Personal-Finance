@@ -8,7 +8,7 @@ a = Analysis(
     ['src\\main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('./src/Quicksand-Bold.ttf', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
