@@ -3,13 +3,24 @@ import tkinter as tk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
+import os
+import sys
 
 #=========================== set default colors ======================================================================================================================================================
 color = "#121414"
 accent = "#3cb371"
 
 #=========================== import custom font ======================================================================================================================================================
-pyglet.font.add_file('Quicksand-Bold.ttf')
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+font_path = "Quicksand-bold.ttf"
+pyglet.font.add_file(resource_path(font_path))
 
 #=========================== function to simplify font size ======================================================================================================================================================
 def font(size):

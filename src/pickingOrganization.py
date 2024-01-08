@@ -4,7 +4,8 @@ from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
-import time
+import os
+import sys
 
 #=========================== import all required functions ======================================================================================================================================================
 
@@ -12,7 +13,6 @@ from errorPage import error
 from addItem import addItem
 from editItem import editItem
 from removeItem import removeItem
-from searchpage import searchPage
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -21,8 +21,16 @@ loginInfo = db["loginInfo"]
 orgInfo = db["orgInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
-pyglet.font.add_file('Quicksand-Bold.ttf')
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
 
+    return os.path.join(base_path, relative_path)
+
+font_path = "Quicksand-bold.ttf"
+pyglet.font.add_file(resource_path(font_path))
 #=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
     return ("Quicksand",size)
@@ -101,7 +109,7 @@ def pickingOrg(root, email):
     searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20))
     searchLabel.place(relx=0.31, rely=0.075, anchor="center")
 
-    searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="search by name")
+    searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by name")
     searchEntry.place(relx= 0.5, rely= 0.075, anchor= "center")
     final = list()
 
@@ -325,7 +333,7 @@ def pickingOrg(root, email):
             backButton.bind("<Leave>", on_leave)
 
 #=========================== create about button ======================================================================================================================================================
-        aboutButton = ctk.CTkButton(moreFrame, text="   about", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= about)
+        aboutButton = ctk.CTkButton(moreFrame, text="   About", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= about)
         aboutButton.place(relx=0, rely=.4, anchor="nw")
 
 #=========================== create support button ======================================================================================================================================================

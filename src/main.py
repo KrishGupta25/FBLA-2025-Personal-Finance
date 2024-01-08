@@ -4,6 +4,8 @@ from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
+import os 
+import sys
 
 #=========================== import all required functions ======================================================================================================================================================
 
@@ -17,7 +19,16 @@ db = cluster["main"]
 loginInfo = db["loginInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
-pyglet.font.add_file('Quicksand-Bold.ttf')
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+font_path = "Quicksand-bold.ttf"
+pyglet.font.add_file(resource_path(font_path))
 
 #=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
