@@ -18,16 +18,16 @@ To install and run CTE Partner Pro on your computer, please follow these steps:
 2. Click on the green "<> code" button next to "add file"
 3. From the dropdown menu select "download zip"
 4. Extract the ZIP package to a desired location on your computer.
-5. Ensure that the extracted folder contains all the necessary files as seen in the [GitHub repository](https://github.com/xIntensity9/FBLA-22-23/).
-6. open the folder titled "src" and open the file labeled "Quicksand-Bold.ttf" click the install button at the top left
+5. Ensure the extracted folder contains all the necessary files as seen in the [GitHub repository](https://github.com/xIntensity9/FBLA-22-23/).
+6. open the folder titled "src" and open the file labeled "Quicksand-Bold.ttf" Click the install button at the top left
 7. Open the folder titled "dist" and click on main.exe
 8. All necessary packages will be installed.
-9. Once the setup is complete, you can start using CTE Partner Pro to track student involvement in your school.
+9. Once the setup is complete, you can start using CTE Partner Pro to track organizations/businesses in your school.
 
 **Note:**
 - It is essential to have a stable internet connection for CTE Partner Pro to function properly.
 - An Admin must first create an account to use CTE Partner Pro
-- For testing purposes, the login is email: "test", password: "test" or you can create your own login
+- For testing purposes, the login is email: "test", password: "test" or you can create your login
 
 ## License
 CTE Partner Pro is released under the [MIT License](https://github.com/xIntensity9/FBLA-22-23/blob/main/LICENSE).
