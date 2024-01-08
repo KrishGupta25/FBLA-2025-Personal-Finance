@@ -3,11 +3,9 @@ import tkinter as tk
 from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
-import pyglet
-import string
-import os
+import ctypes
 import sys
-
+from pathlib import Path
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
@@ -19,16 +17,28 @@ db = cluster["main"]
 loginInfo = db["loginInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
-def resource_path(relative_path):
+def fetch_resource(rsrc_path):
+    """Loads resources from the temp dir used by pyinstaller executables"""
     try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
+        base_path = Path(sys._MEIPASS)
+    except AttributeError:
+        return rsrc_path  # not running as exe, just return the unaltered path
+    else:
+        return base_path.joinpath(rsrc_path)
 
-    return os.path.join(base_path, relative_path)
 
-font_path = "Quicksand-bold.ttf"
-pyglet.font.add_file(resource_path(font_path))
+def load_font(font_path, private=True, enumerable=False):
+    """Add the font at 'font_path' as a Windows font resource"""
+    FR_PRIVATE = 0x10
+    FR_NOT_ENUM = 0x20
+    flags = (FR_PRIVATE * int(private)) | (FR_NOT_ENUM * int(1 - enumerable))
+    font_fetch = str(fetch_resource(font_path))
+    path_buf = ctypes.create_unicode_buffer(font_fetch)
+    add_font = ctypes.windll.gdi32.AddFontResource.ExW
+    font_added = add_font(ctypes.byref(path_buf), flags, 0)
+    return bool(font_added)  # True if the font was added successfully
+
+font = "Quicksand"
 
 #=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
