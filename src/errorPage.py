@@ -26,8 +26,8 @@ def error(message, root):
     label.configure(anchor="center")
     label.place(relx=0.5, rely=0.4, anchor="center")
 
-    loginButton = ctk.CTkButton(newError, text="Ok", font=font(25), command=newError.place_forget, fg_color=accent, hover_color="#63C28D", text_color=color)
-    loginButton.place(relx=0.5, rely=0.8, anchor="center")
+    okButton = ctk.CTkButton(newError, text="Ok", font=font(25), command=newError.place_forget, fg_color=accent, hover_color="#63C28D", text_color=color)
+    okButton.place(relx=0.5, rely=0.8, anchor="center")
 
 
     

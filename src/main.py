@@ -57,7 +57,7 @@ loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
 #=========================== Creating a email entry box and the text above it ======================================================================================================================================================
 # Text box
-emailEntry = ctk.CTkEntry(loginFrame, font=font(15), placeholder_text="Name@domain.com", width=400, height=40, justify="center", fg_color=color)
+emailEntry = ctk.CTkEntry(loginFrame, font=font(15), placeholder_text="Name@domain.com", width=400, height=40, justify="center", fg_color=color, text_color="white")
 emailEntry.place(relx=0.5, rely=0.45, anchor="center")
 # Text above text box
 emailLabel = ctk.CTkLabel(loginFrame, text="Email", font=font(15), fg_color=color, text_color="white")
@@ -65,7 +65,7 @@ emailLabel.place(relx=0.335, rely=0.36, anchor="nw")
 
 #=========================== Creating a password entry box and the text above it ======================================================================================================================================================
 # Text box
-passwordEntry = ctk.CTkEntry(loginFrame, font=font(15), placeholder_text="Password", width=400, height=40, justify="center", show="*", fg_color=color)
+passwordEntry = ctk.CTkEntry(loginFrame, font=font(15), placeholder_text="Password", width=400, height=40, justify="center", show="*", fg_color=color, text_color="white")
 passwordEntry.place(relx=0.5, rely=0.6, anchor="center")
 # Text above text box
 passwordLabel = ctk.CTkLabel(loginFrame, text="Password", font=font(15), fg_color=color, text_color="white")
@@ -122,7 +122,7 @@ def showPasswordCommand():
     else:
         passwordEntry.configure(show='')
 
-showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command=showPasswordCommand, hover_color=accent, checkmark_color=accent, font=font(12))
+showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command=showPasswordCommand, hover_color=accent, checkmark_color=accent, font=font(12), fg_color=color, text_color="white")
 showPasswordCheckbox.place(relx=0.335, rely=0.65)
 
 #=========================== Keeps GUI Running ======================================================================================================================================================

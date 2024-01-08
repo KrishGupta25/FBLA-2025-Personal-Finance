@@ -47,7 +47,7 @@ def signUp(root):
    
     emailLabel = ctk.CTkLabel(signupFrame, text="Email", font=font(15), fg_color=color, text_color=accent)
     emailLabel.place(relx=0.335, rely=0.36, anchor="nw")
-    emailEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Name@domain.com", width=400, height=40, justify="center")
+    emailEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Name@domain.com", width=400, height=40, justify="center", fg_color=color, text_color="white")
     emailEntry.place(relx=0.5, rely=0.45, anchor="center")
 
     #=========================== Password entry box and text above entry box ======================================================================================================================================================

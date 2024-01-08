@@ -101,7 +101,7 @@ def pickingOrg(root, email):
     searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
     searchLabel.place(relx=0.31, rely=0.075, anchor="center")
 
-    searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by name")
+    searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by name", fg_color=color, text_color="white")
     searchEntry.place(relx= 0.5, rely= 0.075, anchor= "center")
     final = list()
 
@@ -171,7 +171,7 @@ def pickingOrg(root, email):
             passwordLabel2 = ctk.CTkLabel(accountFrame, text="Password", font=font(15), fg_color=color, text_color="white")
             passwordLabel2.place(relx=0.335, rely=0.16, anchor="nw")
             
-            passwordEntry2 = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
+            passwordEntry2 = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
             passwordEntry2.place(relx= 0.5, rely= 0.25, anchor= "center")
             passwordEntry2.insert(0, first)
             passwordEntry2.bind('<FocusIn>', lambda x: passwordEntry2.select_range(0, "end"))
@@ -180,7 +180,7 @@ def pickingOrg(root, email):
             firstNameLabel = ctk.CTkLabel(accountFrame, text="First Name", font=font(15), fg_color=color, text_color="white")
             firstNameLabel.place(relx=0.335, rely=0.33, anchor="nw")
             
-            firstNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
+            firstNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
             firstNameEntry.place(relx= 0.5, rely= 0.42, anchor= "center")
             firstNameEntry.insert(0, first)
             firstNameEntry.bind('<FocusIn>', lambda x: firstNameEntry.select_range(0, "end"))
@@ -189,7 +189,7 @@ def pickingOrg(root, email):
             lastNameLabel = ctk.CTkLabel(accountFrame, text="Last Name", font=font(15), fg_color=color, text_color="white")
             lastNameLabel.place(relx=0.335, rely=0.5, anchor="nw")
             
-            lastNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
+            lastNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
             lastNameEntry.place(relx= 0.5, rely= 0.59, anchor= "center")
             lastNameEntry.insert(0, last)
             lastNameEntry.bind('<FocusIn>', lambda x: lastNameEntry.select_range(0, "end"))
@@ -198,7 +198,7 @@ def pickingOrg(root, email):
             preferredNameLabel = ctk.CTkLabel(accountFrame, text="Preferred Name", font=font(15), fg_color=color, text_color="white")
             preferredNameLabel.place(relx=0.335, rely=0.67, anchor="nw")
             
-            preferredNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center")
+            preferredNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
             preferredNameEntry.place(relx= 0.5, rely= 0.76, anchor= "center")
             preferredNameEntry.insert(0, preferred)
             preferredNameEntry.bind('<FocusIn>', lambda x: preferredNameEntry.select_range(0, "end"))
@@ -267,7 +267,7 @@ def pickingOrg(root, email):
             securitylabel = ctk.CTkLabel(securityFrame, text="Password", font=font(15), fg_color=color, text_color="white")
             securitylabel.place(relx=0.34, rely=0.42, anchor="nw")
 
-            passwordEntry = ctk.CTkEntry(securityFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*")
+            passwordEntry = ctk.CTkEntry(securityFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*", fg_color=color, text_color="white")
             passwordEntry.place(relx= 0.5, rely= 0.5, anchor= "center")
 
 #=========================== function for submittion ======================================================================================================================================================
