@@ -4,6 +4,7 @@ from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
+from PIL import ImageTk, Image
 
 #=========================== import all required functions ======================================================================================================================================================
 
@@ -11,6 +12,7 @@ from errorPage import error
 from addItem import addItem
 from editItem import editItem
 from removeItem import removeItem
+from filter import filter
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -135,8 +137,9 @@ def pickingOrg(root, email):
 
     
     searchEntry.bind("<KeyRelease>", on_key_press)
-    
-            
+          
+    filterButton = ctk.CTkButton(pickingFrame, text="filter", font=font(15), command= lambda:(filter(pickingFrame, listbox)), fg_color=accent, hover_color="#63C28D", text_color=color)
+    filterButton.place(relx=0.7, rely=0.075, anchor="center")
 
     
 
@@ -328,8 +331,62 @@ def pickingOrg(root, email):
         aboutButton = ctk.CTkButton(moreFrame, text="   About", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= about)
         aboutButton.place(relx=0, rely=.4, anchor="nw")
 
+#=========================== create about frame ======================================================================================================================================================
+        def support():
+            moreFrame.place_forget()
+            supportFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
+            supportFrame.place(relx= 0, rely= 0, anchor= "nw")
+
+            supportlabel = ctk.CTkLabel(supportFrame, text="Support page", font=font(35), fg_color=color, text_color="white")
+            supportlabel.place(relx=0.5, rely=0.02, anchor="n")
+
+            backButton = ctk.CTkButton(supportFrame, text="⌂", font=font(40), command= supportFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
+            backButton.place(relx=.02, rely=0.001, anchor="nw")
+            backButton.bind("<Enter>", on_enter)
+            backButton.bind("<Leave>", on_leave)
+
+            # Create an object of tkinter ImageTk
+            imgage = Image.open("./src/loginImage.png")
+            new_img = imgage.resize((1200,600))
+            img = ImageTk.PhotoImage(new_img)
+
+
+            # Create a Label Widget to display the text or Image
+            label = ctk.CTkLabel(supportFrame, image = img, text="")
+            label.place(relx= 0.5, rely= 0.5, anchor= "center")
+
+            def suport2(destroy):
+                supportFrame2 = ctk.CTkFrame(supportFrame, width=1200, height=600, fg_color= color, bg_color= color)
+                supportFrame2.place(relx= 0, rely= 0, anchor= "nw")
+
+                supportlabel = ctk.CTkLabel(supportFrame2, text="Support page", font=font(35), fg_color=color, text_color="white")
+                supportlabel.place(relx=0.5, rely=0.02, anchor="n")
+
+                def back():
+                    destroy.place_forget()
+                    supportFrame2.place_forget()
+
+                backButton = ctk.CTkButton(supportFrame2, text="⌂", font=font(40), command= back, fg_color=color, hover_color=color, width=0, height=0)
+                backButton.place(relx=.02, rely=0.001, anchor="nw")
+                backButton.bind("<Enter>", on_enter)
+                backButton.bind("<Leave>", on_leave)
+
+                # Create an object of tkinter ImageTk
+                imgage = Image.open("./src/mainImage.png")
+                new_img = imgage.resize((1200,600))
+                img = ImageTk.PhotoImage(new_img)
+
+                # Create a Label Widget to display the text or Image
+                label = ctk.CTkLabel(supportFrame, image = img, text="")
+                label.place(relx= 0.5, rely= 0.5, anchor= "center")
+
+            nextButton = ctk.CTkButton(supportFrame, text="Next", font=font(25), command= lambda:(suport2(supportFrame)), fg_color=color, hover_color=color, width=0)
+            nextButton.place(relx=.5, rely=0.95, anchor="center")
+            nextButton.bind("<Enter>", on_enter)
+            nextButton.bind("<Leave>", on_leave)
+
 #=========================== create support button ======================================================================================================================================================
-        supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
+        supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), command= support, fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
         supportButton.place(relx=0, rely=.6, anchor="nw")
 
 #=========================== function to logout ======================================================================================================================================================
