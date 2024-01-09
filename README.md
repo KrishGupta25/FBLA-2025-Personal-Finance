@@ -18,7 +18,7 @@ To install and run CTE Partner Pro on your computer, please follow these steps:
 2. Click on the green "<> code" button next to "add file"
 3. From the dropdown menu select "download zip"
 4. Extract the ZIP package to a desired location on your computer.
-5. Ensure the extracted folder contains all the necessary files as seen in the [GitHub repository](https://github.com/xIntensity9/FBLA-22-23/).
+5. Ensure the extracted folder contains all the necessary files as seen in the [GitHub repository]((https://github.com/HarisR39/CTE_Partner_Pro)).
 6. open the folder titled "src" and open the file labeled "Quicksand-Bold.ttf" Click the install button at the top left and close the window after it installs
 7. return to the main folder
 8. Open the folder titled "dist" and click on main.exe
