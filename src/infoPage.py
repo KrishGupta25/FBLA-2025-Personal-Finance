@@ -61,10 +61,11 @@ def info(root, email, password, delete):
     preferredNameEntry = ctk.CTkEntry(infoFrame, font=font(15), placeholder_text="Preferred Name", width=400, height=40, justify="center", fg_color=color, text_color="white")
     preferredNameEntry.place(relx=0.5, rely=0.725, anchor="center")
 
-    backButton = ctk.CTkButton(infoFrame, text="⌂", font=font(40), command=lambda: [infoFrame.place_forget(), delete.place_forget()],fg_color=color, text_color="white", width=0, height=0)
+    backButton = ctk.CTkButton(infoFrame, text="⌂", font=font(40), command=lambda: [infoFrame.place_forget(), delete.place_forget()], fg_color=color, hover_color=color, width=0, height=0)
     backButton.place(relx=.02, rely=0.001, anchor="nw")
     backButton.bind("<Enter>", on_enter)
     backButton.bind("<Leave>", on_leave)
+    
 
     # =========================== function to insert data input from the user into the database ======================================================================================================================================================
     def exit():
@@ -83,5 +84,5 @@ def info(root, email, password, delete):
             delete.place_forget()
 
     # =========================== create sign-up button ======================================================================================================================================================
-    signUpButton = ctk.CTkButton(infoFrame, text="Sign Up", font=font(25), command=exit, fg_color=accent, text_color=color)
-    signUpButton.place(relx=0.5, rely=0.875, anchor="center")
+    loginButton = ctk.CTkButton(infoFrame, text="Sign up", font=font(25), command= exit, fg_color=accent, hover_color="#63C28D", text_color=color)
+    loginButton.place(relx=0.5, rely=0.875, anchor="center")

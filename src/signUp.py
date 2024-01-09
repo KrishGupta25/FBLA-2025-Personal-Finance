@@ -40,21 +40,21 @@ def signUp(root):
     signupFrame.place(relx=0, rely=0)
 
     #Creates signup to xxxx label
-    loginLabel = ctk.CTkLabel(signupFrame, text="Sign up for xxxx", font=font(50), fg_color=color, text_color=accent)
+    loginLabel = ctk.CTkLabel(signupFrame, text="Sign up for xxxx", font=font(50), fg_color=color, text_color="white")
     loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
     #=========================== Email entry box and text above entry box  ======================================================================================================================================================
    
-    emailLabel = ctk.CTkLabel(signupFrame, text="Email", font=font(15), fg_color=color, text_color=accent)
+    emailLabel = ctk.CTkLabel(signupFrame, text="Email", font=font(15), fg_color=color, text_color="white")
     emailLabel.place(relx=0.335, rely=0.36, anchor="nw")
     emailEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Name@domain.com", width=400, height=40, justify="center", fg_color=color, text_color="white")
     emailEntry.place(relx=0.5, rely=0.45, anchor="center")
 
     #=========================== Password entry box and text above entry box ======================================================================================================================================================
    
-    passwordLabel = ctk.CTkLabel(signupFrame, text="Password (must include 1 uppercase letter, 1 lowercase letter, 1 special character and 1 number)", font=font(15), fg_color=color, text_color=accent)
+    passwordLabel = ctk.CTkLabel(signupFrame, text="Password (must include 1 uppercase letter, 1 lowercase letter, 1 special character and 1 number)", font=font(15), fg_color=color, text_color="white")
     passwordLabel.place(relx=0.335, rely=0.56, anchor="nw")
-    passwordEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Password (must have at least 8 characters)", width=400, height=40, justify="center", show="*", fg_color=color, text_color=accent)
+    passwordEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Password (must have at least 8 characters)", width=400, height=40, justify="center", show="*", fg_color=color, text_color="white")
     passwordEntry.place(relx=0.5, rely=0.65, anchor="center")
 
     def display(e):
@@ -64,7 +64,7 @@ def signUp(root):
         tooltipFrame.place_forget()
 
     tooltipFrame = ctk.CTkFrame(signupFrame, width=100, height=50, fg_color=color)
-    tooltipLabel = ctk.CTkLabel(signupFrame, text="ⓘ", font=font(15), fg_color=color, text_color=accent)
+    tooltipLabel = ctk.CTkLabel(signupFrame, text="ⓘ", font=font(15), fg_color=color, text_color="white")
     tooltipLabel.place(relx=0.68, rely=0.65, anchor="center")
 
     tooltipLabel.bind("<Enter>", display)
@@ -78,7 +78,7 @@ def signUp(root):
         else:
             passwordEntry.configure(show='')
 
-    showPasswordCheckbox = ctk.CTkCheckBox(signupFrame, text="Show Password", command=showPasswordCommand, hover_color=accent, checkmark_color=accent, fg_color=color, text_color=accent)
+    showPasswordCheckbox = ctk.CTkCheckBox(signupFrame, text="Show Password", command=showPasswordCommand, hover_color=accent, checkmark_color=accent, fg_color=color, text_color="white")
     showPasswordCheckbox.place(relx=0.335, rely=0.7)
 
     #=========================== Checking to see a valid username and password ======================================================================================================================================================        
