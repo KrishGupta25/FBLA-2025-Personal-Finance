@@ -113,7 +113,7 @@ def editItem(root, listbox,):
                     for item in listbox.get_children():
                         listbox.delete(item)
                     for item in orgs:
-                        listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["location"], item["resources"], item["contactInfo"]))
+                        listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
                         count += 1
                     check = 0
 

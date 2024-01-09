@@ -55,8 +55,10 @@ def removeItem(root, listbox):
             orgInfo.delete_one(item)
             count = 0
 
+        orgs = orgInfo.find()
+        count = 0
         for item in listbox.get_children():
             listbox.delete(item)
         for item in orgs:
-            listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["location"], item["resources"], item["contactInfo"]))
-            count += 1  
+            listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
+            count += 1

@@ -95,7 +95,7 @@ def pickingOrg(root, email):
     for item in listbox.get_children():
         listbox.delete(item)
     for item in orgs:
-        listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
+        listbox.insert(parent='', index='end', text= "", iid= count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
         count+= 1
 
     searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
@@ -122,7 +122,7 @@ def pickingOrg(root, email):
                 for item in listbox.get_children():
                     listbox.delete(item)
                 for item in final:
-                    listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
+                    listbox.insert(parent='', index='end', text= "", iid= count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
                     count+= 1
         else:
             orgs = orgInfo.find()
@@ -130,7 +130,7 @@ def pickingOrg(root, email):
             for item in listbox.get_children():
                 listbox.delete(item)
             for item in orgs:
-                listbox.insert(parent='', index='end', text= "", iid= count, values= (item["orgName"], item["location"], item["resources"], item["contactInfo"]) )
+                listbox.insert(parent='', index='end', text= "", iid= count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
                 count+= 1
 
     
