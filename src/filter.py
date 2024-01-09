@@ -43,12 +43,7 @@ def filter(root, listbox):
     filterFrame.place(relx=0, rely=0, anchor="nw")
     filterFrame.focus_set()
 
-    def back():
-        global check
-        filterFrame.place_forget()
-        check = 0
-
-    backButton = ctk.CTkButton(filterFrame, text="x", font=font(20), command=back, fg_color=color, hover_color=color, width=0, height=0)
+    backButton = ctk.CTkButton(filterFrame, text="x", font=font(20), command= filterFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
     backButton.place(relx=.04, rely=0.02, anchor="nw")
     backButton.bind("<Enter>", on_enter)
     backButton.bind("<Leave>", on_leave)
@@ -108,6 +103,23 @@ def filter(root, listbox):
         filterFrame.place_forget()
 
     submitButton = ctk.CTkButton(filterFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
-    submitButton.place(relx=0.5, rely=0.5, anchor="center")
+    submitButton.place(relx=0.5, rely=0.375, anchor="center")
     submitButton.bind("<Enter>", on_enter)
     submitButton.bind("<Leave>", on_leave)
+
+    def reset():
+        orgs = orgInfo.find()
+        count = 0
+        for item in listbox.get_children():
+            listbox.delete(item)
+        for item in orgs:
+            listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
+            count += 1
+
+        filterFrame.place_forget()
+
+    resetButton = ctk.CTkButton(filterFrame, text="Reset", font=font(18), command= reset, fg_color=color, hover_color=color, text_color="white")
+    resetButton.place(relx=0.5, rely=0.625, anchor="center")
+    resetButton.bind("<Enter>", on_enter)
+    resetButton.bind("<Leave>", on_leave)
+
