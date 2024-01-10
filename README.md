@@ -43,3 +43,10 @@ We appreciate your interest in CTE Partner Pro and look forward to hearing from 
 ---
 
 *Disclaimer: This is a pre-production release of CTE Partner Pro, an innovative student involvement tracking system developed for educational institutions. The information presented below is for illustrative purposes and does not reflect an actual deployed software application.*
+
+## Usage
+
+![loginImage](https://github.com/HarisR39/CTE_Partner_Pro/assets/73035095/74cad525-3a98-4846-bbfe-3b77d7d4417f)
+
+![mainImage](https://github.com/HarisR39/CTE_Partner_Pro/assets/73035095/261d966c-ce0e-459d-92e3-1d397be4be49)
+
