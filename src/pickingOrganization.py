@@ -324,8 +324,16 @@ def pickingOrg(root, email):
             AboutUslabel = ctk.CTkLabel(aboutFrame, text="About Us ", font=font(35), fg_color=color, text_color="white")
             AboutUslabel.place(relx=0.5, rely=0.02, anchor="n")
 
-            AboutUstext = ctk.CTkLabel(aboutFrame, text="Welcome to our Future Business Leaders of America (FBLA) Programming and Coding project for 2023-2024! We, Krish Gupta and Harishankar Rajesh, are juniors at River Ridge High School and have spent the last two months developing a busniness/orginization storage platform. Our system is designed to be able to easily add, store, view, edit, remove, seach, and filter businesses while also implementing a friendly and effecient UI.This project involved in-depth learning of various software development facets, while also enhancing our ability to devise effective solutions to complex problems. The journey was challenging but rewarding, with the final product serving as both a tool for fostering a more interactive educational environment and a testament to our journey into the world of programming. \n fireplaypus375@gmail.com (Haris Rajesh)\n krishgupta2025@gmail.com(Krish Gupta)\nGithub: https://github.com/HarisR39/CTE_Partner_Pro", font=font(35), fg_color=color, text_color="white")
-            AboutUstext.place(relx=0.5, rely=0.5, anchor="n")
+            AboutUstext = ctk.CTkLabel(aboutFrame, text="""Welcome to our Future Business Leaders of America (FBLA) Programming and Coding project for 2023-2024! We, Harishankar Rajesh and
+            \nKrish Gupta, are juniors at River Ridge High School and have spent the last two months developing a busniness/orginization storage platform. 
+            \nOur system is designed to be able to easily add, store, view, edit, remove, seach, and filter businesses while also implementing a 
+            \nfriendly and effecient UI.This project involved in-depth learning of various software development facets, while also enhancing our
+            \nability to devise effective solutions to complex problems. The journey was challenging but rewarding, with the final product serving as 
+            \nboth a tool for fostering a more interactive educational environment and a testament to our journey into the world of programming. 
+            \nfireplaypus375@gmail.com (Haris Rajesh) 
+            \nkrishgupta2025@gmail.com(Krish Gupta) 
+            \nGithub: https://github.com/HarisR39/CTE_Partner_Pro""", font=font(17), fg_color=color, text_color="white")
+            AboutUstext.place(relx=0.5, rely=0.55, anchor="center")
 
             backButton = ctk.CTkButton(aboutFrame, text="⌂", font=font(40), command= aboutFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
             backButton.place(relx=.02, rely=0.001, anchor="nw")
