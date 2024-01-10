@@ -49,14 +49,14 @@ def pickingOrg(root, email):
     temp = loginInfo.find({"email": email})
     orgs = orgInfo.find()
     for item in temp:
-        user = item["prefferedName"]
+        user = item["preferredName"]
 
 #=========================== home page frame ======================================================================================================================================================
     pickingFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
     pickingFrame.place(relx= 0, rely= 0)
 
 #=========================== welcomes user to home page ======================================================================================================================================================
-    labelText = ctk.CTkLabel(pickingFrame, text="Welcome " + user, font=font(30), fg_color=color, text_color="white")
+    labelText = ctk.CTkLabel(pickingFrame, text="Welcome " + user, font=font(20), fg_color=color, text_color="white")
     labelText.place(relx=0.02, rely=0.05, anchor="w")
 
 #=========================== listbox style ======================================================================================================================================================
