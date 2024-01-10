@@ -45,7 +45,7 @@ def on_leave(e):
 #=========================== funtion to create home page ======================================================================================================================================================
 def pickingOrg(root, email):
 
-#=========================== find users preffered name ======================================================================================================================================================
+#=========================== find users preferred name ======================================================================================================================================================
     temp = loginInfo.find({"email": email})
     orgs = orgInfo.find()
     for item in temp:
@@ -162,7 +162,7 @@ def pickingOrg(root, email):
             for item in temp:
                 first = item["firstName"]
                 last = item["lastName"]
-                preferred = item["prefferedName"]
+                preferred = item["preferredName"]
                 password = item["password"]
                 
 #=========================== create account frame ======================================================================================================================================================
@@ -178,7 +178,7 @@ def pickingOrg(root, email):
             
             passwordEntry2 = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
             passwordEntry2.place(relx= 0.5, rely= 0.25, anchor= "center")
-            passwordEntry2.insert(0, first)
+            passwordEntry2.insert(0, password)
             passwordEntry2.bind('<FocusIn>', lambda x: passwordEntry2.select_range(0, "end"))
 
 #=========================== first name entry ======================================================================================================================================================
@@ -199,7 +199,7 @@ def pickingOrg(root, email):
             lastNameEntry.insert(0, last)
             lastNameEntry.bind('<FocusIn>', lambda x: lastNameEntry.select_range(0, "end"))
 
-#=========================== preffered name entry ======================================================================================================================================================
+#=========================== preferred name entry ======================================================================================================================================================
             preferredNameLabel = ctk.CTkLabel(accountFrame, text="Preferred Name", font=font(15), fg_color=color, text_color="white")
             preferredNameLabel.place(relx=0.335, rely=0.67, anchor="nw")
             
@@ -245,7 +245,7 @@ def pickingOrg(root, email):
 
                 #If all of those checks are passed then replace all the changed values
                 else:
-                    loginInfo.replace_one({"email": email}, {"email": email, "password": passwordEntry2.get(), "firstName": firstNameEntry.get(), "lastName": lastNameEntry.get(), "prefferedName": preferredNameEntry.get()})
+                    loginInfo.replace_one({"email": email}, {"email": email, "password": passwordEntry2.get(), "firstName": firstNameEntry.get(), "lastName": lastNameEntry.get(), "preferredName": preferredNameEntry.get()})
                     confirmLabel = ctk.CTkLabel(accountFrame, text="*all changes have been saved", font=font(15), text_color=accent, fg_color=color)
                     confirmLabel.place(relx=0.5, rely=.83, anchor="center")
                 
