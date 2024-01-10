@@ -21,8 +21,9 @@ To install and run CTE Partner Pro on your computer, please follow these steps:
 5. open the folder titled "src" and open the file labeled "Quicksand-Bold.ttf" Click the install button at the top left and close the window after it installs
 6. return to the main folder
 7. Open the folder titled "dist" and click on main.exe
-8. All necessary packages will be installed.
-9. Once the setup is complete, you can start using CTE Partner Pro to track organizations/businesses in your school.
+8. If windows blocks the application click on more info at the top left and then click run anyways at the bottom right
+9. All necessary packages will be installed.
+10. Once the setup is complete, you can start using CTE Partner Pro to track organizations/businesses in your school.
 
 **Note:**
 - It is essential to have a stable internet connection for CTE Partner Pro to function properly.
@@ -43,3 +44,10 @@ We appreciate your interest in CTE Partner Pro and look forward to hearing from 
 ---
 
 *Disclaimer: This is a pre-production release of CTE Partner Pro, an innovative student involvement tracking system developed for educational institutions. The information presented below is for illustrative purposes and does not reflect an actual deployed software application.*
+
+## Usage
+
+![loginImage](https://github.com/HarisR39/CTE_Partner_Pro/assets/73035095/74cad525-3a98-4846-bbfe-3b77d7d4417f)
+
+![mainImage](https://github.com/HarisR39/CTE_Partner_Pro/assets/73035095/261d966c-ce0e-459d-92e3-1d397be4be49)
+
