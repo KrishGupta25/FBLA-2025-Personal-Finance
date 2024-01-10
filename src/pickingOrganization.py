@@ -5,6 +5,8 @@ import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
 from PIL import ImageTk, Image
+import os
+import sys
 
 #=========================== import all required functions ======================================================================================================================================================
 
@@ -310,8 +312,8 @@ def pickingOrg(root, email):
             backButton.bind("<Leave>", on_leave)
 
 #=========================== create settings button ======================================================================================================================================================
-        settingsButton = ctk.CTkButton(moreFrame, text="   Settings", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=settings)
-        settingsButton.place(relx=0, rely=.2, anchor="nw")
+        #settingsButton = ctk.CTkButton(moreFrame, text="   Settings", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=settings)
+        #settingsButton.place(relx=0, rely=.2, anchor="nw")
 
 #=========================== create about frame ======================================================================================================================================================
         def about():
@@ -346,7 +348,16 @@ def pickingOrg(root, email):
             backButton.bind("<Leave>", on_leave)
 
             # Create an object of tkinter ImageTk
-            imgage = Image.open("./src/loginImage.png")
+            def resource_path(relative_path):
+                """ Get absolute path to resource, works for dev and for PyInstaller """
+                try:
+                    # PyInstaller creates a temp folder and stores path in _MEIPASS
+                    base_path = sys._MEIPASS
+                except Exception:
+                    base_path = os.path.abspath(".")
+
+                return os.path.join(base_path, relative_path)
+            imgage = Image.open(resource_path("./src/loginImage.png"))
             new_img = imgage.resize((1200,600))
             img = ImageTk.PhotoImage(new_img)
 
@@ -372,7 +383,17 @@ def pickingOrg(root, email):
                 backButton.bind("<Leave>", on_leave)
 
                 # Create an object of tkinter ImageTk
-                imgage = Image.open("./src/mainImage.png")
+                
+                def resource_path(relative_path):
+                    """ Get absolute path to resource, works for dev and for PyInstaller """
+                    try:
+                        # PyInstaller creates a temp folder and stores path in _MEIPASS
+                        base_path = sys._MEIPASS
+                    except Exception:
+                        base_path = os.path.abspath(".")
+
+                    return os.path.join(base_path, relative_path)
+                imgage = Image.open(resource_path("./src/mainImage.png"))
                 new_img = imgage.resize((1200,600))
                 img = ImageTk.PhotoImage(new_img)
 
@@ -386,8 +407,8 @@ def pickingOrg(root, email):
             nextButton.bind("<Leave>", on_leave)
 
 #=========================== create support button ======================================================================================================================================================
-        supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), command= support, fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
-        supportButton.place(relx=0, rely=.6, anchor="nw")
+        #supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), command= support, fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
+        #supportButton.place(relx=0, rely=.6, anchor="nw")
 
 #=========================== function to logout ======================================================================================================================================================
         def logout():
