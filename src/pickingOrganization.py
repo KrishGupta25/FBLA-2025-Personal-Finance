@@ -15,6 +15,7 @@ from addItem import addItem
 from editItem import editItem
 from removeItem import removeItem
 from filter import filter
+from viewItem import viewItem
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -79,21 +80,26 @@ def pickingOrg(root, email):
 
     listbox.place(relx=.5, rely=.5, anchor="center")
 
-#=========================== add/edit/remove organization buttons ======================================================================================================================================================
+#=========================== add/edit/remove/view organization buttons ======================================================================================================================================================
     addOrgButton = ctk.CTkButton(pickingFrame, text="Add Organization", font=font(18), command = lambda:[addItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
-    addOrgButton.place(relx=0.25, rely=0.91, anchor="center")
+    addOrgButton.place(relx=0.2, rely=0.91, anchor="center")
     addOrgButton.bind("<Enter>", on_enter)
     addOrgButton.bind("<Leave>", on_leave)
 
     editOrgButton = ctk.CTkButton(pickingFrame, text="Edit Organization", font=font(18), command = lambda:[editItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
-    editOrgButton.place(relx=0.5, rely=0.91, anchor="center")
+    editOrgButton.place(relx=0.4, rely=0.91, anchor="center")
     editOrgButton.bind("<Enter>", on_enter)
     editOrgButton.bind("<Leave>", on_leave)
 
     removeOrgButton = ctk.CTkButton(pickingFrame, text="Remove Organization", font=font(18), command = lambda:[removeItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
-    removeOrgButton.place(relx=0.75, rely=0.91, anchor="center")
+    removeOrgButton.place(relx=0.6, rely=0.91, anchor="center")
     removeOrgButton.bind("<Enter>", on_enter)
     removeOrgButton.bind("<Leave>", on_leave)
+
+    viewOrgButton = ctk.CTkButton(pickingFrame, text="View Organization", font=font(18), command = lambda:[viewItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
+    viewOrgButton.place(relx=0.8, rely=0.91, anchor="center")
+    viewOrgButton.bind("<Enter>", on_enter)
+    viewOrgButton.bind("<Leave>", on_leave)
 
     count = 0
     for item in listbox.get_children():
@@ -213,6 +219,7 @@ def pickingOrg(root, email):
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
 
+#=========================== password check ======================================================================================================================================================
             def confirm():
                 print(passwordEntry2.get())
                 #Checking to see if either entry is empty

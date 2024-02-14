@@ -41,13 +41,12 @@ check = 0
 def editItem(root, listbox,):
 #=========================== edit organization frame ======================================================================================================================================================
     global check
-    print(check)
     if check == 0:
         temp = listbox.selection()
         if len(temp) == 0:
-            error("Please select an organization to edit", root)
+            error("Please select an organization to view", root)
         elif len(temp) > 1:
-            error("You can only select one organization to edit at a time", root)
+            error("You can only select one organization to view at a time", root)
         else:
             check = 1
             selection = listbox.item(temp, option="values")
