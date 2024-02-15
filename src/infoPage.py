@@ -8,7 +8,7 @@ import pyglet
 # =========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
-from pickingOrganization import pickingOrg
+from success import success
 
 # =========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -76,12 +76,13 @@ def info(root, email, password, delete):
         last = last.capitalize()
         preferredName = preferredName.capitalize()
         if first == "" or last == "" or preferredName == "":
-            error("one or more of the required fields are empty", infoFrame)
+            error("One or more of the required fields are empty", infoFrame)
         else:
             databaseInformation = {"email": email, "password": password, "firstName": first, "lastName": last,"preferredName": preferredName}
             loginInfo.insert_one(databaseInformation)
             infoFrame.place_forget()
             delete.place_forget()
+            success("User was successfully added to the database", root)
 
     # =========================== create sign-up button ======================================================================================================================================================
     loginButton = ctk.CTkButton(infoFrame, text="Sign up", font=font(25), command= exit, fg_color=accent, hover_color="#63C28D", text_color=color)
