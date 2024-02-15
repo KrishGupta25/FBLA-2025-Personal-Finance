@@ -1,19 +1,37 @@
- 
-# Import Module
-from tkinter import *
-from tkhtmlview import HTMLLabel
- 
-# Create Object
-root = Tk()
- 
-# Set Geometry
-root.geometry("400x400")
- 
-# Add label
-my_label = HTMLLabel(root, html="https://www.google.com/maps/dir/28.2704324,-82.6306974/E%C5%8DS+Fitness,+17634+Harpers+Run,+Lutz,+FL+33558/@28.2360383,-82.6187884,13z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x88c2bdb94f14d48b:0xc273f0d1cc6a0ac4!2m2!1d-82.5244523!2d28.1923397!3e0?entry=ttu")
- 
-# Adjust label
-my_label.pack(pady=20, padx=20)
- 
-# Execute Tkinter
-root.mainloop()
+import tkinter
+import tkintermapview
+
+# create tkinter window
+root_tk = tkinter.Tk()
+root_tk.geometry(f"{1000}x{700}")
+root_tk.title("map_view_simple_example.py")
+
+# create map widget
+map_widget = tkintermapview.TkinterMapView(root_tk, width=1000, height=700, corner_radius=0)
+map_widget.pack(fill="both", expand=True)
+
+# set other tile server (standard is OpenStreetMap)
+# map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)  # google normal
+# map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)  # google satellite
+
+# set current position and zoom
+map_widget.set_position(28.214790, -82.622370, marker=False)  # Berlin, Germany
+map_widget.set_zoom(7)
+
+
+
+
+# set a position marker (also with a custom color and command on click)
+marker_2 = map_widget.set_marker(28.214790, -82.622370, text="")
+marker_3 = map_widget.set_marker(29.643946, -82.355659, text="")
+# marker_3.set_position(...)
+# marker_3.set_text(...)
+# marker_3.delete()
+
+# set a path
+path_1 = map_widget.set_path([marker_2.position, marker_3.position])
+# path_1.add_position(...)
+# path_1.remove_position(...)
+# path_1.delete()
+
+root_tk.mainloop()

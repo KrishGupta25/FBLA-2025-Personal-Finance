@@ -7,6 +7,7 @@ from pymongo import MongoClient
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
+from success import success
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -98,6 +99,7 @@ def addItem(root, listbox):
                 for item in orgs:
                     listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
                     count += 1
+            success("org was succesfully added to the database", root)
 
         submitButton = ctk.CTkButton(addItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
         submitButton.place(relx=0.5, rely=0.9, anchor="center")

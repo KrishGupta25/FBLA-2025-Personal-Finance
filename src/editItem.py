@@ -8,6 +8,7 @@ import pyglet
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
+from success import success
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -44,9 +45,9 @@ def editItem(root, listbox,):
     if check == 0:
         temp = listbox.selection()
         if len(temp) == 0:
-            error("Please select an organization to view", root)
+            error("Please select an organization to edit", root)
         elif len(temp) > 1:
-            error("You can only select one organization to view at a time", root)
+            error("You can only select one organization to edit at a time", root)
         else:
             check = 1
             selection = listbox.item(temp, option="values")
@@ -115,6 +116,8 @@ def editItem(root, listbox,):
                         listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
                         count += 1
                     check = 0
+
+                success("org was succesfully edited", root)
 
             submitButton = ctk.CTkButton(editItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
             submitButton.place(relx=0.5, rely=0.9, anchor="center")

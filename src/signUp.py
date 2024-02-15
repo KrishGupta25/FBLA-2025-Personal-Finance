@@ -57,19 +57,6 @@ def signUp(root):
     passwordEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Password (must have at least 8 characters)", width=400, height=40, justify="center", show="*", fg_color=color, text_color="white")
     passwordEntry.place(relx=0.5, rely=0.65, anchor="center")
 
-    def display(e):
-        tooltipFrame.place(relx=.7, rely=0.76, anchor="nw")
-
-    def hide(e):
-        tooltipFrame.place_forget()
-
-    tooltipFrame = ctk.CTkFrame(signupFrame, width=100, height=50, fg_color=color)
-    tooltipLabel = ctk.CTkLabel(signupFrame, text="ⓘ", font=font(15), fg_color=color, text_color="white")
-    tooltipLabel.place(relx=0.68, rely=0.65, anchor="center")
-
-    tooltipLabel.bind("<Enter>", display)
-    tooltipLabel.bind("<Leave>", hide) 
-
     #=========================== Password Checkbox ======================================================================================================================================================
     
     def showPasswordCommand():
@@ -92,6 +79,11 @@ def signUp(root):
         #Getting the input from the user
         email = emailEntry.get()
         password = passwordEntry.get()
+        logins = loginInfo.find()
+
+        for login in logins:
+            if login['email'] == email:
+                error("Email address is already in use", signupFrame)
 
         #Checking to see if either entry is empty
         if email == "" or password == "":

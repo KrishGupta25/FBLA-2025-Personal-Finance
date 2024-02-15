@@ -16,6 +16,8 @@ from editItem import editItem
 from removeItem import removeItem
 from filter import filter
 from viewItem import viewItem
+from report import report
+from success import success
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -125,7 +127,8 @@ def pickingOrg(root, email):
                 name = item["orgName"]
                 newName = name[:len(list(search))]
                 if len(list(search)) <= len(list(name)):
-                    if search == newName:
+                    # not case sensitive search
+                    if search == newName or search.capitalize() == newName:
                         final.append(item)
 
                 count = 0
@@ -319,8 +322,8 @@ def pickingOrg(root, email):
             backButton.bind("<Leave>", on_leave)
 
 #=========================== create settings button ======================================================================================================================================================
-        #settingsButton = ctk.CTkButton(moreFrame, text="   Settings", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=settings)
-        #settingsButton.place(relx=0, rely=.2, anchor="nw")
+        reportButton = ctk.CTkButton(moreFrame, text="   Create Report", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=report)
+        reportButton.place(relx=0, rely=.2, anchor="nw")
 
 #=========================== create about frame ======================================================================================================================================================
         def about():
