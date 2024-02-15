@@ -322,7 +322,7 @@ def pickingOrg(root, email):
             backButton.bind("<Leave>", on_leave)
 
 #=========================== create settings button ======================================================================================================================================================
-        reportButton = ctk.CTkButton(moreFrame, text="   Create Report", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=report(lambda:(pickingFrame)))
+        reportButton = ctk.CTkButton(moreFrame, text="   Create Report", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=lambda:(report(pickingFrame, moreFrame)))
         reportButton.place(relx=0, rely=.2, anchor="nw")
 
 #=========================== create about frame ======================================================================================================================================================

@@ -30,7 +30,7 @@ accent = "#3cb371"
 # Custom headings
 headings = ['Name', 'Type', 'Location', 'Contact Info']  # Customize these according to your requirements
 
-def report(root):
+def report(root, close):
 
     # Retrieve data from MongoDB
     data = [headings]
@@ -74,4 +74,6 @@ def report(root):
     elements = [title, spacer, table]  # Include title before the table
     doc.build(elements)
 
-    #success("Successfully Created Report - PDF is in the dist folder", root)
+    close.place_forget()
+    success("Successfully Created Report - PDF is in the downloads folder", root)
+    
