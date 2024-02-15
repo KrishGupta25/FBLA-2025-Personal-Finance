@@ -11,6 +11,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
+import os
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -40,8 +41,11 @@ def report(root):
         data.append(row)
 
     # Create PDF document
-    pdf_filename = "report.pdf"
-    doc = SimpleDocTemplate(pdf_filename, pagesize=letter, topMargin=30)
+    # Create PDF document
+    filename = "report.pdf"
+    download_folder = os.path.join(os.path.expanduser('~'), 'Downloads')  # Get user's downloads folder
+    pdf_filepath = os.path.join(download_folder, filename)
+    doc = SimpleDocTemplate(pdf_filepath, pagesize=letter, topMargin=30)
 
     # Create a title
     styles = getSampleStyleSheet()
