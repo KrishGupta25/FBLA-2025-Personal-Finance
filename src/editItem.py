@@ -106,6 +106,8 @@ def editItem(root, listbox,):
                 orgs = orgInfo.find()
                 if orgNameEntry.get() == "" or locationEntry.get() == "" or resourcesEntry.get() == "" or contactInfoEntry.get() == "":
                     error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
+                elif resourcesEntry.get() != "Internship" and resourcesEntry.get() != "Fundraising" and resourcesEntry.get() != "Volunteering" and resourcesEntry.get() != "College help":
+                    error("Resources must be Internship/Fundraising/Volunteering/College help", root)
                 else:
                     orgInfo.replace_one({"orgName": selection[0]}, {"orgName": orgNameEntry.get(), "resources": resourcesEntry.get(), "location": locationEntry.get(), "contactInfo": contactInfoEntry.get()})
                     editItemFrame.place_forget()
@@ -117,11 +119,11 @@ def editItem(root, listbox,):
                         count += 1
                     check = 0
 
-                    success("org was succesfully edited", root)
+                    success("Org was succesfully edited", root)
 
             submitButton = ctk.CTkButton(editItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
             submitButton.place(relx=0.5, rely=0.9, anchor="center")
             submitButton.bind("<Enter>", on_enter)
             submitButton.bind("<Leave>", on_leave)
     else:
-        error("please close the existing 'edit organization' page first", root)
+        error("Please close the existing 'edit organization' page first", root)

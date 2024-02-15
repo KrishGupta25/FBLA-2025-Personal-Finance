@@ -89,6 +89,8 @@ def addItem(root, listbox):
             orgs = orgInfo.find()
             if orgNameEntry.get() == "" or locationEntry.get() == "" or resourceEntry.get() == "" or contactEntry.get() == "":
                 error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
+            elif resourceEntry.get() != "Internship" and resourceEntry.get() != "Fundraising" and resourceEntry.get() != "Volunteering" and resourceEntry.get() != "College help":
+                error("Resources must be Internship/Fundraising/Volunteering/College help", root)
             else:
                 check = 0
                 orgInfo.insert_one({"orgName": orgNameEntry.get(), "resources": resourceEntry.get(), "location": locationEntry.get(), "contactInfo": contactEntry.get()})
@@ -99,13 +101,13 @@ def addItem(root, listbox):
                 for item in orgs:
                     listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
                     count += 1
-                success("org was succesfully added to the database", root)
+                success("Org was succesfully added to the database", root)
 
         submitButton = ctk.CTkButton(addItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
         submitButton.place(relx=0.5, rely=0.9, anchor="center")
         submitButton.bind("<Enter>", on_enter)
         submitButton.bind("<Leave>", on_leave)
     else:
-        error("please close the existing 'add organization' page first", root)
+        error("Please close the existing 'add organization' page first", root)
 
 

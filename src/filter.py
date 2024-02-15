@@ -71,13 +71,13 @@ def filter(root, listbox):
         filtered = list()
         final = list()
         if internship.get() == "on":
-            filtered.append("internship")
+            filtered.append("Internship")
         if volunteer.get() == "on":
-            filtered.append("volunteering")
+            filtered.append("Volunteering")
         if fundraising.get() == "on":
-            filtered.append("fundraising")
+            filtered.append("Fundraising")
         if college.get() == "on":
-            filtered.append("college_help")
+            filtered.append("College_help")
 
         if len(filtered) > 0 and len(filtered) != 4:
             orgs = orgInfo.find()

@@ -256,7 +256,7 @@ def pickingOrg(root, email):
                 #If all of those checks are passed then replace all the changed values
                 else:
                     loginInfo.replace_one({"email": email}, {"email": email, "password": passwordEntry2.get(), "firstName": firstNameEntry.get(), "lastName": lastNameEntry.get(), "preferredName": preferredNameEntry.get()})
-                    confirmLabel = ctk.CTkLabel(accountFrame, text="*all changes have been saved", font=font(15), text_color=accent, fg_color=color)
+                    confirmLabel = ctk.CTkLabel(accountFrame, text="*all changes have been saved, please log out for changes to take effect", font=font(15), text_color=accent, fg_color=color)
                     confirmLabel.place(relx=0.5, rely=.83, anchor="center")
                 
 

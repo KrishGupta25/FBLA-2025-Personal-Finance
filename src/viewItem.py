@@ -82,6 +82,13 @@ def viewItem(root, listbox):
             getLoc = gmaps.geocode(destination)
             newHome = home.rsplit(",")
 
+            try:
+                destination_latitude = getLoc[0]["geometry"]["location"]["lat"]
+            except IndexError:
+                error("Location either does not exist or is N/A", root)
+                viewItemFrame.place_forget()
+                check = 0
+
             origin_latitude = newHome[0]
             origin_longitude = newHome[1]
             destination_latitude = getLoc[0]["geometry"]["location"]["lat"]
