@@ -79,33 +79,30 @@ def viewItem(root, listbox):
 
 
 #=========================== find distance and time ======================================================================================================================================================
-            getLoc = loc.geocode(selection[2])
+            getLoc = gmaps.geocode(destination)
             newHome = home.rsplit(",")
-            print(newHome)
-            print(getLoc.latitude)
-            print(getLoc.longitude)
 
             origin_latitude = newHome[0]
             origin_longitude = newHome[1]
-            destination_latitude = getLoc.latitude
-            destination_longitude = getLoc.longitude
+            destination_latitude = getLoc[0]["geometry"]["location"]["lat"]
+            destination_longitude = getLoc[0]["geometry"]["location"]["lng"]
             distData = gmaps.distance_matrix([str(origin_latitude) + " " + str(origin_longitude)], [str(destination_latitude) + " " + str(destination_longitude)], mode='driving')['rows'][0]['elements'][0]
 
             print(distData)
             distance = distData['distance']['text'].split("k")
             time = distData['duration']['text']
-            km = int(distance[0].replace(",", ""))
+            km = distance[0].replace(",", "")
             print(km)
             
 
             mapWidget = tkm.TkinterMapView(viewItemFrame, width= 840, height= 450)
             mapWidget.place(relx= .5, rely= .075, anchor="n")
 
-            mapWidget.set_position((float(newHome[0])+float(getLoc.latitude))/2, (float(newHome[1])+float(getLoc.longitude))/2, marker=False)
+            mapWidget.set_position((float(newHome[0])+float(destination_latitude))/2, (float(newHome[1])+float(destination_longitude))/2, marker=False)
             mapWidget.set_zoom(7)
 
             marker1 = mapWidget.set_marker(float(newHome[0]), float(newHome[1]), text="home")
-            marker2= mapWidget.set_marker(float(getLoc.latitude), float(getLoc.longitude), text="destination")
+            marker2= mapWidget.set_marker(float(destination_latitude), float(destination_longitude), text="destination")
 
             nameLabel = ctk.CTkLabel(viewItemFrame, text= selection[0], font=font(15), fg_color=color, text_color="white")
             nameLabel.place(relx=0.5, rely=0.68, anchor="n")
