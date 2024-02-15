@@ -120,6 +120,7 @@ def signUp(root):
         #If all of those checks are passed then add the username and password to our database
         else:
             info(root, email, password, signupFrame)
+            
           
     
         

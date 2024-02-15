@@ -7,6 +7,7 @@ import pyglet
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
+from success import success
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -62,3 +63,5 @@ def removeItem(root, listbox):
         for item in orgs:
             listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
             count += 1
+
+        success("Org(s) were deleted", root)

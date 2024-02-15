@@ -110,10 +110,10 @@ def viewItem(root, listbox):
             nameLabel = ctk.CTkLabel(viewItemFrame, text= selection[0], font=font(15), fg_color=color, text_color="white")
             nameLabel.place(relx=0.5, rely=0.68, anchor="n")
 
-            distanceLabel = ctk.CTkLabel(viewItemFrame, text=f'distance to location: {round(float(km)*0.621371,2)} miles', font=font(15), fg_color=color, text_color="white")
+            distanceLabel = ctk.CTkLabel(viewItemFrame, text=f'Distance to location: {round(float(km)*0.621371,2)} miles', font=font(15), fg_color=color, text_color="white")
             distanceLabel.place(relx=0.02, rely=0.8, anchor="w")
             
-            timeLabel = ctk.CTkLabel(viewItemFrame, text=f'travel time to location: {time}', font=font(15), fg_color=color, text_color="white")
+            timeLabel = ctk.CTkLabel(viewItemFrame, text=f'Travel time to location: {time}', font=font(15), fg_color=color, text_color="white")
             timeLabel.place(relx=0.02, rely=0.9, anchor="w")
 
         
