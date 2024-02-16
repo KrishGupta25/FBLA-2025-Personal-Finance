@@ -103,6 +103,12 @@ def pickingOrg(root, email):
     viewOrgButton.bind("<Enter>", on_enter)
     viewOrgButton.bind("<Leave>", on_leave)
 
+    #=========================== create report button ======================================================================================================================================================
+    reportButton = ctk.CTkButton(pickingFrame, text="   Create Report", font=font(15), fg_color= color, command=lambda:(report(pickingFrame, moreFrame)), hover_color=color)
+    reportButton.place(relx=.008, rely=.095, anchor="nw")
+    reportButton.bind("<Enter>", on_enter)
+    reportButton.bind("<Leave>", on_leave)
+
     count = 0
     for item in listbox.get_children():
         listbox.delete(item)
@@ -320,10 +326,6 @@ def pickingOrg(root, email):
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
 
-#=========================== create settings button ======================================================================================================================================================
-        reportButton = ctk.CTkButton(moreFrame, text="   Create Report", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command=lambda:(report(pickingFrame, moreFrame)))
-        reportButton.place(relx=0, rely=.25, anchor="nw")
-
 #=========================== create about frame ======================================================================================================================================================
         def about():
             moreFrame.place_forget()
@@ -351,7 +353,7 @@ def pickingOrg(root, email):
 
 #=========================== create about button ======================================================================================================================================================
         aboutButton = ctk.CTkButton(moreFrame, text="   About", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= about)
-        aboutButton.place(relx=0, rely=.5, anchor="nw")
+        aboutButton.place(relx=0, rely=.33, anchor="nw")
 
 #=========================== create about frame ======================================================================================================================================================
         def support():
@@ -437,7 +439,7 @@ def pickingOrg(root, email):
 
 #=========================== create logout button ======================================================================================================================================================
         logOutButton = ctk.CTkButton(moreFrame, text="   Log out", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= logout)
-        logOutButton.place(relx=0, rely=.75, anchor="nw")
+        logOutButton.place(relx=0, rely=.66, anchor="nw")
 
 #=========================== algorithm to open and close more frame ======================================================================================================================================================
         if moreFrame.winfo_ismapped():
@@ -446,7 +448,7 @@ def pickingOrg(root, email):
             moreFrame.place(relx= .975, rely= .08, anchor= "ne")
 
 #=========================== create more frame ======================================================================================================================================================
-    moreFrame = ctk.CTkFrame(pickingFrame, width= 187.5, height= 200, fg_color= "#1e2121")
+    moreFrame = ctk.CTkFrame(pickingFrame, width= 187.5, height= 150, fg_color= "#1e2121")
 
 #=========================== create button to open up the more frame ======================================================================================================================================================
     moreButton = ctk.CTkButton(pickingFrame, text=name, font=font(18), command= more, fg_color=color, hover_color=color, width=0)
