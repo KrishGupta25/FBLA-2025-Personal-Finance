@@ -19,7 +19,7 @@ To install and run CTE Partner Pro on your computer, please follow these steps:
 3. From the dropdown menu select "download zip"
 4. Extract the ZIP package to a desired location on your computer.
 5. open the folder titled "src" and open the file labeled "Quicksand-Bold.ttf" Click the install button at the top left and close the window after it installs
-6. return to the main folder
+6. return to the main folder (Downloads\CTE_Partner_Pro-main\CTE_Partner_Pro-main)
 7. Open the folder titled "dist" and click on main.exe
 8. If windows blocks the application click on more info at the top left and then click run anyways at the bottom right
 9. All necessary packages will be installed.
