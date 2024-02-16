@@ -224,7 +224,6 @@ def pickingOrg(root, email):
 
 #=========================== password check ======================================================================================================================================================
             def confirm():
-                print(passwordEntry2.get())
                 #Checking to see if either entry is empty
                 if passwordEntry2.get() == "":
                     error("Either one or more of the required fields are empty or your entry has spaces", accountFrame)

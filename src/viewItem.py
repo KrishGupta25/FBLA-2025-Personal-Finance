@@ -8,6 +8,8 @@ from geopy.geocoders import Nominatim
 import googlemaps
 from urllib.request import urlopen
 import tkintermapview as tkm
+import requests
+
 #=========================== import all required functions ======================================================================================================================================================
 from errorPage import error
 
@@ -80,7 +82,23 @@ def viewItem(root, listbox):
 
 #=========================== find distance and time ======================================================================================================================================================
             getLoc = gmaps.geocode(destination)
-            newHome = home.rsplit(",")
+            # API endpoint for the Google Maps Geolocation API
+            url = 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + apiKey
+
+            # Request body with empty WiFi and cell tower data
+            data = {
+                "considerIp": "true"
+            }
+
+            # Make a POST request to the Geolocation API
+            response = requests.post(url, json=data)
+
+            # Check if the request was successful
+            if response.status_code == 200:
+                result = response.json()
+                # Extract latitude and longitude from the response
+                latitude = result['location']['lat']
+                longitude = result['location']['lng']
 
             try:
                 destination_latitude = getLoc[0]["geometry"]["location"]["lat"]
@@ -89,26 +107,23 @@ def viewItem(root, listbox):
                 viewItemFrame.place_forget()
                 check = 0
 
-            origin_latitude = newHome[0]
-            origin_longitude = newHome[1]
+            origin_latitude = latitude
+            origin_longitude = longitude
             destination_latitude = getLoc[0]["geometry"]["location"]["lat"]
             destination_longitude = getLoc[0]["geometry"]["location"]["lng"]
             distData = gmaps.distance_matrix([str(origin_latitude) + " " + str(origin_longitude)], [str(destination_latitude) + " " + str(destination_longitude)], mode='driving')['rows'][0]['elements'][0]
 
-            print(distData)
             distance = distData['distance']['text'].split("k")
             time = distData['duration']['text']
             km = distance[0].replace(",", "")
-            print(km)
             
-
             mapWidget = tkm.TkinterMapView(viewItemFrame, width= 840, height= 450)
             mapWidget.place(relx= .5, rely= .075, anchor="n")
 
-            mapWidget.set_position((float(newHome[0])+float(destination_latitude))/2, (float(newHome[1])+float(destination_longitude))/2, marker=False)
+            mapWidget.set_position((float(latitude)+float(destination_latitude))/2, (float(longitude)+float(destination_longitude))/2, marker=False)
             mapWidget.set_zoom(7)
 
-            marker1 = mapWidget.set_marker(float(newHome[0]), float(newHome[1]), text="home")
+            marker1 = mapWidget.set_marker(float(latitude), float(longitude), text="home")
             marker2= mapWidget.set_marker(float(destination_latitude), float(destination_longitude), text="destination")
 
             nameLabel = ctk.CTkLabel(viewItemFrame, text= selection[0], font=font(15), fg_color=color, text_color="white")
