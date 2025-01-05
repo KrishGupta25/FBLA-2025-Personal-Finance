@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
+from tkcalendar import Calendar
 
 #=========================== import all required functions ======================================================================================================================================================
 
@@ -13,7 +14,9 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-transactionInfo = db["transactionInfo"]
+transactions = db["transactionInfo"]
+#TESTINGGG
+
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -57,8 +60,9 @@ def addItem(root, listbox):
         backButton.bind("<Enter>", on_enter)
         backButton.bind("<Leave>", on_leave)
 
-        labelText = ctk.CTkLabel(addItemFrame, text="Add Organization", font=font(20), fg_color=color, text_color="white")
+        labelText = ctk.CTkLabel(addTransactionFrame, text="Add Transaction", font=font(20), fg_color=color, text_color="white")
         labelText.place(relx=0.5, rely=0.05, anchor="center")
+
 
         orgNameText = ctk.CTkLabel(addItemFrame, text="Organization Name", font=font(15), fg_color=color, text_color="white")
         orgNameText.place(relx=0.12, rely=0.15, anchor="w")
@@ -86,14 +90,14 @@ def addItem(root, listbox):
 
         def submit():
             global check
-            orgs = transactionInfo.find()
+            orgs = orgInfo.find()
             if orgNameEntry.get() == "" or locationEntry.get() == "" or resourceEntry.get() == "" or contactEntry.get() == "":
                 error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
             elif resourceEntry.get() != "Internship" and resourceEntry.get() != "Fundraising" and resourceEntry.get() != "Volunteering" and resourceEntry.get() != "College help":
                 error("Resources must be Internship/Fundraising/Volunteering/College help", root)
             else:
                 check = 0
-                transactionInfo.insert_one({"orgName": orgNameEntry.get(), "resources": resourceEntry.get(), "location": locationEntry.get(), "contactInfo": contactEntry.get()})
+                orgInfo.insert_one({"orgName": orgNameEntry.get(), "resources": resourceEntry.get(), "location": locationEntry.get(), "contactInfo": contactEntry.get()})
                 addItemFrame.place_forget()
                 count = 0
                 for item in listbox.get_children():
