@@ -81,19 +81,12 @@ def pickingTransaction(root, email):
 
     listbox.place(relx=.5, rely=.5, anchor="center")
 
-<<<<<<< HEAD:src/pickingOrganization.py
-#=========================== add/edit/remove/view organization buttons ======================================================================================================================================================
-    addOrgButton = ctk.CTkButton(pickingFrame, text="Add Organization", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox)], fg_color=color, hover_color=color)
-    addOrgButton.place(relx=0.2, rely=0.91, anchor="center")
-    addOrgButton.bind("<Enter>", on_enter)
-    addOrgButton.bind("<Leave>", on_leave)
-=======
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
     addtransactionButton = ctk.CTkButton(pickingFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox)], fg_color=color, hover_color=color)
     addtransactionButton.place(relx=0.2, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
->>>>>>> a47dfa2b1f1253cab7db0737f0f8ec2aa0e63c45:src/pickingTransaction.py
+    #test
 
     edittransactionButton = ctk.CTkButton(pickingFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
     edittransactionButton.place(relx=0.4, rely=0.91, anchor="center")
