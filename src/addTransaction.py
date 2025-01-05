@@ -75,18 +75,38 @@ def addTransaction(root, listbox):
         categoryDropdown.set("Select a category")
         categoryDropdown.place(relx=0.5, rely=0.4, anchor="center")
 
+        dateText = ctk.CTkLabel(addTransactionFrame, text="Date", font=font(15), fg_color=color, text_color="white")
+        dateText.place(relx=0.12, rely=0.55, anchor="w")
+        
+        dateEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Select a date", width=400, height=40, justify="center", fg_color=color, text_color="white", state="normal")
+        dateEntry.place(relx=0.5, rely=0.6, anchor="center")
+
+        def show_calendar(event):
+            # Create the calendar widget
+            calendarWindow = ctk.CTkFrame(addTransactionFrame, width=400, height=300, fg_color="#2e2e2e", border_width=2, border_color=accent)
+            calendarWindow.place(relx=0.5, rely=0.7, anchor="n")
+            
+            calendar = Calendar(calendarWindow, date_pattern="yyyy-mm-dd", font=font(10))
+            calendar.pack(pady=10)
+
+            def select_date():
+                selected_date = calendar.get_date()
+                dateEntry.delete(0, tk.END)  # Clear the entry box
+                dateEntry.insert(0, selected_date)  # Insert the selected date
+                calendarWindow.destroy()  # Close the calendar widget
+            
+            selectButton = ctk.CTkButton(calendarWindow, text="Select", command=select_date, font=font(12), fg_color=accent, hover_color="#1c5c3c", text_color="white")
+            selectButton.pack(pady=10)
 
 
-        #resourceEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Category", width=400, height=40, justify="center", fg_color=color, text_color="white")
-        #resourceEntry.place(relx=0.5, rely=0.4, anchor="center")
+            
 
-        locationText = ctk.CTkLabel(addTransactionFrame, text="Location", font=font(15), fg_color=color, text_color="white")
-        locationText.place(relx=0.12, rely=0.55, anchor="w")
 
-        locationEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Address", width=400, height=40, justify="center", fg_color=color, text_color="white")
-        locationEntry.place(relx=0.5, rely=0.6, anchor="center")
+        
+        dateEntry.bind("<Button-1>", show_calendar)  # Show calendar when clicking on the entry
 
-        contactText = ctk.CTkLabel(addTransactionFrame, text="Direct Contact", font=font(15), fg_color=color, text_color="white")
+
+        contactText = ctk.CTkLabel(addTransactionFrame, text="Select a date", font=font(15), fg_color=color, text_color="white")
         contactText.place(relx=0.12, rely=0.75, anchor="w")
 
         contactEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Contact Info", width=400, height=40, justify="center", fg_color=color, text_color="white")
@@ -95,19 +115,19 @@ def addTransaction(root, listbox):
         def submit():
             global check
             orgs = transactionInfo.find()
-            if amountEntry.get() == "" or locationEntry.get() == "" or resourceEntry.get() == "" or contactEntry.get() == "":
+            if amountEntry.get() == "" or dateEntry.get() == "" or resourceEntry.get() == "" or contactEntry.get() == "":
                 error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
             elif resourceEntry.get() != "Internship" and resourceEntry.get() != "Fundraising" and resourceEntry.get() != "Volunteering" and resourceEntry.get() != "College help":
                 error("Resources must be Internship/Fundraising/Volunteering/College help", root)
             else:
                 check = 0
-                transactionInfo.insert_one({"amount": amountEntry.get(), "resources": resourceEntry.get(), "location": locationEntry.get(), "contactInfo": contactEntry.get()})
+                transactionInfo.insert_one({"amount": amountEntry.get(), "resources": resourceEntry.get(), "Date": dateEntry.get(), "contactInfo": contactEntry.get()})
                 addTransactionFrame.place_forget()
                 count = 0
                 for item in listbox.get_children():
                     listbox.delete(item)
                 for item in orgs:
-                    listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["location"], item["contactInfo"]))
+                    listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["contactInfo"]))
                     count += 1
                 success("Org was succesfully added to the database", root)
 
