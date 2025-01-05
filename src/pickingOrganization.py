@@ -11,7 +11,7 @@ import sys
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
-from addItem import addItem
+from addTransaction import addTransaction
 from editItem import editItem
 from removeItem import removeItem
 from filter import filter
@@ -82,7 +82,7 @@ def pickingOrg(root, email):
     listbox.place(relx=.5, rely=.5, anchor="center")
 
 #=========================== add/edit/remove/view organization buttons ======================================================================================================================================================
-    addOrgButton = ctk.CTkButton(pickingFrame, text="Add Organization", font=font(18), command = lambda:[addItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
+    addOrgButton = ctk.CTkButton(pickingFrame, text="Add Organization", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox)], fg_color=color, hover_color=color)
     addOrgButton.place(relx=0.2, rely=0.91, anchor="center")
     addOrgButton.bind("<Enter>", on_enter)
     addOrgButton.bind("<Leave>", on_leave)

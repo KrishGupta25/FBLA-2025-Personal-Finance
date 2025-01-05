@@ -58,13 +58,13 @@ def addTransaction(root, listbox):
         backButton.bind("<Enter>", on_enter)
         backButton.bind("<Leave>", on_leave)
 
-        amountText = ctk.CTkLabel(addTransactionFrame, text="Amount", font=font(20), fg_color=color, text_color="white")
-        amountText.place(relx=0.5, rely=0.05, anchor="center")
+        #IDK WTF this was doing amountText = ctk.CTkLabel(addTransactionFrame, text="Amount", font=font(20), fg_color=color, text_color="white")
+        #amountText.place(relx=0.5, rely=0.05, anchor="center")
 
         amountEntry = ctk.CTkLabel(addTransactionFrame, text="Enter Amount", font=font(15), fg_color=color, text_color="white")
         amountEntry.place(relx=0.12, rely=0.15, anchor="w")
 
-        orgNameEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Organization name", width=400, height=40, justify="center", fg_color=color, text_color="white")
+        orgNameEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Amount", width=400, height=40, justify="center", fg_color=color, text_color="white")
         orgNameEntry.place(relx=0.5, rely=0.2, anchor="center")
 
         resourceText = ctk.CTkLabel(addTransactionFrame, text="Resources Available", font=font(15), fg_color=color, text_color="white")
