@@ -84,7 +84,7 @@ def addTransaction(root, listbox):
         def show_calendar(event):
             # Create the calendar widget
             calendarWindow = ctk.CTkFrame(addTransactionFrame, width=400, height=300, fg_color="#2e2e2e", border_width=2, border_color=accent)
-            calendarWindow.place(relx=0.5, rely=0.7, anchor="n")
+            calendarWindow.place(relx=0.5, rely=0.4, anchor="n")
             
             calendar = Calendar(calendarWindow, date_pattern="yyyy-mm-dd", font=font(10))
             calendar.pack(pady=10)
