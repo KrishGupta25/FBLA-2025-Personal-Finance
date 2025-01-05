@@ -83,18 +83,18 @@ def pickingTransaction(root, email):
 
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
     addtransactionButton = ctk.CTkButton(pickingFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox)], fg_color=color, hover_color=color)
-    addtransactionButton.place(relx=0.2, rely=0.91, anchor="center")
+    addtransactionButton.place(relx=0.25, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
     #test
 
     edittransactionButton = ctk.CTkButton(pickingFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
-    edittransactionButton.place(relx=0.4, rely=0.91, anchor="center")
+    edittransactionButton.place(relx=0.5, rely=0.91, anchor="center")
     edittransactionButton.bind("<Enter>", on_enter)
     edittransactionButton.bind("<Leave>", on_leave)
 
     removetransactionButton = ctk.CTkButton(pickingFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
-    removetransactionButton.place(relx=0.6, rely=0.91, anchor="center")
+    removetransactionButton.place(relx=0.75, rely=0.91, anchor="center")
     removetransactionButton.bind("<Enter>", on_enter)
     removetransactionButton.bind("<Leave>", on_leave)
 
