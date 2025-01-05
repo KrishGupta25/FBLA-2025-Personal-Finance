@@ -14,9 +14,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-transactions = db["transactionInfo"]
-#TESTINGGG
-
+transactionInfo = db["transactionInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -41,21 +39,21 @@ def on_leave(e):
 check = 0
 
 #=========================== function to create add item frame ======================================================================================================================================================
-def addItem(root, listbox):
+def addTransaction(root, listbox):
 #=========================== add organization frame ======================================================================================================================================================
     global check
     if check == 0:
         check = 1
-        addItemFrame = ctk.CTkFrame(root, width=500, height=600, fg_color=color, border_color="#1e2121", border_width=4)
-        addItemFrame.place(relx=1, rely=0, anchor="ne")
-        addItemFrame.focus_set()
+        addTransactionFrame = ctk.CTkFrame(root, width=500, height=600, fg_color=color, border_color="#1e2121", border_width=4)
+        addTransactionFrame.place(relx=1, rely=0, anchor="ne")
+        addTransactionFrame.focus_set()
 
         def back():
             global check
-            addItemFrame.place_forget()
+            addTransactionFrame.place_forget()
             check = 0
 
-        backButton = ctk.CTkButton(addItemFrame, text="x", font=font(20), command=back, fg_color=color, hover_color=color, width=0, height=0)
+        backButton = ctk.CTkButton(addTransactionFrame, text="x", font=font(20), command=back, fg_color=color, hover_color=color, width=0, height=0)
         backButton.place(relx=.04, rely=0.02, anchor="nw")
         backButton.bind("<Enter>", on_enter)
         backButton.bind("<Leave>", on_leave)
@@ -63,29 +61,28 @@ def addItem(root, listbox):
         labelText = ctk.CTkLabel(addTransactionFrame, text="Add Transaction", font=font(20), fg_color=color, text_color="white")
         labelText.place(relx=0.5, rely=0.05, anchor="center")
 
-
-        orgNameText = ctk.CTkLabel(addItemFrame, text="Organization Name", font=font(15), fg_color=color, text_color="white")
+        orgNameText = ctk.CTkLabel(addTransactionFrame, text="Organization Name", font=font(15), fg_color=color, text_color="white")
         orgNameText.place(relx=0.12, rely=0.15, anchor="w")
 
-        orgNameEntry = ctk.CTkEntry(addItemFrame, font=font(15), placeholder_text="Organization name", width=400, height=40, justify="center", fg_color=color, text_color="white")
+        orgNameEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Organization name", width=400, height=40, justify="center", fg_color=color, text_color="white")
         orgNameEntry.place(relx=0.5, rely=0.2, anchor="center")
 
-        resourceText = ctk.CTkLabel(addItemFrame, text="Resources Available", font=font(15), fg_color=color, text_color="white")
+        resourceText = ctk.CTkLabel(addTransactionFrame, text="Resources Available", font=font(15), fg_color=color, text_color="white")
         resourceText.place(relx=0.12, rely=0.35, anchor="w")
 
-        resourceEntry = ctk.CTkEntry(addItemFrame, font=font(15), placeholder_text="Resources Available", width=400, height=40, justify="center", fg_color=color, text_color="white")
+        resourceEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Resources Available", width=400, height=40, justify="center", fg_color=color, text_color="white")
         resourceEntry.place(relx=0.5, rely=0.4, anchor="center")
 
-        locationText = ctk.CTkLabel(addItemFrame, text="Location", font=font(15), fg_color=color, text_color="white")
+        locationText = ctk.CTkLabel(addTransactionFrame, text="Location", font=font(15), fg_color=color, text_color="white")
         locationText.place(relx=0.12, rely=0.55, anchor="w")
 
-        locationEntry = ctk.CTkEntry(addItemFrame, font=font(15), placeholder_text="Address", width=400, height=40, justify="center", fg_color=color, text_color="white")
+        locationEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Address", width=400, height=40, justify="center", fg_color=color, text_color="white")
         locationEntry.place(relx=0.5, rely=0.6, anchor="center")
 
-        contactText = ctk.CTkLabel(addItemFrame, text="Direct Contact", font=font(15), fg_color=color, text_color="white")
+        contactText = ctk.CTkLabel(addTransactionFrame, text="Direct Contact", font=font(15), fg_color=color, text_color="white")
         contactText.place(relx=0.12, rely=0.75, anchor="w")
 
-        contactEntry = ctk.CTkEntry(addItemFrame, font=font(15), placeholder_text="Contact Info", width=400, height=40, justify="center", fg_color=color, text_color="white")
+        contactEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Contact Info", width=400, height=40, justify="center", fg_color=color, text_color="white")
         contactEntry.place(relx=0.5, rely=0.8, anchor="center")
 
         def submit():
@@ -98,7 +95,7 @@ def addItem(root, listbox):
             else:
                 check = 0
                 orgInfo.insert_one({"orgName": orgNameEntry.get(), "resources": resourceEntry.get(), "location": locationEntry.get(), "contactInfo": contactEntry.get()})
-                addItemFrame.place_forget()
+                addTransactionFrame.place_forget()
                 count = 0
                 for item in listbox.get_children():
                     listbox.delete(item)
@@ -107,7 +104,7 @@ def addItem(root, listbox):
                     count += 1
                 success("Org was succesfully added to the database", root)
 
-        submitButton = ctk.CTkButton(addItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
+        submitButton = ctk.CTkButton(addTransactionFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
         submitButton.place(relx=0.5, rely=0.9, anchor="center")
         submitButton.bind("<Enter>", on_enter)
         submitButton.bind("<Leave>", on_leave)
