@@ -14,7 +14,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-orgInfo = db["orgInfo"]
+transactionInfo = db["transactionInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -40,14 +40,14 @@ check = 0
 
 #=========================== function to create edit item frame ======================================================================================================================================================
 def editItem(root, listbox,):
-#=========================== edit organization frame ======================================================================================================================================================
+#=========================== edit transaction frame ======================================================================================================================================================
     global check
     if check == 0:
         temp = listbox.selection()
         if len(temp) == 0:
-            error("Please select an organization to edit", root)
+            error("Please select an transaction to edit", root)
         elif len(temp) > 1:
-            error("You can only select one organization to edit at a time", root)
+            error("You can only select one transaction to edit at a time", root)
         else:
             check = 1
             selection = listbox.item(temp, option="values")
@@ -66,10 +66,10 @@ def editItem(root, listbox,):
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
 
-            labelText = ctk.CTkLabel(editItemFrame, text="Edit Organization", font=font(20), fg_color=color, text_color="white")
+            labelText = ctk.CTkLabel(editItemFrame, text="Edit Transaction", font=font(20), fg_color=color, text_color="white")
             labelText.place(relx=0.5, rely=0.05, anchor="center")
 
-            orgNameText = ctk.CTkLabel(editItemFrame, text="Organization Name", font=font(15), fg_color=color, text_color="white")
+            orgNameText = ctk.CTkLabel(editItemFrame, text="Transaction Name", font=font(15), fg_color=color, text_color="white")
             orgNameText.place(relx=0.12, rely=0.15, anchor="w")
 
             orgNameEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
@@ -77,45 +77,45 @@ def editItem(root, listbox,):
             orgNameEntry.insert(0, selection[0])
             orgNameEntry.bind('<FocusIn>', lambda x: orgNameEntry.select_range(0, "end"))
 
-            resourcesText = ctk.CTkLabel(editItemFrame, text="Resources", font=font(15), fg_color=color, text_color="white")
-            resourcesText.place(relx=0.12, rely=0.35, anchor="w")
+            categoryText = ctk.CTkLabel(editItemFrame, text="category", font=font(15), fg_color=color, text_color="white")
+            categoryText.place(relx=0.12, rely=0.35, anchor="w")
 
-            resourcesEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            resourcesEntry.place(relx=0.5, rely=0.4, anchor="center")
-            resourcesEntry.insert(0, selection[1])
-            resourcesEntry.bind('<FocusIn>', lambda x: resourcesEntry.select_range(0, "end"))
+            categoryEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
+            categoryEntry.place(relx=0.5, rely=0.4, anchor="center")
+            categoryEntry.insert(0, selection[1])
+            categoryEntry.bind('<FocusIn>', lambda x: categoryEntry.select_range(0, "end"))
 
-            locationText = ctk.CTkLabel(editItemFrame, text="Location", font=font(15), fg_color=color, text_color="white")
-            locationText.place(relx=0.12, rely=0.55, anchor="w")
+            dateText = ctk.CTkLabel(editItemFrame, text="date", font=font(15), fg_color=color, text_color="white")
+            dateText.place(relx=0.12, rely=0.55, anchor="w")
 
-            locationEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            locationEntry.place(relx=0.5, rely=0.6, anchor="center")
-            locationEntry.insert(0, selection[2])
-            locationEntry.bind('<FocusIn>', lambda x: locationEntry.select_range(0, "end"))
+            dateEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
+            dateEntry.place(relx=0.5, rely=0.6, anchor="center")
+            dateEntry.insert(0, selection[2])
+            dateEntry.bind('<FocusIn>', lambda x: dateEntry.select_range(0, "end"))
 
-            contactInfoText = ctk.CTkLabel(editItemFrame, text="Contact info", font=font(15), fg_color=color, text_color="white")
-            contactInfoText.place(relx=0.12, rely=0.75, anchor="w")
+            typeText = ctk.CTkLabel(editItemFrame, text="Contact info", font=font(15), fg_color=color, text_color="white")
+            typeText.place(relx=0.12, rely=0.75, anchor="w")
 
-            contactInfoEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            contactInfoEntry.place(relx=0.5, rely=0.8, anchor="center")
-            contactInfoEntry.insert(0, selection[3])
-            contactInfoEntry.bind('<FocusIn>', lambda x: contactInfoEntry.select_range(0, "end"))
+            typeEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
+            typeEntry.place(relx=0.5, rely=0.8, anchor="center")
+            typeEntry.insert(0, selection[3])
+            typeEntry.bind('<FocusIn>', lambda x: typeEntry.select_range(0, "end"))
 
             def submit():
                 global check
-                orgs = orgInfo.find()
-                if orgNameEntry.get() == "" or locationEntry.get() == "" or resourcesEntry.get() == "" or contactInfoEntry.get() == "":
+                orgs = transactionInfo.find()
+                if orgNameEntry.get() == "" or dateEntry.get() == "" or categoryEntry.get() == "" or typeEntry.get() == "":
                     error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
-                elif resourcesEntry.get() != "Internship" and resourcesEntry.get() != "Fundraising" and resourcesEntry.get() != "Volunteering" and resourcesEntry.get() != "College help":
-                    error("Resources must be Internship/Fundraising/Volunteering/College help", root)
+                elif categoryEntry.get() != "Internship" and categoryEntry.get() != "Fundraising" and categoryEntry.get() != "Volunteering" and categoryEntry.get() != "College help":
+                    error("category must be Internship/Fundraising/Volunteering/College help", root)
                 else:
-                    orgInfo.replace_one({"orgName": selection[0]}, {"orgName": orgNameEntry.get(), "resources": resourcesEntry.get(), "location": locationEntry.get(), "contactInfo": contactInfoEntry.get()})
+                    transactionInfo.replace_one({"orgName": selection[0]}, {"orgName": orgNameEntry.get(), "category": categoryEntry.get(), "date": dateEntry.get(), "type": typeEntry.get()})
                     editItemFrame.place_forget()
                     count = 0
                     for item in listbox.get_children():
                         listbox.delete(item)
                     for item in orgs:
-                        listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
+                        listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["category"], item["date"], item["type"]))
                         count += 1
                     check = 0
 
