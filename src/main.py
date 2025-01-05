@@ -82,7 +82,7 @@ def login():
             count += 1
 
     if count == 1:
-        pickingOrg(loginFrame, emailEntry.get())
+        pickingTransaction(loginFrame, emailEntry.get())
         emailEntry.delete(0, "end")
         passwordEntry.delete(0, "end")
     else:
