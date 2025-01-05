@@ -15,7 +15,6 @@ from addItem import addItem
 from editItem import editItem
 from removeItem import removeItem
 from filter import filter
-from viewItem import viewItem
 from report import report
 from success import success
 
@@ -97,11 +96,6 @@ def pickingOrg(root, email):
     removeOrgButton.place(relx=0.6, rely=0.91, anchor="center")
     removeOrgButton.bind("<Enter>", on_enter)
     removeOrgButton.bind("<Leave>", on_leave)
-
-    viewOrgButton = ctk.CTkButton(pickingFrame, text="View Organization", font=font(18), command = lambda:[viewItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
-    viewOrgButton.place(relx=0.8, rely=0.91, anchor="center")
-    viewOrgButton.bind("<Enter>", on_enter)
-    viewOrgButton.bind("<Leave>", on_leave)
 
     #=========================== create report button ======================================================================================================================================================
     reportButton = ctk.CTkButton(pickingFrame, text="   Create Report", font=font(15), fg_color= color, command=lambda:(report(pickingFrame, moreFrame)), hover_color=color)
