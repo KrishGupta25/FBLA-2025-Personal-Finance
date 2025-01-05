@@ -13,7 +13,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-orgInfo = db["orgInfo"]
+transactionInfo = db["transactionInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -86,14 +86,14 @@ def addItem(root, listbox):
 
         def submit():
             global check
-            orgs = orgInfo.find()
+            orgs = transactionInfo.find()
             if orgNameEntry.get() == "" or locationEntry.get() == "" or resourceEntry.get() == "" or contactEntry.get() == "":
                 error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
             elif resourceEntry.get() != "Internship" and resourceEntry.get() != "Fundraising" and resourceEntry.get() != "Volunteering" and resourceEntry.get() != "College help":
                 error("Resources must be Internship/Fundraising/Volunteering/College help", root)
             else:
                 check = 0
-                orgInfo.insert_one({"orgName": orgNameEntry.get(), "resources": resourceEntry.get(), "location": locationEntry.get(), "contactInfo": contactEntry.get()})
+                transactionInfo.insert_one({"orgName": orgNameEntry.get(), "resources": resourceEntry.get(), "location": locationEntry.get(), "contactInfo": contactEntry.get()})
                 addItemFrame.place_forget()
                 count = 0
                 for item in listbox.get_children():

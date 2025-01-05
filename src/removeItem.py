@@ -13,7 +13,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-orgInfo = db["orgInfo"]
+transactionInfo = db["transactionInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -43,7 +43,7 @@ def removeItem(root, listbox):
     if len(temp) == 0:
         error("Please select at least one Organization to delete", root)
     else:
-        orgs = orgInfo.find()
+        orgs = transactionInfo.find()
         selection = list()
         for item in temp:
             selection.append(listbox.item(item, option="values"))
@@ -53,10 +53,10 @@ def removeItem(root, listbox):
                     delete.append({"orgName": select[0], "resources": select[1], "location": select[2], "contactInfo": select[3]})
                     
         for item in delete:
-            orgInfo.delete_one(item)
+            transactionInfo.delete_one(item)
             count = 0
 
-        orgs = orgInfo.find()
+        orgs = transactionInfo.find()
         count = 0
         for item in listbox.get_children():
             listbox.delete(item)

@@ -17,7 +17,7 @@ import os
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-orgInfo = db["orgInfo"]
+transactionInfo = db["transactionInfo"]
 
 #=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
@@ -36,7 +36,7 @@ def report(root, close):
     data = [headings]
 
     # Fetch data from MongoDB collection
-    for document in orgInfo.find():
+    for document in transactionInfo.find():
         row = [document['orgName'], document['resources'], document['location'], document['contactInfo']]  # Modify according to your data structure
         data.append(row)
 

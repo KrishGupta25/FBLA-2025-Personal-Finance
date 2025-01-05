@@ -22,7 +22,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-orgInfo = db["orgInfo"]
+transactionInfo = db["transactionInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -49,7 +49,7 @@ def pickingOrg(root, email):
 
 #=========================== find users preferred name ======================================================================================================================================================
     temp = loginInfo.find({"email": email})
-    orgs = orgInfo.find()
+    orgs = transactionInfo.find()
     for item in temp:
         user = item["preferredName"]
 
@@ -119,7 +119,7 @@ def pickingOrg(root, email):
 
     def on_key_press(event):
         check = 0
-        orgs = orgInfo.find()
+        orgs = transactionInfo.find()
         search= searchEntry.get()
         if len(list(search)) > 0:
             final.clear()
@@ -138,7 +138,7 @@ def pickingOrg(root, email):
                     listbox.insert(parent='', index='end', text= "", iid= count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
                     count+= 1
         else:
-            orgs = orgInfo.find()
+            orgs = transactionInfo.find()
             count = 0
             for item in listbox.get_children():
                 listbox.delete(item)

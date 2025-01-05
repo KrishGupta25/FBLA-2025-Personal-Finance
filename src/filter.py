@@ -13,7 +13,7 @@ from errorPage import error
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-orgInfo = db["orgInfo"]
+transactionInfo = db["transactionInfo"]
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -80,7 +80,7 @@ def filter(root, listbox):
             filtered.append("College_help")
 
         if len(filtered) > 0 and len(filtered) != 4:
-            orgs = orgInfo.find()
+            orgs = transactionInfo.find()
             for org in orgs:
                 for item in filtered:
                     if item == org["resources"]:
@@ -92,7 +92,7 @@ def filter(root, listbox):
                 listbox.insert(parent='', index='end', text= "", iid= count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
                 count+= 1
         else:
-            orgs = orgInfo.find()
+            orgs = transactionInfo.find()
             count = 0
             for item in listbox.get_children():
                 listbox.delete(item)
@@ -108,7 +108,7 @@ def filter(root, listbox):
     submitButton.bind("<Leave>", on_leave)
 
     def reset():
-        orgs = orgInfo.find()
+        orgs = transactionInfo.find()
         count = 0
         for item in listbox.get_children():
             listbox.delete(item)
