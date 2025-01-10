@@ -86,7 +86,7 @@ def login():
         emailEntry.delete(0, "end")
         passwordEntry.delete(0, "end")
     else:
-        error("Wrong email or password!", loginFrame)
+        error("Wrong email or password! If you dont have an account, click the Sign Up button!", loginFrame)
         emailEntry.delete(0, "end")
         passwordEntry.delete(0, "end")
 

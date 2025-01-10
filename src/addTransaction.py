@@ -69,11 +69,27 @@ def addTransaction(root, listbox):
 
         categoryText = ctk.CTkLabel(addTransactionFrame, text="Category", font=font(15), fg_color=color, text_color="white")
         categoryText.place(relx=0.12, rely=0.35, anchor="w")
-
+        categoryFrame = ctk.CTkFrame(
+            addTransactionFrame,
+            width=400,
+            height=40,
+            fg_color=color,
+            border_color="#565B5E",  # Match border color of other entries
+            border_width=2,
+        )
+        categoryFrame.place(relx=0.5, rely=0.4, anchor="center")
         categories = ["Income", "Rent", "Groceries", "Utilities", "Transportation", "Entertainment", "Others"]
-        categoryDropdown = ttk.Combobox(addTransactionFrame, values=categories, font=font(15), state="readonly")
-        categoryDropdown.set("Select a category")
-        categoryDropdown.place(relx=0.5, rely=0.4, anchor="center")
+        categoryDropdown = ctk.CTkOptionMenu(
+            categoryFrame,
+            values=categories,
+            font=font(15),
+            fg_color=color,
+            text_color="white",
+            button_color=accent,
+            button_hover_color="#1c5c3c",
+        )
+        categoryDropdown.place(relx=0.5, rely=0.5, anchor="center")
+        categoryDropdown.set("Select a category")  # Set default option
 
         dateText = ctk.CTkLabel(addTransactionFrame, text="Date", font=font(15), fg_color=color, text_color="white")
         dateText.place(relx=0.12, rely=0.55, anchor="w")
