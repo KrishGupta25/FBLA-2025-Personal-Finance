@@ -128,5 +128,4 @@ showPasswordCheckbox = ctk.CTkCheckBox(loginFrame, text="Show Password", command
 showPasswordCheckbox.place(relx=0.335, rely=0.65)
 
 #=========================== Keeps GUI Running ======================================================================================================================================================
-if __name__ == "__main__":
-    mainFrame.mainloop()
+mainFrame.mainloop()

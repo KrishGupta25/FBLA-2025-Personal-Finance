@@ -456,7 +456,7 @@ def pickingTransaction(root, email):
     moreFrame = ctk.CTkFrame(pickingFrame, width= 187.5, height= 150, fg_color= "#1e2121")
 
 #=========================== create button to open up the more frame ======================================================================================================================================================
-    moreButton = ctk.CTkButton(pickingFrame, text=name, font=font(18), command= more, fg_color=color, hover_color=color, width=0)
+    """moreButton = ctk.CTkButton(pickingFrame, text=name, font=font(18), command= more, fg_color=color, hover_color=color, width=0)
     moreButton.place(relx=.975, rely=0.05, anchor="e")
     moreButton.bind("<Enter>", on_enter)
-    moreButton.bind("<Leave>", on_leave)
+    moreButton.bind("<Leave>", on_leave)"""

@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
-from tkcalendar import Calendar
+#from tkcalendar import Calendar
 
 
 #=========================== import all required functions ======================================================================================================================================================
@@ -98,7 +98,7 @@ def addTransaction(root, listbox, tempLabel):
         dateEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Select a date", width=400, height=40, justify="center", fg_color=color, text_color="white", state="normal")
         dateEntry.place(relx=0.5, rely=0.6, anchor="center")
 
-        def show_calendar(event):
+        """def show_calendar(event):
             # Create the calendar widget
             calendarWindow = ctk.CTkFrame(addTransactionFrame, width=400, height=300, fg_color="#2e2e2e", border_width=2, border_color=accent)
             calendarWindow.place(relx=0.5, rely=0.4, anchor="n")
@@ -116,7 +116,7 @@ def addTransaction(root, listbox, tempLabel):
             selectButton.pack(pady=10)
        
         dateEntry.bind("<Button-1>", show_calendar)  # Show calendar when clicking on the entry
-
+"""
 
         optionalInfoText = ctk.CTkLabel(addTransactionFrame, text="Enter Any Extra Information", font=font(15), fg_color=color, text_color="white")
         optionalInfoText.place(relx=0.12, rely=0.75, anchor="w")
