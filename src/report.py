@@ -28,7 +28,7 @@ color = "#121414"
 accent = "#3cb371"
 
 # Custom headings
-headings = ['Name', 'Type', 'Location', 'Contact Info']  # Customize these according to your requirements
+headings = ['Amount', 'Category', 'Date', 'Extra Info']  # Customize these according to your requirements
 
 def report(root, close):
 
@@ -37,7 +37,7 @@ def report(root, close):
 
     # Fetch data from MongoDB collection
     for document in transactionInfo.find():
-        row = [document['orgName'], document['resources'], document['location'], document['contactInfo']]  # Modify according to your data structure
+        row = [document['amount'], document['resources'], document['Date'], document['extraInfo']]  # Modify according to your data structure
         data.append(row)
 
     # Create PDF document
