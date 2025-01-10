@@ -237,31 +237,31 @@ def pickingTransaction(root, email):
             def confirm():
                 #Checking to see if either entry is empty
                 if passwordEntry2.get() == "":
-                    error("Either one or more of the required fields are empty or your entry has spaces", accountFrame)
+                    error("Either One Or More Of The Required Fields Are Empty Or Your Entry Has Spaces", accountFrame)
 
                 #Checking to see if either entry has spaces
                 elif passwordEntry2.get().find(" ") > -1:
-                    error("Either one or more of the required fields are empty or your entry has spaces", accountFrame)
+                    error("Either One Or More Of The Required Fields Are Empty Or Your Entry Has Spaces", accountFrame)
 
                 #Checking to see if there is at least one uppercase character in the password
                 elif any(ele.isupper() for ele in passwordEntry2.get()) == False:
-                    error("There is no uppercase letter in your password, please try again!", accountFrame)
+                    error("There Is No Uppercase Letter In Your Password, Please Try Again!", accountFrame)
                 
                 #Checking to see if there is at least one lowercase character in the password
                 elif any(ele.islower() for ele in passwordEntry2.get()) == False:
-                    error("There is no lowercase letter in your password, please try again!", accountFrame)
+                    error("There Is No Lowercase Letter In Your Password, Please Try Again!", accountFrame)
             
                 #Checking to see if there is at least one special character in the password
                 elif (passwordEntry2.get().isalnum()) == True:
-                    error("There is no special characters in your password, please try again!", accountFrame)
+                    error("There Are No Special Characters In Your Password, Please Try Again!", accountFrame)
 
                 #Checking to see if there is at least one number in the password
                 elif any(ele.isdigit() for ele in passwordEntry2.get()) == False:
-                    error("There is no number in your password, please try again!", accountFrame)
+                    error("There Is No Number In Your Password, Please Try Again!", accountFrame)
                 
                 #Checking to see if there is at least 8 characters in the password
                 elif len(passwordEntry2.get()) <= 8:
-                    error("There arent 8 characters in your password, please try again!", accountFrame)
+                    error("There Arent 8 Characters In Your Password, Please Try Again!", accountFrame)
 
                 #If all of those checks are passed then replace all the changed values
                 else:
@@ -303,7 +303,7 @@ def pickingTransaction(root, email):
                     if x['password'] == entry:
                         securityFrame.place_ftransactionet()
                     else:
-                        error("Incorrect password please try again", securityFrame)
+                        error("Incorrect Password Please Try Again", securityFrame)
 
 #=========================== create submittion button ======================================================================================================================================================
             submitButton = ctk.CTkButton(securityFrame, text="Submit", font=font(18), command = submit, fg_color=color, hover_color=color)
@@ -460,4 +460,3 @@ def pickingTransaction(root, email):
     moreButton.place(relx=.975, rely=0.05, anchor="e")
     moreButton.bind("<Enter>", on_enter)
     moreButton.bind("<Leave>", on_leave)
-

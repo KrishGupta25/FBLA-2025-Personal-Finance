@@ -130,9 +130,9 @@ def addTransaction(root, listbox, tempLabel):
             try:
                 int(amountEntry.get())
             except:
-                error("make sure the amount is a numerical value", root)
+                error("Make Sure The Amount Is a Numerical Value", root)
             if amountEntry.get() == "" or dateEntry.get() == "" or categoryDropdown.get() == "" or optionalInfoEntry.get() == "":
-                error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
+                error("One or More Fields Are Empty, Please Use N/A In Replacement Of An Empty Entry", root)
             else:
                 check = 0
                 transactionInfo.insert_one({"amount": int(amountEntry.get()), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
@@ -153,13 +153,13 @@ def addTransaction(root, listbox, tempLabel):
 
                 tempLabel.configure(text= "Total: " + str(total))
 
-                success("Transaction was succesfully added to the database", root)
+                success("Transaction Was Succesfully Added To The Database!", root)
 
         submitButton = ctk.CTkButton(addTransactionFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
         submitButton.place(relx=0.5, rely=0.9, anchor="center")
         submitButton.bind("<Enter>", on_enter)
         submitButton.bind("<Leave>", on_leave)
     else:
-        error("Please close the existing 'add organization' page first", root)
+        error("Please Close The Existing 'Add Organization' Page First", root)
 
 

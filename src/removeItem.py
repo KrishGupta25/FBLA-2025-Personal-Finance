@@ -41,7 +41,7 @@ def removeItem(root, listbox,tempLabel):
     temp = listbox.selection()
     delete = list()
     if len(temp) == 0:
-        error("Please select at least one Transaction to delete", root)
+        error("Please Select At Least One Transaction To Delete", root)
     else:
         orgs = transactionInfo.find()
         selection = list()
@@ -75,4 +75,4 @@ def removeItem(root, listbox,tempLabel):
         tempLabel.configure(text= "Total: " + str(total))
 
 
-        success("Transaction(s) were deleted", root)
+        success("Transaction(s) Were Deleted", root)

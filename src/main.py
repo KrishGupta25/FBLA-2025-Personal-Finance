@@ -53,8 +53,8 @@ mainFrame.resizable(width=False, height=False)
 loginFrame = ctk.CTkFrame(mainFrame, width=1200, height=600, fg_color=color)
 loginFrame.place(relx=0, rely=0)
 
-#=========================== Creating title text that says "Login to CTE PartnerPro" ======================================================================================================================================================
-loginLabel = ctk.CTkLabel(loginFrame, text="Log in to CTE PartnerPro", font=font(50), fg_color=color, text_color="white")
+#=========================== Creating title text that says "Login to BudgetBuddy" ======================================================================================================================================================
+loginLabel = ctk.CTkLabel(loginFrame, text="Log in to BudgetBuddy", font=font(50), fg_color=color, text_color="white")
 loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
 #=========================== Creating a email entry box and the text above it ======================================================================================================================================================
@@ -86,12 +86,12 @@ def login():
         emailEntry.delete(0, "end")
         passwordEntry.delete(0, "end")
     else:
-        error("Wrong email or password! If you dont have an account, click the Sign Up button!", loginFrame)
+        error("Wrong Email or Password! If You Don't Have An Account, Click The Sign Up button!", loginFrame)
         emailEntry.delete(0, "end")
         passwordEntry.delete(0, "end")
 
 #=========================== Login Button ======================================================================================================================================================
-loginButton = ctk.CTkButton(loginFrame, text="Log in to PartnerPro", font=font(25), command=lambda: (login()), fg_color=accent, hover_color="#63C28D", text_color=color)
+loginButton = ctk.CTkButton(loginFrame, text="Log in to BudgetBuddy", font=font(25), command=lambda: (login()), fg_color=accent, hover_color="#63C28D", text_color=color)
 loginButton.place(relx=0.5, rely=0.825, anchor="center")
 
 ''' - WORK IN PROGRESS
@@ -112,7 +112,7 @@ lightAndDarkSwitch = ctk.CTkSwitch(loginFrame, command = lambda:(backgroundColor
 lightAndDarkSwitch.place(relx = 0.5, rely = 0.5)
 '''
 #=========================== Sign up Button ======================================================================================================================================================
-signupButton = ctk.CTkButton(loginFrame, text="Sign up for PartnerPro", font=font(18), command=lambda: (signUp(loginFrame)), fg_color=color, hover_color=color)
+signupButton = ctk.CTkButton(loginFrame, text="Sign up for BudgetBuddy", font=font(18), command=lambda: (signUp(loginFrame)), fg_color=color, hover_color=color)
 signupButton.place(relx=0.5, rely=0.92, anchor="center")
 signupButton.bind("<Enter>", on_enter)
 signupButton.bind("<Leave>", on_leave)

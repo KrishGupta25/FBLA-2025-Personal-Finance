@@ -34,29 +34,40 @@ def report(root, close):
 
     # Retrieve data from MongoDB
     data = [headings]
+    total = 0
 
     # Fetch data from MongoDB collection
     for document in transactionInfo.find():
         row = [document['amount'], document['resources'], document['Date'], document['extraInfo']]  # Modify according to your data structure
         data.append(row)
 
+        # Calculate total
+        if document['resources'] == "Income":
+            total += document["amount"]
+        else:
+            total -= document["amount"]
+
+    # Add totals row at the end
+    totals_row = [f'Total: {total}']
+    data.append(totals_row)
+
     # Create PDF document
     # Create PDF document
-    filename = "report.pdf"
+    filename = "FINANCIAL_REPORT.pdf"
     download_folder = os.path.join(os.path.expanduser('~'), 'Downloads')  # Get user's downloads folder
     pdf_filepath = os.path.join(download_folder, filename)
     doc = SimpleDocTemplate(pdf_filepath, pagesize=letter, topMargin=30)
 
     # Create a title
     styles = getSampleStyleSheet()
-    title_text = "CTE Organizations"  # Customize title text
+    title_text = "Financial Report"  # Customize title text
     title = Paragraph(title_text, styles['Title'])
 
      # Create a spacer to add space between title and table
     spacer = Spacer(1, 30)  # Adjust the height as needed
     
     # Create a table from the data
-    table = Table(data)
+    table = Table(data, colWidths=[120] * len(headings))
     
     # Add style to the table
     style = TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
@@ -66,7 +77,9 @@ def report(root, close):
                         ('FONTSIZE', (0, 0), (-1, -1), 8),  # Set font size to 8 points
                         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
                         ('BACKGROUND', (0, 1), (-1, -1), colors.white),
-                        ('GRID', (0, 0), (-1, -1), 1, colors.black)])
+                        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                        ('SPAN', (0, -1), (-1, -1)),  # Merge the totals row across all columns
+                        ])
     
     table.setStyle(style)
 

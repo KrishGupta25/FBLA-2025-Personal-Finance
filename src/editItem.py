@@ -45,9 +45,9 @@ def editItem(root, listbox, tempLabel):
     if check == 0:
         temp = listbox.selection()
         if len(temp) == 0:
-            error("Please select an transaction to edit", root)
+            error("Please Select An Transaction To Edit", root)
         elif len(temp) > 1:
-            error("You can only select one transaction to edit at a time", root)
+            error("You Can Only Select One Transaction To Edit At a Time", root)
         else:
             check = 1
             selection = listbox.item(temp, option="values")
@@ -105,7 +105,7 @@ def editItem(root, listbox, tempLabel):
                 global check
                 orgs = transactionInfo.find()
                 if orgNameEntry.get() == "" or dateEntry.get() == "" or categoryEntry.get() == "" or typeEntry.get() == "":
-                    error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
+                    error("One or More Fields Are Empty, Please Use N/A In Replacement Of An Empty Entry", root)
                 else:
                     transactionInfo.replace_one({"amount": int(selection[0]), "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": int(orgNameEntry.get()), "resources": categoryEntry.get(), "Date": dateEntry.get(), "extraInfo": typeEntry.get()})
                     editItemFrame.place_forget()
@@ -128,11 +128,11 @@ def editItem(root, listbox, tempLabel):
                 tempLabel.configure(text= "Total: " + str(total))
 
 
-                success("Org was succesfully edited", root)
+                success("Transaction was succesfully edited", root)
 
             submitButton = ctk.CTkButton(editItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
             submitButton.place(relx=0.5, rely=0.9, anchor="center")
             submitButton.bind("<Enter>", on_enter)
             submitButton.bind("<Leave>", on_leave)
     else:
-        error("Please close the existing 'edit organization' page first", root)
+        error("Please Close The Existing 'Edit Transaction' Page First", root)
