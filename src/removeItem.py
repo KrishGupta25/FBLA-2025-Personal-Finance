@@ -41,7 +41,7 @@ def removeItem(root, listbox):
     temp = listbox.selection()
     delete = list()
     if len(temp) == 0:
-        error("Please select at least one Organization to delete", root)
+        error("Please select at least one Transaction to delete", root)
     else:
         orgs = transactionInfo.find()
         selection = list()
@@ -49,8 +49,8 @@ def removeItem(root, listbox):
             selection.append(listbox.item(item, option="values"))
         for select in selection:
             for org in orgs:
-                if select[0] == org["orgName"] and select[1] == org["resources"] and select[2] == org["location"] and select[3] == org["contactInfo"]:
-                    delete.append({"orgName": select[0], "resources": select[1], "location": select[2], "contactInfo": select[3]})
+                if int(select[0]) == org["amount"] and select[1] == org["resources"] and select[2] == org["Date"] and select[3] == org["extraInfo"]:
+                    delete.append({"amount": int(select[0]), "resources": select[1], "Date": select[2], "extraInfo": select[3]})
                     
         for item in delete:
             transactionInfo.delete_one(item)
@@ -61,7 +61,7 @@ def removeItem(root, listbox):
         for item in listbox.get_children():
             listbox.delete(item)
         for item in orgs:
-            listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["resources"], item["location"], item["contactInfo"]))
+            listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
             count += 1
 
-        success("Org(s) were deleted", root)
+        success("Transaction(s) were deleted", root)
