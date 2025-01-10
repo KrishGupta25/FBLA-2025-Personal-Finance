@@ -71,13 +71,13 @@ def pickingTransaction(root, email):
 #=========================== create listbox ======================================================================================================================================================
     listbox = ttk.Treeview(pickingFrame, selectmode="extended",columns=("c1", "c2", "c3", "c4"),show="headings", height= 5)
     listbox.column("# 1", anchor="center", width = 360)
-    listbox.heading("# 1", text="Name")
+    listbox.heading("# 1", text="Amount")
     listbox.column("# 2", anchor="center", width = 360)
-    listbox.heading("# 2", text="Resources")
+    listbox.heading("# 2", text="Type")
     listbox.column("# 3", anchor="center", width = 360)
-    listbox.heading("# 3", text="Location")
+    listbox.heading("# 3", text="Date")
     listbox.column("# 4", anchor="center", width = 360)
-    listbox.heading("# 4", text="Contact")
+    listbox.heading("# 4", text="Additional Info")
 
     listbox.place(relx=.5, rely=.5, anchor="center")
 
@@ -108,7 +108,7 @@ def pickingTransaction(root, email):
     for item in listbox.get_children():
         listbox.delete(item)
     for item in transactions:
-        listbox.insert(parent='', index='end', text= "", iid= count, values=(item["transactionName"], item["resources"], item["location"], item["contactInfo"]))
+        listbox.insert(parent='', index='end', text= "", iid= count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
         count+= 1
 
     searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")

@@ -69,7 +69,7 @@ def editItem(root, listbox,):
             labelText = ctk.CTkLabel(editItemFrame, text="Edit Transaction", font=font(20), fg_color=color, text_color="white")
             labelText.place(relx=0.5, rely=0.05, anchor="center")
 
-            orgNameText = ctk.CTkLabel(editItemFrame, text="Transaction Name", font=font(15), fg_color=color, text_color="white")
+            orgNameText = ctk.CTkLabel(editItemFrame, text="Amount", font=font(15), fg_color=color, text_color="white")
             orgNameText.place(relx=0.12, rely=0.15, anchor="w")
 
             orgNameEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
@@ -77,7 +77,7 @@ def editItem(root, listbox,):
             orgNameEntry.insert(0, selection[0])
             orgNameEntry.bind('<FocusIn>', lambda x: orgNameEntry.select_range(0, "end"))
 
-            categoryText = ctk.CTkLabel(editItemFrame, text="category", font=font(15), fg_color=color, text_color="white")
+            categoryText = ctk.CTkLabel(editItemFrame, text="Category", font=font(15), fg_color=color, text_color="white")
             categoryText.place(relx=0.12, rely=0.35, anchor="w")
 
             categoryEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
@@ -85,7 +85,7 @@ def editItem(root, listbox,):
             categoryEntry.insert(0, selection[1])
             categoryEntry.bind('<FocusIn>', lambda x: categoryEntry.select_range(0, "end"))
 
-            dateText = ctk.CTkLabel(editItemFrame, text="date", font=font(15), fg_color=color, text_color="white")
+            dateText = ctk.CTkLabel(editItemFrame, text="Date", font=font(15), fg_color=color, text_color="white")
             dateText.place(relx=0.12, rely=0.55, anchor="w")
 
             dateEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
@@ -93,7 +93,7 @@ def editItem(root, listbox,):
             dateEntry.insert(0, selection[2])
             dateEntry.bind('<FocusIn>', lambda x: dateEntry.select_range(0, "end"))
 
-            typeText = ctk.CTkLabel(editItemFrame, text="Contact info", font=font(15), fg_color=color, text_color="white")
+            typeText = ctk.CTkLabel(editItemFrame, text="Additional Info", font=font(15), fg_color=color, text_color="white")
             typeText.place(relx=0.12, rely=0.75, anchor="w")
 
             typeEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
@@ -106,16 +106,14 @@ def editItem(root, listbox,):
                 orgs = transactionInfo.find()
                 if orgNameEntry.get() == "" or dateEntry.get() == "" or categoryEntry.get() == "" or typeEntry.get() == "":
                     error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
-                elif categoryEntry.get() != "Internship" and categoryEntry.get() != "Fundraising" and categoryEntry.get() != "Volunteering" and categoryEntry.get() != "College help":
-                    error("category must be Internship/Fundraising/Volunteering/College help", root)
                 else:
-                    transactionInfo.replace_one({"orgName": selection[0]}, {"orgName": orgNameEntry.get(), "category": categoryEntry.get(), "date": dateEntry.get(), "type": typeEntry.get()})
+                    transactionInfo.replace_one({"amount": selection[0], "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": orgNameEntry.get(), "resources": categoryEntry.get(), "Date": dateEntry.get(), "extraInfo": typeEntry.get()})
                     editItemFrame.place_forget()
                     count = 0
                     for item in listbox.get_children():
                         listbox.delete(item)
                     for item in orgs:
-                        listbox.insert(parent='', index='end', text="", iid=count, values=(item["orgName"], item["category"], item["date"], item["type"]))
+                        listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
                         count += 1
                     check = 0
 

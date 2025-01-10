@@ -126,21 +126,23 @@ def addTransaction(root, listbox):
         def submit():
             global check
             orgs = transactionInfo.find()
-            if amountEntry.get() == "" or dateEntry.get() == "" or resourceEntry.get() == "" or optionalInfoEntry.get() == "":
+            try:
+                int(amountEntry.get())
+            except:
+                error("make sure the amount is a numerical value", root)
+            if amountEntry.get() == "" or dateEntry.get() == "" or categoryDropdown.get() == "" or optionalInfoEntry.get() == "":
                 error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
-            elif resourceEntry.get() != "Internship" and resourceEntry.get() != "Fundraising" and resourceEntry.get() != "Volunteering" and resourceEntry.get() != "College help":
-                error("Resources must be Internship/Fundraising/Volunteering/College help", root)
             else:
                 check = 0
-                transactionInfo.insert_one({"amount": amountEntry.get(), "resources": resourceEntry.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
+                transactionInfo.insert_one({"amount": int(amountEntry.get()), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
                 addTransactionFrame.place_forget()
                 count = 0
                 for item in listbox.get_children():
                     listbox.delete(item)
                 for item in orgs:
-                    listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["contactInfo"]))
+                    listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
                     count += 1
-                success("Org was succesfully added to the database", root)
+                success("Transaction was succesfully added to the database", root)
 
         submitButton = ctk.CTkButton(addTransactionFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
         submitButton.place(relx=0.5, rely=0.9, anchor="center")
