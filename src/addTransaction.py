@@ -113,31 +113,26 @@ def addTransaction(root, listbox):
             
             selectButton = ctk.CTkButton(calendarWindow, text="Select", command=select_date, font=font(12), fg_color=accent, hover_color="#1c5c3c", text_color="white")
             selectButton.pack(pady=10)
-
-
-            
-
-
-        
+       
         dateEntry.bind("<Button-1>", show_calendar)  # Show calendar when clicking on the entry
 
 
-        contactText = ctk.CTkLabel(addTransactionFrame, text="Select a date", font=font(15), fg_color=color, text_color="white")
-        contactText.place(relx=0.12, rely=0.75, anchor="w")
+        optionalInfoText = ctk.CTkLabel(addTransactionFrame, text="Enter Any Extra Information", font=font(15), fg_color=color, text_color="white")
+        optionalInfoText.place(relx=0.12, rely=0.75, anchor="w")
 
-        contactEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Contact Info", width=400, height=40, justify="center", fg_color=color, text_color="white")
-        contactEntry.place(relx=0.5, rely=0.8, anchor="center")
+        optionalInfoEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Optional Info", width=400, height=40, justify="center", fg_color=color, text_color="white")
+        optionalInfoEntry.place(relx=0.5, rely=0.8, anchor="center")
 
         def submit():
             global check
             orgs = transactionInfo.find()
-            if amountEntry.get() == "" or dateEntry.get() == "" or resourceEntry.get() == "" or contactEntry.get() == "":
+            if amountEntry.get() == "" or dateEntry.get() == "" or resourceEntry.get() == "" or optionalInfoEntry.get() == "":
                 error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
             elif resourceEntry.get() != "Internship" and resourceEntry.get() != "Fundraising" and resourceEntry.get() != "Volunteering" and resourceEntry.get() != "College help":
                 error("Resources must be Internship/Fundraising/Volunteering/College help", root)
             else:
                 check = 0
-                transactionInfo.insert_one({"amount": amountEntry.get(), "resources": resourceEntry.get(), "Date": dateEntry.get(), "contactInfo": contactEntry.get()})
+                transactionInfo.insert_one({"amount": amountEntry.get(), "resources": resourceEntry.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
                 addTransactionFrame.place_forget()
                 count = 0
                 for item in listbox.get_children():
