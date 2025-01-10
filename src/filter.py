@@ -1,4 +1,4 @@
-#=========================== import all required packages ======================================================================================================================================================
+'''#=========================== import all required packages ======================================================================================================================================================
 import tkinter as tk
 from tkinter import ttk
 import customtkinter as ctk
@@ -122,4 +122,4 @@ def filter(root, listbox):
     resetButton.place(relx=0.5, rely=0.625, anchor="center")
     resetButton.bind("<Enter>", on_enter)
     resetButton.bind("<Leave>", on_leave)
-
+'''

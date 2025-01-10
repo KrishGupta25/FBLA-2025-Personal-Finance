@@ -14,7 +14,7 @@ from errorPage import error
 from addTransaction import addTransaction
 from editItem import editItem
 from removeItem import removeItem
-from filter import filter
+#from filter import filter
 from report import report
 from success import success
 
@@ -82,18 +82,18 @@ def pickingTransaction(root, email):
     listbox.place(relx=.5, rely=.5, anchor="center")
 
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
-    addtransactionButton = ctk.CTkButton(pickingFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox)], fg_color=color, hover_color=color)
+    addtransactionButton = ctk.CTkButton(pickingFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox, totalLabel)], fg_color=color, hover_color=color)
     addtransactionButton.place(relx=0.25, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
     #test
 
-    edittransactionButton = ctk.CTkButton(pickingFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
+    edittransactionButton = ctk.CTkButton(pickingFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(pickingFrame, listbox, totalLabel)], fg_color=color, hover_color=color)
     edittransactionButton.place(relx=0.5, rely=0.91, anchor="center")
     edittransactionButton.bind("<Enter>", on_enter)
     edittransactionButton.bind("<Leave>", on_leave)
 
-    removetransactionButton = ctk.CTkButton(pickingFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(pickingFrame, listbox)], fg_color=color, hover_color=color)
+    removetransactionButton = ctk.CTkButton(pickingFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(pickingFrame, listbox, totalLabel)], fg_color=color, hover_color=color)
     removetransactionButton.place(relx=0.75, rely=0.91, anchor="center")
     removetransactionButton.bind("<Enter>", on_enter)
     removetransactionButton.bind("<Leave>", on_leave)
@@ -114,7 +114,7 @@ def pickingTransaction(root, email):
     searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
     searchLabel.place(relx=0.31, rely=0.075, anchor="center")
 
-    searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by name", fg_color=color, text_color="white")
+    searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by type", fg_color=color, text_color="white")
     searchEntry.place(relx= 0.5, rely= 0.075, anchor= "center")
     final = list()
 
@@ -125,7 +125,7 @@ def pickingTransaction(root, email):
         if len(list(search)) > 0:
             final.clear()
             for item in transactions:
-                name = item["transactionName"]
+                name = item["resources"]
                 newName = name[:len(list(search))]
                 if len(list(search)) <= len(list(name)):
                     # not case sensitive search
@@ -136,7 +136,7 @@ def pickingTransaction(root, email):
                 for item in listbox.get_children():
                     listbox.delete(item)
                 for item in final:
-                    listbox.insert(parent='', index='end', text= "", iid= count, values=(item["transactionName"], item["resources"], item["location"], item["contactInfo"]))
+                    listbox.insert(parent='', index='end', text= "", iid= count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
                     count+= 1
         else:
             transactions = transactionInfo.find()
@@ -144,16 +144,26 @@ def pickingTransaction(root, email):
             for item in listbox.get_children():
                 listbox.delete(item)
             for item in transactions:
-                listbox.insert(parent='', index='end', text= "", iid= count, values=(item["transactionName"], item["resources"], item["location"], item["contactInfo"]))
+                listbox.insert(parent='', index='end', text= "", iid= count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
                 count+= 1
 
     
     searchEntry.bind("<KeyRelease>", on_key_press)
           
-    filterButton = ctk.CTkButton(pickingFrame, text="filter", font=font(15), command= lambda:(filter(pickingFrame, listbox)), fg_color=accent, hover_color="#63C28D", text_color=color)
-    filterButton.place(relx=0.7, rely=0.075, anchor="center")
+    #filterButton = ctk.CTkButton(pickingFrame, text="filter", font=font(15), command= lambda:(filter(pickingFrame, listbox)), fg_color=accent, hover_color="#63C28D", text_color=color)
+    #filterButton.place(relx=0.7, rely=0.075, anchor="center")
 
-    
+    transactions = transactionInfo.find()
+    total = 0
+    for transaction in transactions:
+        if transaction["resources"] == "Income":
+            total += transaction["amount"]
+        else:
+            total -= transaction["amount"]
+        
+
+    totalLabel = ctk.CTkLabel(pickingFrame, text= "Total: " + str(total), font=font(18), fg_color=color, text_color="white")
+    totalLabel.place(relx=0.05, rely=0.91, anchor="center")
 
 #=========================== find users first and last name ======================================================================================================================================================
     temp = loginInfo.find({"email": email})

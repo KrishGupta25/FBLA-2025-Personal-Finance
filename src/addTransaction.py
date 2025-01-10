@@ -5,6 +5,7 @@ import customtkinter as ctk
 from pymongo import MongoClient
 from tkcalendar import Calendar
 
+
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
@@ -39,7 +40,7 @@ def on_leave(e):
 check = 0
 
 #=========================== function to create add item frame ======================================================================================================================================================
-def addTransaction(root, listbox):
+def addTransaction(root, listbox, tempLabel):
 #=========================== add organization frame ======================================================================================================================================================
     global check
     if check == 0:
@@ -142,6 +143,16 @@ def addTransaction(root, listbox):
                 for item in orgs:
                     listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
                     count += 1
+                transactions = transactionInfo.find()
+                total = 0
+                for transaction in transactions:
+                    if transaction["resources"] == "Income":
+                        total += transaction["amount"]
+                    else:
+                        total -= transaction["amount"]
+
+                tempLabel.configure(text= "Total: " + str(total))
+
                 success("Transaction was succesfully added to the database", root)
 
         submitButton = ctk.CTkButton(addTransactionFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")

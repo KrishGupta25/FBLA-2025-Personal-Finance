@@ -37,7 +37,7 @@ def on_leave(e):
 
 
 #=========================== function to create edit item frame ======================================================================================================================================================
-def removeItem(root, listbox):
+def removeItem(root, listbox,tempLabel):
     temp = listbox.selection()
     delete = list()
     if len(temp) == 0:
@@ -63,5 +63,16 @@ def removeItem(root, listbox):
         for item in orgs:
             listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
             count += 1
+
+        transactions = transactionInfo.find()
+        total = 0
+        for transaction in transactions:
+            if transaction["resources"] == "Income":
+                total += transaction["amount"]
+            else:
+                total -= transaction["amount"]
+
+        tempLabel.configure(text= "Total: " + str(total))
+
 
         success("Transaction(s) were deleted", root)

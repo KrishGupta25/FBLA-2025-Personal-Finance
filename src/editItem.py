@@ -39,7 +39,7 @@ def on_leave(e):
 check = 0
 
 #=========================== function to create edit item frame ======================================================================================================================================================
-def editItem(root, listbox,):
+def editItem(root, listbox, tempLabel):
 #=========================== edit transaction frame ======================================================================================================================================================
     global check
     if check == 0:
@@ -117,7 +117,18 @@ def editItem(root, listbox,):
                         count += 1
                     check = 0
 
-                    success("Org was succesfully edited", root)
+                transactions = transactionInfo.find()
+                total = 0
+                for transaction in transactions:
+                    if transaction["resources"] == "Income":
+                        total += transaction["amount"]
+                    else:
+                        total -= transaction["amount"]
+
+                tempLabel.configure(text= "Total: " + str(total))
+
+
+                success("Org was succesfully edited", root)
 
             submitButton = ctk.CTkButton(editItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
             submitButton.place(relx=0.5, rely=0.9, anchor="center")
