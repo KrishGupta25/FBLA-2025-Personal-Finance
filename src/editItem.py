@@ -128,7 +128,7 @@ def editItem(root, listbox, tempLabel):
                 tempLabel.configure(text= "Total: " + str(total))
 
 
-                success("Org was succesfully edited", root)
+                success("Transaction was succesfully edited", root)
 
             submitButton = ctk.CTkButton(editItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
             submitButton.place(relx=0.5, rely=0.9, anchor="center")
