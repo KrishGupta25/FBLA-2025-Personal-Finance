@@ -107,7 +107,7 @@ def editItem(root, listbox,):
                 if orgNameEntry.get() == "" or dateEntry.get() == "" or categoryEntry.get() == "" or typeEntry.get() == "":
                     error("One or more fields are empty, please use N/A in replacement of an empty entry", root)
                 else:
-                    transactionInfo.replace_one({"amount": selection[0], "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": orgNameEntry.get(), "resources": categoryEntry.get(), "Date": dateEntry.get(), "extraInfo": typeEntry.get()})
+                    transactionInfo.replace_one({"amount": int(selection[0]), "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": int(orgNameEntry.get()), "resources": categoryEntry.get(), "Date": dateEntry.get(), "extraInfo": typeEntry.get()})
                     editItemFrame.place_forget()
                     count = 0
                     for item in listbox.get_children():
