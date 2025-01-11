@@ -1,4 +1,4 @@
-﻿# CTE Partner Pro
+﻿# Budget Buddy
 
 Budget Buddy is a financial tracking system designed for students. It allows users to monitor and manage their personal finances effectively. This README provides an overview of Budget Buddy, its features, and installation instructions.
 
