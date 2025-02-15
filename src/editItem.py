@@ -14,7 +14,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-transactionInfo = db["transactionInfo"]
+
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -39,8 +39,9 @@ def on_leave(e):
 check = 0
 
 #=========================== function to create edit item frame ======================================================================================================================================================
-def editItem(root, listbox, tempLabel):
+def editItem(root, listbox, tempLabel, user):
 #=========================== edit transaction frame ======================================================================================================================================================
+    transactionInfo = db[user]
     global check
     if check == 0:
         temp = listbox.selection()

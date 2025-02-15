@@ -4,6 +4,7 @@ from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 
+
 #=========================== import all required functions ======================================================================================================================================================
 from errorPage import error
 from signUp import signUp
@@ -14,7 +15,6 @@ from tkinter import font
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-transactionInfo = db["transactionInfo"]
 
 #=========================== import custom font =====================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -94,23 +94,6 @@ def login():
 loginButton = ctk.CTkButton(loginFrame, text="Log in to BudgetBuddy", font=font(25), command=lambda: (login()), fg_color=accent, hover_color="#63C28D", text_color=color)
 loginButton.place(relx=0.5, rely=0.825, anchor="center")
 
-''' - WORK IN PROGRESS
-#=========================== Light and Dark Mode Button ======================================================================================================================================================
-switch_var = ctk.StringVar(value="on")
-def backgroundColor(root):
-
-    if switch_var.get() == "on": #root.cget('fg_color') == "#121414":
-        color = "white"
-        print(1)
-    elif switch_var.get() == "off":  #root.cget('fg_color') == "white":
-        color = "#121414"
-        print(0)
-
-    root.configure(fg_color = color)
-
-lightAndDarkSwitch = ctk.CTkSwitch(loginFrame, command = lambda:(backgroundColor(loginFrame)), onvalue= "on", offvalue= "off", variable= switch_var, text = "hola")
-lightAndDarkSwitch.place(relx = 0.5, rely = 0.5)
-'''
 #=========================== Sign up Button ======================================================================================================================================================
 signupButton = ctk.CTkButton(loginFrame, text="Sign up for BudgetBuddy", font=font(18), command=lambda: (signUp(loginFrame)), fg_color=color, hover_color=color)
 signupButton.place(relx=0.5, rely=0.92, anchor="center")

@@ -82,6 +82,8 @@ def info(root, email, password, delete):
             loginInfo.insert_one(databaseInformation)
             infoFrame.place_forget()
             delete.place_forget()
+            temp = loginInfo.find_one({"email": email}, {"password": password})
+            db.create_collection(str(temp["_id"]) + "collection")
             success("User Was Successfully Added To The Database", root)
 
     # =========================== create sign-up button ======================================================================================================================================================

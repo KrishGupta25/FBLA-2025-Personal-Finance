@@ -22,7 +22,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-transactionInfo = db["transactionInfo"]
+
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -47,11 +47,14 @@ def on_leave(e):
 #=========================== funtion to create home page ======================================================================================================================================================
 def pickingTransaction(root, email):
 
-#=========================== find users preferred name ======================================================================================================================================================
+#=========================== find users preferred name and transaction details =================================================================================================================================
     temp = loginInfo.find({"email": email})
-    transactions = transactionInfo.find()
     for item in temp:
         user = item["preferredName"]
+        pickingTransactionId = item["_id"]
+    
+    transactionInfo = db[str(pickingTransactionId)+"collection"]
+    transactions = transactionInfo.find()
 
 #=========================== home page frame ======================================================================================================================================================
     pickingFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
@@ -82,18 +85,18 @@ def pickingTransaction(root, email):
     listbox.place(relx=.5, rely=.5, anchor="center")
 
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
-    addtransactionButton = ctk.CTkButton(pickingFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox, totalLabel)], fg_color=color, hover_color=color)
+    addtransactionButton = ctk.CTkButton(pickingFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
     addtransactionButton.place(relx=0.25, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
     #test
 
-    edittransactionButton = ctk.CTkButton(pickingFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(pickingFrame, listbox, totalLabel)], fg_color=color, hover_color=color)
+    edittransactionButton = ctk.CTkButton(pickingFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(pickingFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
     edittransactionButton.place(relx=0.5, rely=0.91, anchor="center")
     edittransactionButton.bind("<Enter>", on_enter)
     edittransactionButton.bind("<Leave>", on_leave)
 
-    removetransactionButton = ctk.CTkButton(pickingFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(pickingFrame, listbox, totalLabel)], fg_color=color, hover_color=color)
+    removetransactionButton = ctk.CTkButton(pickingFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(pickingFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
     removetransactionButton.place(relx=0.75, rely=0.91, anchor="center")
     removetransactionButton.bind("<Enter>", on_enter)
     removetransactionButton.bind("<Leave>", on_leave)
@@ -175,7 +178,7 @@ def pickingTransaction(root, email):
 #=========================== create pop up window for more options ======================================================================================================================================================
     def more():
         def account():
-            moreFrame.place_ftransactionet()
+            moreFrame.place_forget()
 
 #=========================== get all user data ======================================================================================================================================================
             temp = loginInfo.find({"email": email})
@@ -228,7 +231,7 @@ def pickingTransaction(root, email):
             preferredNameEntry.insert(0, preferred)
             preferredNameEntry.bind('<FocusIn>', lambda x: preferredNameEntry.select_range(0, "end"))
 
-            backButton = ctk.CTkButton(accountFrame, text="⌂", font=font(40), command= accountFrame.place_ftransactionet, fg_color=color, hover_color=color, width=0, height=0)
+            backButton = ctk.CTkButton(accountFrame, text="⌂", font=font(40), command= accountFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
             backButton.place(relx=.02, rely=0.001, anchor="nw")
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
@@ -280,7 +283,7 @@ def pickingTransaction(root, email):
             securityFrame = ctk.CTkFrame(accountFrame, width=1200, height=600, fg_color= color, bg_color= color)
             securityFrame.place(relx= 0, rely= 0, anchor= "nw")
 
-            back1Button = ctk.CTkButton(securityFrame, text="⌂", font=font(40), command= lambda: [securityFrame.place_ftransactionet(), accountFrame.place_ftransactionet()], fg_color=color, hover_color=color, width=0, height=0)
+            back1Button = ctk.CTkButton(securityFrame, text="⌂", font=font(40), command= lambda: [securityFrame.place_forget(), accountFrame.place_forget()], fg_color=color, hover_color=color, width=0, height=0)
             back1Button.place(relx=.02, rely=0.001, anchor="nw")
             back1Button.bind("<Enter>", on_enter)
             back1Button.bind("<Leave>", on_leave)
@@ -301,7 +304,7 @@ def pickingTransaction(root, email):
                 values = loginInfo.find({'email': email})
                 for x in values:
                     if x['password'] == entry:
-                        securityFrame.place_ftransactionet()
+                        securityFrame.place_forget()
                     else:
                         error("Incorrect Password Please Try Again", securityFrame)
 
@@ -318,7 +321,7 @@ def pickingTransaction(root, email):
 
 #=========================== create settings page ======================================================================================================================================================
         def settings():
-            moreFrame.place_ftransactionet()
+            moreFrame.place_forget()
 
             settingFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
             settingFrame.place(relx= 0, rely= 0, anchor= "nw")
@@ -326,32 +329,32 @@ def pickingTransaction(root, email):
             settingslabel = ctk.CTkLabel(settingFrame, text="Settings", font=font(35), fg_color=color, text_color="white")
             settingslabel.place(relx=0.5, rely=0.02, anchor="n")
 
-            backButton = ctk.CTkButton(settingFrame, text="⌂", font=font(40), command= settingFrame.place_ftransactionet, fg_color=color, hover_color=color, width=0, height=0)
+            backButton = ctk.CTkButton(settingFrame, text="⌂", font=font(40), command= settingFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
             backButton.place(relx=.02, rely=0.001, anchor="nw")
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
 
 #=========================== create about frame ======================================================================================================================================================
         def about():
-            moreFrame.place_ftransactionet()
+            moreFrame.place_forget()
             aboutFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
             aboutFrame.place(relx= 0, rely= 0, anchor= "nw")
 
             AboutUslabel = ctk.CTkLabel(aboutFrame, text="About Us ", font=font(35), fg_color=color, text_color="white")
             AboutUslabel.place(relx=0.5, rely=0.02, anchor="n")
 
-            AboutUstext = ctk.CTkLabel(aboutFrame, text="""Welcome to our Future Business Leaders of America (FBLA) Programming and Coding project for 2023-2024! We, Harishankar Rajesh and
-            \nKrish Gupta, are juniors at River Ridge High School and have spent the last two months developing a busniness/transactioninization storage platform. 
+            AboutUstext = ctk.CTkLabel(aboutFrame, text="""Welcome to our Future Business Leaders of America (FBLA) Programming and Coding project for 2024-2025! We, Harishankar Rajesh and
+            \nKrish Gupta, are seniors at River Ridge Highschool and have spent three months developing a busniness/transaction storage platform with a  
             \nOur system is designed to be able to easily add, store, view, edit, remove, seach, and filter businesses while also implementing a 
-            \nfriendly and effecient UI.This project involved in-depth learning of various software development facets, while also enhancing our
+            \nfriendly and effecient UI. This project involved in-depth learning of various software development facets, while also enhancing our
             \nability to devise effective solutions to complex problems. The journey was challenging but rewarding, with the final product serving as 
             \nboth a tool for fostering a more interactive educational environment and a testament to our journey into the world of programming. 
             \nfireplaypus375@gmail.com (Haris Rajesh) 
-            \nkrishgupta2025@gmail.com(Krish Gupta) 
-            \nGithub: https://github.com/HarisR39/CTE_Partner_Pro""", font=font(17), fg_color=color, text_color="white")
+            \nkrishgupta2025@gmail.com(Krish Gupta) """
+            , font=font(17), fg_color=color, text_color="white")
             AboutUstext.place(relx=0.5, rely=0.55, anchor="center")
 
-            backButton = ctk.CTkButton(aboutFrame, text="⌂", font=font(40), command= aboutFrame.place_ftransactionet, fg_color=color, hover_color=color, width=0, height=0)
+            backButton = ctk.CTkButton(aboutFrame, text="⌂", font=font(40), command= aboutFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
             backButton.place(relx=.02, rely=0.001, anchor="nw")
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
@@ -362,14 +365,14 @@ def pickingTransaction(root, email):
 
 #=========================== create about frame ======================================================================================================================================================
         def support():
-            moreFrame.place_ftransactionet()
+            moreFrame.place_forget()
             supportFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
             supportFrame.place(relx= 0, rely= 0, anchor= "nw")
 
             supportlabel = ctk.CTkLabel(supportFrame, text="Support page", font=font(35), fg_color=color, text_color="white")
             supportlabel.place(relx=0.5, rely=0.02, anchor="n")
 
-            backButton = ctk.CTkButton(supportFrame, text="⌂", font=font(40), command= supportFrame.place_ftransactionet, fg_color=color, hover_color=color, width=0, height=0)
+            backButton = ctk.CTkButton(supportFrame, text="⌂", font=font(40), command= supportFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
             backButton.place(relx=.02, rely=0.001, anchor="nw")
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
@@ -393,7 +396,7 @@ def pickingTransaction(root, email):
             label = ctk.CTkLabel(supportFrame, image = img, text="")
             label.place(relx= 0.5, rely= 0.5, anchor= "center")
 
-            def suport2(destroy):
+            def suport2(place_forget):
                 supportFrame2 = ctk.CTkFrame(supportFrame, width=1200, height=600, fg_color= color, bg_color= color)
                 supportFrame2.place(relx= 0, rely= 0, anchor= "nw")
 
@@ -401,8 +404,8 @@ def pickingTransaction(root, email):
                 supportlabel.place(relx=0.5, rely=0.02, anchor="n")
 
                 def back():
-                    destroy.place_ftransactionet()
-                    supportFrame2.place_ftransactionet()
+                    place_forget.place_forget()
+                    supportFrame2.place_forget()
 
                 backButton = ctk.CTkButton(supportFrame2, text="⌂", font=font(40), command= back, fg_color=color, hover_color=color, width=0, height=0)
                 backButton.place(relx=.02, rely=0.001, anchor="nw")
@@ -439,8 +442,8 @@ def pickingTransaction(root, email):
 
 #=========================== function to logout ======================================================================================================================================================
         def logout():
-            moreFrame.place_ftransactionet()
-            pickingFrame.place_ftransactionet()
+            moreFrame.place_forget()
+            pickingFrame.place_forget()
 
 #=========================== create logout button ======================================================================================================================================================
         logOutButton = ctk.CTkButton(moreFrame, text="   Log out", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= logout)
@@ -448,7 +451,7 @@ def pickingTransaction(root, email):
 
 #=========================== algorithm to open and close more frame ======================================================================================================================================================
         if moreFrame.winfo_ismapped():
-            moreFrame.place_ftransactionet()
+            moreFrame.place_forget()
         else:
             moreFrame.place(relx= .975, rely= .08, anchor= "ne")
 
@@ -456,7 +459,7 @@ def pickingTransaction(root, email):
     moreFrame = ctk.CTkFrame(pickingFrame, width= 187.5, height= 150, fg_color= "#1e2121")
 
 #=========================== create button to open up the more frame ======================================================================================================================================================
-    """moreButton = ctk.CTkButton(pickingFrame, text=name, font=font(18), command= more, fg_color=color, hover_color=color, width=0)
-    moreButton.place(relx=.975, rely=0.05, anchor="e")
+    moreButton = ctk.CTkButton(pickingFrame, text="⚙", font=font(25), command= more, fg_color=color, hover_color=color, width=0)
+    moreButton.place(relx=.975, rely=0.06, anchor="e")
     moreButton.bind("<Enter>", on_enter)
-    moreButton.bind("<Leave>", on_leave)"""
+    moreButton.bind("<Leave>", on_leave)

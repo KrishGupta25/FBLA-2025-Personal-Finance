@@ -13,7 +13,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-transactionInfo = db["transactionInfo"]
+
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -37,7 +37,8 @@ def on_leave(e):
 
 
 #=========================== function to create edit item frame ======================================================================================================================================================
-def removeItem(root, listbox,tempLabel):
+def removeItem(root, listbox,tempLabel, user):
+    transactionInfo = db[user]
     temp = listbox.selection()
     delete = list()
     if len(temp) == 0:
