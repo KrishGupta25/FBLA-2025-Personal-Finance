@@ -8,7 +8,7 @@ from pymongo import MongoClient
 #=========================== import all required functions ======================================================================================================================================================
 from errorPage import error
 from signUp import signUp
-from pickingTransaction import pickingTransaction
+from HomePage import pickingTransaction
 from tkinter import font
 
 #=========================== establish connection to database ======================================================================================================================================================

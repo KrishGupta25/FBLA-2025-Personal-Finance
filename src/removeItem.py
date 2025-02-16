@@ -50,8 +50,8 @@ def removeItem(root, listbox,tempLabel, user):
             selection.append(listbox.item(item, option="values"))
         for select in selection:
             for org in orgs:
-                if int(select[0]) == org["amount"] and select[1] == org["resources"] and select[2] == org["Date"] and select[3] == org["extraInfo"]:
-                    delete.append({"amount": int(select[0]), "resources": select[1], "Date": select[2], "extraInfo": select[3]})
+                if float(select[0]) == org["amount"] and select[1] == org["resources"] and select[2] == org["Date"] and select[3] == org["extraInfo"]:
+                    delete.append({"amount": float(select[0]), "resources": select[1], "Date": select[2], "extraInfo": select[3]})
                     
         for item in delete:
             transactionInfo.delete_one(item)

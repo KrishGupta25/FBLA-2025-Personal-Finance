@@ -60,9 +60,6 @@ def addTransaction(root, listbox, tempLabel, user):
         backButton.bind("<Enter>", on_enter)
         backButton.bind("<Leave>", on_leave)
 
-        #IDK WTF this was doing amountText = ctk.CTkLabel(addTransactionFrame, text="Amount", font=font(20), fg_color=color, text_color="white")
-        #amountText.place(relx=0.5, rely=0.05, anchor="center")
-
         amountEntryText = ctk.CTkLabel(addTransactionFrame, text="Enter Amount", font=font(15), fg_color=color, text_color="white")
         amountEntryText.place(relx=0.12, rely=0.15, anchor="w")
 
@@ -80,7 +77,7 @@ def addTransaction(root, listbox, tempLabel, user):
             border_width=2,
         )
         categoryFrame.place(relx=0.5, rely=0.4, anchor="center")
-        categories = ["Income", "Rent", "Groceries", "Utilities", "Transportation", "Entertainment", "Others"]
+        categories = ["Income", "Rent", "Groceries", "Utilities", "Transportation", "Entertainment", "Other"]
         categoryDropdown = ctk.CTkOptionMenu(
             categoryFrame,
             values=categories,
@@ -96,28 +93,8 @@ def addTransaction(root, listbox, tempLabel, user):
         dateText = ctk.CTkLabel(addTransactionFrame, text="Date", font=font(15), fg_color=color, text_color="white")
         dateText.place(relx=0.12, rely=0.55, anchor="w")
         
-        dateEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Select a date", width=400, height=40, justify="center", fg_color=color, text_color="white", state="normal")
+        dateEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Enter a date", width=400, height=40, justify="center", fg_color=color, text_color="white", state="normal")
         dateEntry.place(relx=0.5, rely=0.6, anchor="center")
-
-        """def show_calendar(event):
-            # Create the calendar widget
-            calendarWindow = ctk.CTkFrame(addTransactionFrame, width=400, height=300, fg_color="#2e2e2e", border_width=2, border_color=accent)
-            calendarWindow.place(relx=0.5, rely=0.4, anchor="n")
-            
-            calendar = Calendar(calendarWindow, date_pattern="yyyy-mm-dd", font=font(10))
-            calendar.pack(pady=10)
-
-            def select_date():
-                selected_date = calendar.get_date()
-                dateEntry.delete(0, tk.END)  # Clear the entry box
-                dateEntry.insert(0, selected_date)  # Insert the selected date
-                calendarWindow.destroy()  # Close the calendar widget
-            
-            selectButton = ctk.CTkButton(calendarWindow, text="Select", command=select_date, font=font(12), fg_color=accent, hover_color="#1c5c3c", text_color="white")
-            selectButton.pack(pady=10)
-       
-        dateEntry.bind("<Button-1>", show_calendar)  # Show calendar when clicking on the entry
-"""
 
         optionalInfoText = ctk.CTkLabel(addTransactionFrame, text="Enter Any Extra Information", font=font(15), fg_color=color, text_color="white")
         optionalInfoText.place(relx=0.12, rely=0.75, anchor="w")
@@ -128,15 +105,41 @@ def addTransaction(root, listbox, tempLabel, user):
         def submit():
             global check
             orgs = transactionInfo.find()
+            date = list(dateEntry.get())
             try:
-                int(amountEntry.get())
+                float(amountEntry.get())
             except:
                 error("Make Sure The Amount Is a Numerical Value", root)
+
+            try:
+                float(date[0])
+                float(date[1])
+                float(date[3])
+                float(date[4])
+                float(date[6])
+                float(date[7])
+                float(date[8])
+                float(date[9])
+            except:
+                error("Please Enter A Valid Date", root)
+
             if amountEntry.get() == "" or dateEntry.get() == "" or categoryDropdown.get() == "" or optionalInfoEntry.get() == "":
                 error("One or More Fields Are Empty, Please Use N/A In Replacement Of An Empty Entry", root)
+
+            elif float(amountEntry.get()) > 1000000:
+                error("Amount Is Too Large, Please Enter A Smaller Amount", root)
+
+            elif len(date) != 10:
+                error("Please Enter A Valid Date", root)
+
+            elif date[2] != "/" or date[5] != "/":
+                error("Please Enter A Valid Date", root)  
+
+            elif len(optionalInfoEntry.get()) > 25:
+                error("Please Enter A Shorter Description", root)
             else:
                 check = 0
-                transactionInfo.insert_one({"amount": int(amountEntry.get()), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
+                transactionInfo.insert_one({"amount": round(float(amountEntry.get()), 2), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
                 addTransactionFrame.place_forget()
                 count = 0
                 for item in listbox.get_children():

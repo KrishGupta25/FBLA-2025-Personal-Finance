@@ -70,13 +70,13 @@ def editItem(root, listbox, tempLabel, user):
             labelText = ctk.CTkLabel(editItemFrame, text="Edit Transaction", font=font(20), fg_color=color, text_color="white")
             labelText.place(relx=0.5, rely=0.05, anchor="center")
 
-            orgNameText = ctk.CTkLabel(editItemFrame, text="Amount", font=font(15), fg_color=color, text_color="white")
-            orgNameText.place(relx=0.12, rely=0.15, anchor="w")
+            amountText = ctk.CTkLabel(editItemFrame, text="Amount", font=font(15), fg_color=color, text_color="white")
+            amountText.place(relx=0.12, rely=0.15, anchor="w")
 
-            orgNameEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            orgNameEntry.place(relx=0.5, rely=0.2, anchor="center")
-            orgNameEntry.insert(0, selection[0])
-            orgNameEntry.bind('<FocusIn>', lambda x: orgNameEntry.select_range(0, "end"))
+            amountEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
+            amountEntry.place(relx=0.5, rely=0.2, anchor="center")
+            amountEntry.insert(0, selection[0])
+            amountEntry.bind('<FocusIn>', lambda x: amountEntry.select_range(0, "end"))
 
             categoryText = ctk.CTkLabel(editItemFrame, text="Category", font=font(15), fg_color=color, text_color="white")
             categoryText.place(relx=0.12, rely=0.35, anchor="w")
@@ -94,21 +94,51 @@ def editItem(root, listbox, tempLabel, user):
             dateEntry.insert(0, selection[2])
             dateEntry.bind('<FocusIn>', lambda x: dateEntry.select_range(0, "end"))
 
-            typeText = ctk.CTkLabel(editItemFrame, text="Additional Info", font=font(15), fg_color=color, text_color="white")
-            typeText.place(relx=0.12, rely=0.75, anchor="w")
+            optionalInfoText = ctk.CTkLabel(editItemFrame, text="Additional Info", font=font(15), fg_color=color, text_color="white")
+            optionalInfoText.place(relx=0.12, rely=0.75, anchor="w")
 
-            typeEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            typeEntry.place(relx=0.5, rely=0.8, anchor="center")
-            typeEntry.insert(0, selection[3])
-            typeEntry.bind('<FocusIn>', lambda x: typeEntry.select_range(0, "end"))
+            optionalInfoEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
+            optionalInfoEntry.place(relx=0.5, rely=0.8, anchor="center")
+            optionalInfoEntry.insert(0, selection[3])
+            optionalInfoEntry.bind('<FocusIn>', lambda x: optionalInfoEntry.select_range(0, "end"))
 
             def submit():
                 global check
+                date = list(dateEntry.get())
                 orgs = transactionInfo.find()
-                if orgNameEntry.get() == "" or dateEntry.get() == "" or categoryEntry.get() == "" or typeEntry.get() == "":
+                try:
+                    float(amountEntry.get())
+                except:
+                    error("Make Sure The Amount Is a Numerical Value", root)
+
+                try:
+                    float(date[0])
+                    float(date[1])
+                    float(date[3])
+                    float(date[4])
+                    float(date[6])
+                    float(date[7])
+                    float(date[8])
+                    float(date[9])
+                except:
+                    error("Please Enter A Valid Date", root)
+
+                if amountEntry.get() == "" or dateEntry.get() == "" or categoryEntry.get() == "" or optionalInfoEntry.get() == "":
                     error("One or More Fields Are Empty, Please Use N/A In Replacement Of An Empty Entry", root)
+
+                elif float(amountEntry.get()) > 1000000:
+                    error("Amount Is Too Large, Please Enter A Smaller Amount", root)
+
+                elif len(date) != 10:
+                    error("Please Enter A Valid Date", root)
+
+                elif date[2] != "/" or date[5] != "/":
+                    error("Please Enter A Valid Date", root)  
+
+                elif len(optionalInfoEntry.get()) > 25:
+                    error("Please Enter A Shorter Description", root)
                 else:
-                    transactionInfo.replace_one({"amount": int(selection[0]), "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": int(orgNameEntry.get()), "resources": categoryEntry.get(), "Date": dateEntry.get(), "extraInfo": typeEntry.get()})
+                    transactionInfo.replace_one({"amount": float(selection[0]), "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": round(float(amountEntry.get()), 2), "resources": categoryEntry.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
                     editItemFrame.place_forget()
                     count = 0
                     for item in listbox.get_children():
@@ -118,18 +148,18 @@ def editItem(root, listbox, tempLabel, user):
                         count += 1
                     check = 0
 
-                transactions = transactionInfo.find()
-                total = 0
-                for transaction in transactions:
-                    if transaction["resources"] == "Income":
-                        total += transaction["amount"]
-                    else:
-                        total -= transaction["amount"]
+                    transactions = transactionInfo.find()
+                    total = 0
+                    for transaction in transactions:
+                        if transaction["resources"] == "Income":
+                            total += transaction["amount"]
+                        else:
+                            total -= transaction["amount"]
 
-                tempLabel.configure(text= "Total: " + str(total))
+                    tempLabel.configure(text= "Total: " + str(total))
 
 
-                success("Transaction was succesfully edited", root)
+                    success("Transaction was succesfully edited", root)
 
             submitButton = ctk.CTkButton(editItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
             submitButton.place(relx=0.5, rely=0.9, anchor="center")

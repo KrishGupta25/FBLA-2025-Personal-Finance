@@ -45,7 +45,7 @@ def on_leave(e):
     e.widget['foreground'] = 'white'
 
 #=========================== funtion to create home page ======================================================================================================================================================
-def pickingTransaction(root, email):
+def yourData(root, email):
 
 #=========================== find users preferred name and transaction details =================================================================================================================================
     temp = loginInfo.find({"email": email})
@@ -57,11 +57,11 @@ def pickingTransaction(root, email):
     transactions = transactionInfo.find()
 
 #=========================== home page frame ======================================================================================================================================================
-    pickingFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
-    pickingFrame.place(relx= 0, rely= 0)
+    yourDataFrame = ctk.CTkFrame(root, width= 1050, height= 600, fg_color= color)
+    yourDataFrame.place(relx= 0.125, rely= 0, anchor= "nw")
 
 #=========================== welcomes user to home page ======================================================================================================================================================
-    labelText = ctk.CTkLabel(pickingFrame, text="Welcome " + user, font=font(20), fg_color=color, text_color="white")
+    labelText = ctk.CTkLabel(yourDataFrame, text="Welcome " + user, font=font(20), fg_color=color, text_color="white")
     labelText.place(relx=0.02, rely=0.05, anchor="w")
 
 #=========================== listbox style ======================================================================================================================================================
@@ -72,37 +72,37 @@ def pickingTransaction(root, email):
     style.map('Treeview', background=[('selected', '#292929')])
 
 #=========================== create listbox ======================================================================================================================================================
-    listbox = ttk.Treeview(pickingFrame, selectmode="extended",columns=("c1", "c2", "c3", "c4"),show="headings", height= 5)
-    listbox.column("# 1", anchor="center", width = 360)
+    listbox = ttk.Treeview(yourDataFrame, selectmode="extended",columns=("c1", "c2", "c3", "c4"),show="headings", height= 5)
+    listbox.column("# 1", anchor="center", width = 315)
     listbox.heading("# 1", text="Amount")
-    listbox.column("# 2", anchor="center", width = 360)
+    listbox.column("# 2", anchor="center", width = 315)
     listbox.heading("# 2", text="Type")
-    listbox.column("# 3", anchor="center", width = 360)
+    listbox.column("# 3", anchor="center", width = 315)
     listbox.heading("# 3", text="Date")
-    listbox.column("# 4", anchor="center", width = 360)
+    listbox.column("# 4", anchor="center", width = 315)
     listbox.heading("# 4", text="Additional Info")
 
     listbox.place(relx=.5, rely=.5, anchor="center")
 
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
-    addtransactionButton = ctk.CTkButton(pickingFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(pickingFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
+    addtransactionButton = ctk.CTkButton(yourDataFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
     addtransactionButton.place(relx=0.25, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
     #test
 
-    edittransactionButton = ctk.CTkButton(pickingFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(pickingFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
+    edittransactionButton = ctk.CTkButton(yourDataFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
     edittransactionButton.place(relx=0.5, rely=0.91, anchor="center")
     edittransactionButton.bind("<Enter>", on_enter)
     edittransactionButton.bind("<Leave>", on_leave)
 
-    removetransactionButton = ctk.CTkButton(pickingFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(pickingFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
+    removetransactionButton = ctk.CTkButton(yourDataFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
     removetransactionButton.place(relx=0.75, rely=0.91, anchor="center")
     removetransactionButton.bind("<Enter>", on_enter)
     removetransactionButton.bind("<Leave>", on_leave)
 
     #=========================== create report button ======================================================================================================================================================
-    reportButton = ctk.CTkButton(pickingFrame, text="   Create Report", font=font(15), fg_color= color, command=lambda:(report(pickingFrame, moreFrame)), hover_color=color)
+    reportButton = ctk.CTkButton(yourDataFrame, text="   Create Report", font=font(15), fg_color= color, command=lambda:(report(yourDataFrame, moreFrame)), hover_color=color)
     reportButton.place(relx=.008, rely=.095, anchor="nw")
     reportButton.bind("<Enter>", on_enter)
     reportButton.bind("<Leave>", on_leave)
@@ -114,10 +114,10 @@ def pickingTransaction(root, email):
         listbox.insert(parent='', index='end', text= "", iid= count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
         count+= 1
 
-    searchLabel = ctk.CTkLabel(pickingFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
-    searchLabel.place(relx=0.31, rely=0.075, anchor="center")
+    searchLabel = ctk.CTkLabel(yourDataFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
+    searchLabel.place(relx=0.29, rely=0.075, anchor="center")
 
-    searchEntry = ctk.CTkEntry(pickingFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by type", fg_color=color, text_color="white")
+    searchEntry = ctk.CTkEntry(yourDataFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by type", fg_color=color, text_color="white")
     searchEntry.place(relx= 0.5, rely= 0.075, anchor= "center")
     final = list()
 
@@ -153,7 +153,7 @@ def pickingTransaction(root, email):
     
     searchEntry.bind("<KeyRelease>", on_key_press)
           
-    #filterButton = ctk.CTkButton(pickingFrame, text="filter", font=font(15), command= lambda:(filter(pickingFrame, listbox)), fg_color=accent, hover_color="#63C28D", text_color=color)
+    #filterButton = ctk.CTkButton(yourDataFrame, text="filter", font=font(15), command= lambda:(filter(yourDataFrame, listbox)), fg_color=accent, hover_color="#63C28D", text_color=color)
     #filterButton.place(relx=0.7, rely=0.075, anchor="center")
 
     transactions = transactionInfo.find()
@@ -165,8 +165,8 @@ def pickingTransaction(root, email):
             total -= transaction["amount"]
         
 
-    totalLabel = ctk.CTkLabel(pickingFrame, text= "Total: " + str(total), font=font(18), fg_color=color, text_color="white")
-    totalLabel.place(relx=0.05, rely=0.91, anchor="center")
+    totalLabel = ctk.CTkLabel(yourDataFrame, text= "Total: " + str(total), font=font(18), fg_color=color, text_color="white")
+    totalLabel.place(relx=0.02, rely=0.91, anchor="w")
 
 #=========================== find users first and last name ======================================================================================================================================================
     temp = loginInfo.find({"email": email})
@@ -189,7 +189,7 @@ def pickingTransaction(root, email):
                 password = item["password"]
                 
 #=========================== create account frame ======================================================================================================================================================
-            accountFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
+            accountFrame = ctk.CTkFrame(yourDataFrame, width=1200, height=600, fg_color= color, bg_color= color)
             accountFrame.place(relx= 0, rely= 0, anchor= "nw")
 
             accountlabel = ctk.CTkLabel(accountFrame, text="Acount Details", font=font(35), fg_color=color, text_color="white")
@@ -323,7 +323,7 @@ def pickingTransaction(root, email):
         def settings():
             moreFrame.place_forget()
 
-            settingFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
+            settingFrame = ctk.CTkFrame(yourDataFrame, width=1200, height=600, fg_color= color, bg_color= color)
             settingFrame.place(relx= 0, rely= 0, anchor= "nw")
 
             settingslabel = ctk.CTkLabel(settingFrame, text="Settings", font=font(35), fg_color=color, text_color="white")
@@ -337,7 +337,7 @@ def pickingTransaction(root, email):
 #=========================== create about frame ======================================================================================================================================================
         def about():
             moreFrame.place_forget()
-            aboutFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
+            aboutFrame = ctk.CTkFrame(yourDataFrame, width=1200, height=600, fg_color= color, bg_color= color)
             aboutFrame.place(relx= 0, rely= 0, anchor= "nw")
 
             AboutUslabel = ctk.CTkLabel(aboutFrame, text="About Us ", font=font(35), fg_color=color, text_color="white")
@@ -366,7 +366,7 @@ def pickingTransaction(root, email):
 #=========================== create about frame ======================================================================================================================================================
         def support():
             moreFrame.place_forget()
-            supportFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
+            supportFrame = ctk.CTkFrame(yourDataFrame, width=1200, height=600, fg_color= color, bg_color= color)
             supportFrame.place(relx= 0, rely= 0, anchor= "nw")
 
             supportlabel = ctk.CTkLabel(supportFrame, text="Support page", font=font(35), fg_color=color, text_color="white")
@@ -443,7 +443,7 @@ def pickingTransaction(root, email):
 #=========================== function to logout ======================================================================================================================================================
         def logout():
             moreFrame.place_forget()
-            pickingFrame.place_forget()
+            yourDataFrame.place_forget()
 
 #=========================== create logout button ======================================================================================================================================================
         logOutButton = ctk.CTkButton(moreFrame, text="   Log out", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= logout)
@@ -456,10 +456,10 @@ def pickingTransaction(root, email):
             moreFrame.place(relx= .975, rely= .08, anchor= "ne")
 
 #=========================== create more frame ======================================================================================================================================================
-    moreFrame = ctk.CTkFrame(pickingFrame, width= 187.5, height= 150, fg_color= "#1e2121")
+    moreFrame = ctk.CTkFrame(yourDataFrame, width= 187.5, height= 150, fg_color= "#1e2121")
 
 #=========================== create button to open up the more frame ======================================================================================================================================================
-    moreButton = ctk.CTkButton(pickingFrame, text="⚙", font=font(25), command= more, fg_color=color, hover_color=color, width=0)
+    moreButton = ctk.CTkButton(yourDataFrame, text="⚙", font=font(25), command= more, fg_color=color, hover_color=color, width=0)
     moreButton.place(relx=.975, rely=0.06, anchor="e")
     moreButton.bind("<Enter>", on_enter)
     moreButton.bind("<Leave>", on_leave)

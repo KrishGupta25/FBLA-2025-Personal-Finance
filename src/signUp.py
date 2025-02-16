@@ -40,7 +40,7 @@ def signUp(root):
     signupFrame.place(relx=0, rely=0)
 
     #Creates signup to xxxx label
-    loginLabel = ctk.CTkLabel(signupFrame, text="Sign up for xxxx", font=font(50), fg_color=color, text_color="white")
+    loginLabel = ctk.CTkLabel(signupFrame, text="Sign up for BudgetBuddy", font=font(50), fg_color=color, text_color="white")
     loginLabel.place(relx=0.5, rely=0.2, anchor="center")
 
     #=========================== Email entry box and text above entry box  ======================================================================================================================================================
@@ -52,10 +52,29 @@ def signUp(root):
 
     #=========================== Password entry box and text above entry box ======================================================================================================================================================
    
-    passwordLabel = ctk.CTkLabel(signupFrame, text="Password (must include 1 uppercase letter, 1 lowercase letter, 1 special character and 1 number)", font=font(15), fg_color=color, text_color="white")
+    passwordLabel = ctk.CTkLabel(signupFrame, text="Password", font=font(15), fg_color=color, text_color="white")
     passwordLabel.place(relx=0.335, rely=0.56, anchor="nw")
     passwordEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Password (must have at least 8 characters)", width=400, height=40, justify="center", show="*", fg_color=color, text_color="white")
     passwordEntry.place(relx=0.5, rely=0.65, anchor="center")
+
+
+    tooltip = ctk.CTkLabel(signupFrame, text="ⓘ", font=font(15), fg_color=color, text_color="white")
+    tooltip.place(relx=0.4, rely=0.56, anchor="nw")
+
+
+    '''def show_frame(event):
+        toolFrame.configure(width=400, height=200)
+        
+    
+    def hide_frame(event):
+        toolFrame.configure(width=0, height=0)
+
+    toolFrame = ctk.CTkFrame(signupFrame, width=400, height=200, fg_color="white")
+    toolFrame.place(relx=0.5, rely=0.65, anchor="center")
+    toolFrame.configure(width=0, height=0)
+    tooltip.bind("<Enter>", show_frame)
+    tooltip.bind("<Leave>", hide_frame)'''
+
 
     #=========================== Password Checkbox ======================================================================================================================================================
     
@@ -114,7 +133,7 @@ def signUp(root):
             error("There is no number in your password, please try again!", signupFrame)
         
         #Checking to see if there is at least 8 characters in the password
-        elif len(password) <= 8:
+        elif len(password) < 8:
             error("There aren't 8 characters in your password, please try again!", signupFrame)
 
         #If all of those checks are passed then add the username and password to our database
