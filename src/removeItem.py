@@ -72,6 +72,7 @@ def removeItem(root, listbox,tempLabel, user):
                 total += transaction["amount"]
             else:
                 total -= transaction["amount"]
+            total = round(total, 2)
 
         tempLabel.configure(text= "Total: " + str(total))
 

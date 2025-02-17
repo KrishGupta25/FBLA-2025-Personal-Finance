@@ -8,11 +8,12 @@ import os
 import sys
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
+from datetime import datetime as dt
 
 #=========================== import all required functions ======================================================================================================================================================
 
 from errorPage import error
-from yourData import yourData
+from dataPage import yourData
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -139,7 +140,7 @@ def pickingTransaction(root, email):
             )
 
         # Set the title with white text
-        ax.set_title("Total spending", color='white', 
+        ax.set_title("All Expenses", color='white', 
         fontdict={
         'fontsize': 10,
         'fontweight': 'bold',
@@ -158,10 +159,8 @@ def pickingTransaction(root, email):
         categories1 = ["Income", "Expenses" ]
         Expenses = []
         Income = []
-        transactions = transactionInfo.find()
         for t in transactions:
             templist.append(t)
-        print(templist)
 
         for x in templist:
             if x["resources"] != "Income":
@@ -182,9 +181,6 @@ def pickingTransaction(root, email):
             total_sum += t["amount"]
         
         colors = ['#FF9F85', '#2EC4B6']
-        print(expense_sum)
-        print(income_sum)
-        print(total_sum)
 
         # Create a Matplotlib figure and axis with a dark theme
         fig1, ax1 = plt.subplots(facecolor= color)  # Dark grey background for the figure
@@ -231,8 +227,55 @@ def pickingTransaction(root, email):
         # Embed the Matplotlib figure in CustomTkinter
         canvas1 = FigureCanvasTkAgg(fig1, master=pickingFrame)
         canvas1.draw()
-        canvas1.get_tk_widget().place(relx=0.75, rely=0.32, anchor="center")        
+        canvas1.get_tk_widget().place(relx=0.75, rely=0.32, anchor="center") 
 
+#=========================== create line graph  ======================================================================================================================================================       
+    
+    plt.rcParams["font.family"] = "Quicksand"  
+    plt.rcParams["font.size"] = 10
+    
+    transactions = transactionInfo.find()
+    transaction_dates = []
+    for t in transactions:
+        transaction_dates.append(t)
+    
+    sorted_data = sorted(transaction_dates, key=lambda x: dt.strptime(x["Date"], "%m/%d/%Y"))
+
+    # Assign numerical values based on chronological order
+    for index, item in enumerate(sorted_data, start=1):
+        item["time_num"] = index
+    
+    sorted_total = 0
+    sorted_total_list = []
+    dates = [dt.strptime(item["Date"], "%m/%d/%Y") for item in sorted_data]
+    for data in sorted_data:
+        if data["resources"] == "Income":
+            sorted_total += data["amount"]
+        else:
+            sorted_total -= data["amount"]
+        sorted_total_list.append(sorted_total)
+        
+    balances = [item for item in sorted_total_list]
+
+# Create the line graph
+    fig2, ax2 = plt.subplots(figsize=(15.5, 4))  # Create a figure and axis
+    ax2.plot(dates, balances, marker='o', linestyle='-', label="Balance Over Time", color = 'white')
+        
+    ax2.set_title("Change in Balance Over Time", color = 'white',)
+    ax2.grid(True)
+    fig2.autofmt_xdate()
+    canvas2 = FigureCanvasTkAgg(fig2, master=pickingFrame)
+    canvas2.draw()
+    canvas2.get_tk_widget().place(relx= 0.035, rely= 0.8, anchor= "w")
+    fig2.patch.set_facecolor(color) 
+    ax2.set_facecolor(color)
+    ax2.set_xticks([])
+    ax2.set_xticklabels([])
+    ax2.tick_params(axis='y', colors='white')
+    for spine in ax2.spines.values():
+        spine.set_color(color)
+
+    
     
 #=========================== side frame ======================================================================================================================================================
     sideFrame = ctk.CTkFrame(root, width= 150, height= 600, fg_color= "#0f1010")

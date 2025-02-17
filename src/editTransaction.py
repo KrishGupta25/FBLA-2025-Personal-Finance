@@ -53,51 +53,67 @@ def editItem(root, listbox, tempLabel, user):
             check = 1
             selection = listbox.item(temp, option="values")
 
-            editItemFrame = ctk.CTkFrame(root, width=500, height=600, fg_color=color, border_color="#1e2121", border_width=4)
-            editItemFrame.place(relx=1, rely=0, anchor="ne")
-            editItemFrame.focus_set()
+            editTransactionFrame = ctk.CTkFrame(root, width=500, height=600, fg_color=color, border_color="#1e2121", border_width=4)
+            editTransactionFrame.place(relx=1, rely=0, anchor="ne")
+            editTransactionFrame.focus_set()
 
             def back():
                 global check
-                editItemFrame.place_forget()
+                editTransactionFrame.place_forget()
                 check = 0
 
-            backButton = ctk.CTkButton(editItemFrame, text="x", font=font(20), command=back, fg_color=color, hover_color=color, width=0, height=0)
+            backButton = ctk.CTkButton(editTransactionFrame, text="x", font=font(20), command=back, fg_color=color, hover_color=color, width=0, height=0)
             backButton.place(relx=.04, rely=0.02, anchor="nw")
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
 
-            labelText = ctk.CTkLabel(editItemFrame, text="Edit Transaction", font=font(20), fg_color=color, text_color="white")
+            labelText = ctk.CTkLabel(editTransactionFrame, text="Edit Transaction", font=font(20), fg_color=color, text_color="white")
             labelText.place(relx=0.5, rely=0.05, anchor="center")
 
-            amountText = ctk.CTkLabel(editItemFrame, text="Amount", font=font(15), fg_color=color, text_color="white")
+            amountText = ctk.CTkLabel(editTransactionFrame, text="Amount", font=font(15), fg_color=color, text_color="white")
             amountText.place(relx=0.12, rely=0.15, anchor="w")
 
-            amountEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
+            amountEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
             amountEntry.place(relx=0.5, rely=0.2, anchor="center")
             amountEntry.insert(0, selection[0])
             amountEntry.bind('<FocusIn>', lambda x: amountEntry.select_range(0, "end"))
 
-            categoryText = ctk.CTkLabel(editItemFrame, text="Category", font=font(15), fg_color=color, text_color="white")
+            categoryText = ctk.CTkLabel(editTransactionFrame, text="Category", font=font(15), fg_color=color, text_color="white")
             categoryText.place(relx=0.12, rely=0.35, anchor="w")
 
-            categoryEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            categoryEntry.place(relx=0.5, rely=0.4, anchor="center")
-            categoryEntry.insert(0, selection[1])
-            categoryEntry.bind('<FocusIn>', lambda x: categoryEntry.select_range(0, "end"))
-
-            dateText = ctk.CTkLabel(editItemFrame, text="Date", font=font(15), fg_color=color, text_color="white")
+            categoryFrame = ctk.CTkFrame(
+            editTransactionFrame,
+            width=400,
+            height=40,
+            fg_color=color,
+            border_color="#565B5E",  # Match border color of other entries
+            border_width=2,
+            )
+            categoryFrame.place(relx=0.5, rely=0.4, anchor="center")
+            categories = ["Income", "Rent", "Groceries", "Utilities", "Transportation", "Entertainment", "Other"]
+            categoryDropdown = ctk.CTkOptionMenu(
+            categoryFrame,
+            values=categories,
+            font=font(15),
+            fg_color=color,
+            text_color="white",
+            button_color=accent,
+            button_hover_color="#1c5c3c",
+            )
+            categoryDropdown.place(relx=0.5, rely=0.5, anchor="center")
+            categoryDropdown.set(selection[1])  # Set default option
+            dateText = ctk.CTkLabel(editTransactionFrame, text="Date", font=font(15), fg_color=color, text_color="white")
             dateText.place(relx=0.12, rely=0.55, anchor="w")
 
-            dateEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
+            dateEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
             dateEntry.place(relx=0.5, rely=0.6, anchor="center")
             dateEntry.insert(0, selection[2])
             dateEntry.bind('<FocusIn>', lambda x: dateEntry.select_range(0, "end"))
 
-            optionalInfoText = ctk.CTkLabel(editItemFrame, text="Additional Info", font=font(15), fg_color=color, text_color="white")
+            optionalInfoText = ctk.CTkLabel(editTransactionFrame, text="Additional Info", font=font(15), fg_color=color, text_color="white")
             optionalInfoText.place(relx=0.12, rely=0.75, anchor="w")
 
-            optionalInfoEntry = ctk.CTkEntry(editItemFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
+            optionalInfoEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
             optionalInfoEntry.place(relx=0.5, rely=0.8, anchor="center")
             optionalInfoEntry.insert(0, selection[3])
             optionalInfoEntry.bind('<FocusIn>', lambda x: optionalInfoEntry.select_range(0, "end"))
@@ -123,7 +139,7 @@ def editItem(root, listbox, tempLabel, user):
                 except:
                     error("Please Enter A Valid Date", root)
 
-                if amountEntry.get() == "" or dateEntry.get() == "" or categoryEntry.get() == "" or optionalInfoEntry.get() == "":
+                if amountEntry.get() == "" or dateEntry.get() == "" or categoryDropdown.get() == "" or optionalInfoEntry.get() == "":
                     error("One or More Fields Are Empty, Please Use N/A In Replacement Of An Empty Entry", root)
 
                 elif float(amountEntry.get()) > 1000000:
@@ -138,8 +154,8 @@ def editItem(root, listbox, tempLabel, user):
                 elif len(optionalInfoEntry.get()) > 25:
                     error("Please Enter A Shorter Description", root)
                 else:
-                    transactionInfo.replace_one({"amount": float(selection[0]), "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": round(float(amountEntry.get()), 2), "resources": categoryEntry.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
-                    editItemFrame.place_forget()
+                    transactionInfo.replace_one({"amount": float(selection[0]), "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": round(float(amountEntry.get()), 2), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
+                    editTransactionFrame.place_forget()
                     count = 0
                     for item in listbox.get_children():
                         listbox.delete(item)
@@ -155,13 +171,14 @@ def editItem(root, listbox, tempLabel, user):
                             total += transaction["amount"]
                         else:
                             total -= transaction["amount"]
+                        total = round(total, 2)
 
                     tempLabel.configure(text= "Total: " + str(total))
 
 
                     success("Transaction was succesfully edited", root)
 
-            submitButton = ctk.CTkButton(editItemFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
+            submitButton = ctk.CTkButton(editTransactionFrame, text="Submit", font=font(18), command=submit, fg_color=color, hover_color=color, text_color="white")
             submitButton.place(relx=0.5, rely=0.9, anchor="center")
             submitButton.bind("<Enter>", on_enter)
             submitButton.bind("<Leave>", on_leave)

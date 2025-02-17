@@ -12,7 +12,7 @@ import sys
 
 from errorPage import error
 from addTransaction import addTransaction
-from editItem import editItem
+from editTransaction import editItem
 from removeItem import removeItem
 #from filter import filter
 from report import report
@@ -86,18 +86,18 @@ def yourData(root, email):
 
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
     addtransactionButton = ctk.CTkButton(yourDataFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
-    addtransactionButton.place(relx=0.25, rely=0.91, anchor="center")
+    addtransactionButton.place(relx=0.3, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
     #test
 
     edittransactionButton = ctk.CTkButton(yourDataFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
-    edittransactionButton.place(relx=0.5, rely=0.91, anchor="center")
+    edittransactionButton.place(relx=0.55, rely=0.91, anchor="center")
     edittransactionButton.bind("<Enter>", on_enter)
     edittransactionButton.bind("<Leave>", on_leave)
 
     removetransactionButton = ctk.CTkButton(yourDataFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
-    removetransactionButton.place(relx=0.75, rely=0.91, anchor="center")
+    removetransactionButton.place(relx=0.8, rely=0.91, anchor="center")
     removetransactionButton.bind("<Enter>", on_enter)
     removetransactionButton.bind("<Leave>", on_leave)
 
@@ -160,9 +160,12 @@ def yourData(root, email):
     total = 0
     for transaction in transactions:
         if transaction["resources"] == "Income":
-            total += transaction["amount"]
+            total += round(transaction["amount"],2)
+            total = round(total,2)
         else:
-            total -= transaction["amount"]
+            total -= round(transaction["amount"],2)
+            total = round(total,2)
+        
         
 
     totalLabel = ctk.CTkLabel(yourDataFrame, text= "Total: " + str(total), font=font(18), fg_color=color, text_color="white")
