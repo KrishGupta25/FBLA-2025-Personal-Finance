@@ -65,7 +65,7 @@ def pickingTransaction(root, email):
 
     noDataText = ctk.CTkLabel(pickingFrame, text="Please enter at least one piece of data \n for income and expense for statistics ", font=font(25), fg_color=color, text_color="white")
     noDataText.place_forget()
-#=========================== pie charts ======================================================================================================================================================
+#=========================== pie chart 1 ======================================================================================================================================================
     templist = []
     
     categories = ["Entertainment", "Groceries", "Other", "Rent",  "Transportation", "Utilities" ]
@@ -154,27 +154,22 @@ def pickingTransaction(root, email):
         canvas.get_tk_widget().place(relx=0.25, rely=0.32, anchor="center")
 
 
-#=========================== create second pie chart ======================================================================================================================================================templist = []
+#=========================== pie chart 2 ======================================================================================================================================================templist = []
         
         categories1 = ["Income", "Expenses" ]
-        Expenses = []
-        Income = []
+        templist = []
+        transactions = transactionInfo.find()
+
         for t in transactions:
             templist.append(t)
 
+        expense_sum = 0
+        income_sum = 0
         for x in templist:
             if x["resources"] != "Income":
-                Expenses.append(x)
-        expense_sum = 0
-        for e in Expenses:
-            expense_sum += e["amount"]
-
-        for x in templist:
-            if x["resources"] == "Income":
-                Income.append(x)
-        income_sum = 0
-        for i in Income:
-            income_sum += i["amount"]
+                expense_sum += x["amount"]
+            else:
+                income_sum += x["amount"]
 
         total_sum = 0
         for t in templist:
@@ -259,7 +254,7 @@ def pickingTransaction(root, email):
 
 # Create the line graph
     fig2, ax2 = plt.subplots(figsize=(15.5, 4))  # Create a figure and axis
-    ax2.plot(dates, balances, marker='o', linestyle='-', label="Balance Over Time", color = 'white')
+    ax2.plot(dates, balances, marker='o', linestyle='-', label="Balance Over Time", color = accent)
         
     ax2.set_title("Change in Balance Over Time", color = 'white',)
     ax2.grid(True)
