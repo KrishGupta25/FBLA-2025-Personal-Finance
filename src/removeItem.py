@@ -37,14 +37,36 @@ def on_leave(e):
 
 
 #=========================== function to create edit item frame ======================================================================================================================================================
-def removeItem(root, listbox,tempLabel, user):
+def removeItem(root, listbox,tempLabel, user, switch, projectid):
+
+    query = {
+        "$or": [
+            # Condition for string _id
+            { "_id": { "$type": "string", "$regex": str(user)+"projectNames"+ str(projectid)}},
+            # Condition for ObjectId _id
+            {
+                "$expr": {
+                    "$regexMatch": {
+                        "input": { "$toString": "$_id" },
+                        "regex": "^specificString"
+                    }
+                }
+            }
+        ]
+    }
+
+
+
     transactionInfo = db[user]
     temp = listbox.selection()
     delete = list()
     if len(temp) == 0:
         error("Please Select At Least One Transaction To Delete", root)
     else:
-        orgs = transactionInfo.find()
+        if switch == 0:
+            orgs = transactionInfo.find()
+        else:
+            orgs = transactionInfo.find(query)
         selection = list()
         for item in temp:
             selection.append(listbox.item(item, option="values"))
@@ -57,7 +79,10 @@ def removeItem(root, listbox,tempLabel, user):
             transactionInfo.delete_one(item)
             count = 0
 
-        orgs = transactionInfo.find()
+        if switch == 0:
+            orgs = transactionInfo.find()
+        else:
+            orgs = transactionInfo.find(query)
         count = 0
         for item in listbox.get_children():
             listbox.delete(item)
@@ -65,7 +90,10 @@ def removeItem(root, listbox,tempLabel, user):
             listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
             count += 1
 
-        transactions = transactionInfo.find()
+        if switch == 0:
+            transactions = transactionInfo.find()
+        else:
+            transactions = transactionInfo.find(query)
         total = 0
         for transaction in transactions:
             if transaction["resources"] == "Income":

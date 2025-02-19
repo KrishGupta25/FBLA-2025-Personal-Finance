@@ -9,6 +9,7 @@ import sys
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from datetime import datetime as dt
+from projectsPage import Projects
 
 #=========================== import all required functions ======================================================================================================================================================
 
@@ -19,8 +20,6 @@ from dataPage import yourData
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-
-
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
     def __init__(self):
@@ -285,6 +284,10 @@ def pickingTransaction(root, email):
 
     tableButton = ctk.CTkButton(sideFrame, text="  📖 Your Data", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", width=150, anchor="w", height= 50, corner_radius=0, command= lambda: [yourData(pickingFrame ,email)])
     tableButton.place(relx=0, rely=0.083, anchor="nw")
+
+#=========================== create Projects Button ======================================================================================================================================================
+    projectsButton = ctk.CTkButton(sideFrame, text="  📂 Projects", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", width=150, anchor="w", height= 50, corner_radius=0, command= lambda: [Projects(pickingFrame ,email)])
+    projectsButton.place(relx=0, rely=0.166, anchor="nw")
 
 #=========================== find users first and last name ======================================================================================================================================================
     temp = loginInfo.find({"email": email})

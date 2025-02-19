@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
+import random as rand
 #from tkcalendar import Calendar
 
 
@@ -39,10 +40,30 @@ def on_leave(e):
 
 check = 0
 
+
+
 #=========================== function to create add item frame ======================================================================================================================================================
-def addTransaction(root, listbox, tempLabel, user):
+def addTransaction(root, listbox, tempLabel, user, switch, projectid):
 #=========================== add organization frame ======================================================================================================================================================
-    transactionInfo = db[user]
+    # Define the query
+    query = {
+        "$or": [
+            # Condition for string _id
+            { "_id": { "$type": "string", "$regex": str(user)+"projectNames"+ str(projectid)}},
+            # Condition for ObjectId _id
+            {
+                "$expr": {
+                    "$regexMatch": {
+                        "input": { "$toString": "$_id" },
+                        "regex": "^specificString"
+                    }
+                }
+            }
+        ]
+    }
+
+    transactionInfo = db[str(user)]
+    print(user)
     global check
     if check == 0:
         check = 1
@@ -104,7 +125,10 @@ def addTransaction(root, listbox, tempLabel, user):
 
         def submit():
             global check
-            orgs = transactionInfo.find()
+            if switch == 0:
+                orgs = transactionInfo.find()
+            else:
+                orgs = transactionInfo.find(query)
             date = list(dateEntry.get())
             try:
                 float(amountEntry.get())
@@ -139,15 +163,33 @@ def addTransaction(root, listbox, tempLabel, user):
                 error("Please Enter A Shorter Description", root)
             else:
                 check = 0
-                transactionInfo.insert_one({"amount": round(float(amountEntry.get()), 2), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
+                if switch == 0:
+                    transactionInfo.insert_one({"amount": round(float(amountEntry.get()), 2), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
+                else:
+                    while True:
+                        try:
+                            transactionInfo.insert_one({"_id": str(user)+"projectNames"+ str(projectid) + "-" + str(rand.randint(0, 100000)),"amount": round(float(amountEntry.get()), 2), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
+                            break
+                        except:
+                            pass
                 addTransactionFrame.place_forget()
+
+                if switch == 0:
+                    orgs = transactionInfo.find()
+                else:
+                    orgs = transactionInfo.find(query)
+
                 count = 0
                 for item in listbox.get_children():
                     listbox.delete(item)
                 for item in orgs:
                     listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
                     count += 1
-                transactions = transactionInfo.find()
+                if switch == 0:
+                    transactions = transactionInfo.find()
+                else:
+                    transactions = transactionInfo.find(query)
+
                 total = 0
                 for transaction in transactions:
                     if transaction["resources"] == "Income":

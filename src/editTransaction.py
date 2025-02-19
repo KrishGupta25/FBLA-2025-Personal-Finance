@@ -38,9 +38,29 @@ def on_leave(e):
 
 check = 0
 
+
+
 #=========================== function to create edit item frame ======================================================================================================================================================
-def editItem(root, listbox, tempLabel, user):
+def editItem(root, listbox, tempLabel, user, switch, projectid):
 #=========================== edit transaction frame ======================================================================================================================================================
+    query = {
+        "$or": [
+            # Condition for string _id
+            { "_id": { "$type": "string", "$regex": str(user)+"projectNames"+ str(projectid)}},
+            # Condition for ObjectId _id
+            {
+                "$expr": {
+                    "$regexMatch": {
+                        "input": { "$toString": "$_id" },
+                        "regex": "^specificString"
+                    }
+                }
+            }
+        ]
+    }
+    
+    print(str(user)+"collectionprojectNames"+ str(projectid))
+  
     transactionInfo = db[user]
     global check
     if check == 0:
@@ -121,7 +141,10 @@ def editItem(root, listbox, tempLabel, user):
             def submit():
                 global check
                 date = list(dateEntry.get())
-                orgs = transactionInfo.find()
+                if switch == 0:
+                    orgs = transactionInfo.find()
+                else:
+                    orgs = transactionInfo.find(query)
                 try:
                     float(amountEntry.get())
                 except:
@@ -156,6 +179,12 @@ def editItem(root, listbox, tempLabel, user):
                 else:
                     transactionInfo.replace_one({"amount": float(selection[0]), "resources": selection[1], "Date": selection[2], "extraInfo": selection[3]}, {"amount": round(float(amountEntry.get()), 2), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
                     editTransactionFrame.place_forget()
+
+                    if switch == 0:
+                        orgs = transactionInfo.find()
+                    else:
+                        orgs = transactionInfo.find(query)
+
                     count = 0
                     for item in listbox.get_children():
                         listbox.delete(item)
@@ -164,7 +193,10 @@ def editItem(root, listbox, tempLabel, user):
                         count += 1
                     check = 0
 
-                    transactions = transactionInfo.find()
+                    if switch == 0:
+                        transactions = transactionInfo.find()
+                    else:
+                        transactions = transactionInfo.find(query)
                     total = 0
                     for transaction in transactions:
                         if transaction["resources"] == "Income":

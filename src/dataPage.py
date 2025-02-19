@@ -61,7 +61,7 @@ def yourData(root, email):
     yourDataFrame.place(relx= 0.125, rely= 0, anchor= "nw")
 
 #=========================== welcomes user to home page ======================================================================================================================================================
-    labelText = ctk.CTkLabel(yourDataFrame, text="Welcome " + user, font=font(20), fg_color=color, text_color="white")
+    labelText = ctk.CTkLabel(yourDataFrame, text="Welcome, " + user, font=font(20), fg_color=color, text_color="white")
     labelText.place(relx=0.02, rely=0.05, anchor="w")
 
 #=========================== listbox style ======================================================================================================================================================
@@ -85,18 +85,18 @@ def yourData(root, email):
     listbox.place(relx=.5, rely=.5, anchor="center")
 
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
-    addtransactionButton = ctk.CTkButton(yourDataFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
+    addtransactionButton = ctk.CTkButton(yourDataFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+ "collection", 0, 0)], fg_color=color, hover_color=color)
     addtransactionButton.place(relx=0.3, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
     #test
 
-    edittransactionButton = ctk.CTkButton(yourDataFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
+    edittransactionButton = ctk.CTkButton(yourDataFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection", 0, 0)], fg_color=color, hover_color=color)
     edittransactionButton.place(relx=0.55, rely=0.91, anchor="center")
     edittransactionButton.bind("<Enter>", on_enter)
     edittransactionButton.bind("<Leave>", on_leave)
 
-    removetransactionButton = ctk.CTkButton(yourDataFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection")], fg_color=color, hover_color=color)
+    removetransactionButton = ctk.CTkButton(yourDataFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection"), 0, 0], fg_color=color, hover_color=color)
     removetransactionButton.place(relx=0.8, rely=0.91, anchor="center")
     removetransactionButton.bind("<Enter>", on_enter)
     removetransactionButton.bind("<Leave>", on_leave)

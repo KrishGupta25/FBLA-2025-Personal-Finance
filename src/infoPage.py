@@ -84,6 +84,10 @@ def info(root, email, password, delete):
             delete.place_forget()
             temp = loginInfo.find_one({"email": email}, {"password": password})
             db.create_collection(str(temp["_id"]) + "collection")
+            db.create_collection(str(temp["_id"]) + "projectNames")
+            projectNames = db[str(temp["_id"]) + "projectNames"]
+            for i in range(12):
+                projectNames.insert_one({"_id":i, "projectName": "Empty " + str(i)})
             success("User Was Successfully Added To The Database", root)
 
     # =========================== create sign-up button ======================================================================================================================================================
