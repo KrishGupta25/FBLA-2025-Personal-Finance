@@ -102,7 +102,7 @@ def yourData(root, email):
     removetransactionButton.bind("<Leave>", on_leave)
 
     #=========================== create report button ======================================================================================================================================================
-    reportButton = ctk.CTkButton(yourDataFrame, text="   Create Report", font=font(15), fg_color= color, command=lambda:(report(yourDataFrame, moreFrame)), hover_color=color)
+    reportButton = ctk.CTkButton(yourDataFrame, text="   Create Report", font=font(15), fg_color= color, command=lambda:(report(yourDataFrame, moreFrame, pickingTransactionId)), hover_color=color)
     reportButton.place(relx=.008, rely=.095, anchor="nw")
     reportButton.bind("<Enter>", on_enter)
     reportButton.bind("<Leave>", on_leave)

@@ -17,7 +17,6 @@ import os
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-transactionInfo = db["transactionInfo"]
 
 #=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
@@ -30,7 +29,9 @@ accent = "#3cb371"
 # Custom headings
 headings = ['Amount', 'Category', 'Date', 'Extra Info']  # Customize these according to your requirements
 
-def report(root, close):
+def report(root, close, id):
+
+    transactionInfo = db[str(id) +"collection"]
 
     # Retrieve data from MongoDB
     data = [headings]
@@ -46,6 +47,8 @@ def report(root, close):
             total += document["amount"]
         else:
             total -= document["amount"]
+        
+        total = round(total, 2)
 
     # Add totals row at the end
     totals_row = [f'Total: {total}']
