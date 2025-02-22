@@ -90,6 +90,7 @@ def report(root, close, id):
      # Build PDF document
     elements = [title, spacer, table]  # Include title before the table
     doc.build(elements)
+    
 
     close.place_forget()
     success("Successfully Created Report - PDF is in the downloads folder", root)

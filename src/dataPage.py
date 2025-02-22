@@ -17,6 +17,7 @@ from removeItem import removeItem
 #from filter import filter
 from report import report
 from success import success
+from datetime import datetime
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -96,7 +97,7 @@ def yourData(root, email):
     edittransactionButton.bind("<Enter>", on_enter)
     edittransactionButton.bind("<Leave>", on_leave)
 
-    removetransactionButton = ctk.CTkButton(yourDataFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection"), 0, 0], fg_color=color, hover_color=color)
+    removetransactionButton = ctk.CTkButton(yourDataFrame, text="Remove transaction", font=font(18), command = lambda:[removeItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection", 0, 0)], fg_color=color, hover_color=color)
     removetransactionButton.place(relx=0.8, rely=0.91, anchor="center")
     removetransactionButton.bind("<Enter>", on_enter)
     removetransactionButton.bind("<Leave>", on_leave)
@@ -110,7 +111,14 @@ def yourData(root, email):
     count = 0
     for item in listbox.get_children():
         listbox.delete(item)
+
+    sortedTemp = []
     for item in transactions:
+        sortedTemp.append(item)
+    
+    sortedData = sorted(sortedTemp, key=lambda x: datetime.strptime(x["Date"], "%m/%d/%Y"))
+
+    for item in sortedData:
         listbox.insert(parent='', index='end', text= "", iid= count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
         count+= 1
 
@@ -165,6 +173,7 @@ def yourData(root, email):
         else:
             total -= round(transaction["amount"],2)
             total = round(total,2)
+    
         
         
 

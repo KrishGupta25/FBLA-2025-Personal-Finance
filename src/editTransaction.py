@@ -4,6 +4,7 @@ from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
+from datetime import datetime
 
 #=========================== import all required functions ======================================================================================================================================================
 
@@ -188,9 +189,17 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
                     count = 0
                     for item in listbox.get_children():
                         listbox.delete(item)
-                    for item in orgs:
-                        listbox.insert(parent='', index='end', text="", iid=count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
-                        count += 1
+                        
+                    transactions = transactionInfo.find()
+                    sortedTemp = []
+                    for item in transactions:
+                        sortedTemp.append(item)
+                    
+                    sortedData = sorted(sortedTemp, key=lambda x: datetime.strptime(x["Date"], "%m/%d/%Y"))
+
+                    for item in sortedData:
+                        listbox.insert(parent='', index='end', text= "", iid= count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
+                        count+= 1
                     check = 0
 
                     if switch == 0:

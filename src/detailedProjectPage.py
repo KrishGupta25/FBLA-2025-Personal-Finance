@@ -55,6 +55,7 @@ def detailedProject(root, email, id):
     
     transactionInfo = db[str(pickingTransactionId)+"collection"]
     projectnames = db[str(pickingTransactionId)+"projectNames"]
+
     # Define the query
     query = {
         "$or": [
