@@ -9,6 +9,7 @@ import os
 import sys
 
 #=========================== import all required functions ======================================================================================================================================================
+
 from errorPage import error
 from addTransaction import addTransaction
 from editTransaction import editItem
@@ -21,6 +22,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
+
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -72,7 +74,9 @@ def detailedProject(root, email, id):
     }
 
     # Execute the query
+    print(str(pickingTransactionId)+"collectionprojectNames"+ str(id))
     transactions = transactionInfo.find(query)
+
 
 #=========================== home page frame ======================================================================================================================================================
     detailedProjectFrame = ctk.CTkFrame(root, width= 1050, height= 600, fg_color= color)
@@ -103,6 +107,7 @@ def detailedProject(root, email, id):
     addtransactionButton.place(relx=0.3, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
+    #test
 
     edittransactionButton = ctk.CTkButton(detailedProjectFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(detailedProjectFrame, listbox, totalLabel, str(pickingTransactionId)+"collection", 1, id)], fg_color=color, hover_color=color)
     edittransactionButton.place(relx=0.55, rely=0.91, anchor="center")
@@ -115,6 +120,7 @@ def detailedProject(root, email, id):
     removetransactionButton.bind("<Leave>", on_leave)
 
 #=========================== insert listbox details ======================================================================================================================================================
+
     count = 0
     transactions = transactionInfo.find(query)
     for item in listbox.get_children():
@@ -140,6 +146,7 @@ def detailedProject(root, email, id):
                 name = item["resources"]
                 newName = name[:len(list(search))]
                 if len(list(search)) <= len(list(name)):
+                    # not case sensitive search
                     if search == newName or search.capitalize() == newName:
                         final.append(item)
 
@@ -158,7 +165,9 @@ def detailedProject(root, email, id):
                 listbox.insert(parent='', index='end', text= "", iid= count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
                 count+= 1
 
+    
     searchEntry.bind("<KeyRelease>", on_key_press)
+    
 
     transactions = transactionInfo.find(query)
     total = 0
@@ -169,6 +178,8 @@ def detailedProject(root, email, id):
         else:
             total -= round(transaction["amount"],2)
             total = round(total,2)
+        
+        
 
     totalLabel = ctk.CTkLabel(detailedProjectFrame, text= "Total: " + str(total), font=font(18), fg_color=color, text_color="white")
     totalLabel.place(relx=0.02, rely=0.91, anchor="w")
@@ -201,11 +212,13 @@ def detailedProject(root, email, id):
         submitButton.bind("<Enter>", on_enter)
         submitButton.bind("<Leave>", on_leave)
 
+        
+
     reportButton = ctk.CTkButton(root, text="   Change project name", font=font(15), fg_color= color, command=changeName, hover_color=color)
     reportButton.place(relx=.008, rely=.095, anchor="nw")
     reportButton.bind("<Enter>", on_enter)
     reportButton.bind("<Leave>", on_leave)
 
-#=========================== welcomes user to home page ======================================================================================================================================================
+    #=========================== welcomes user to home page ======================================================================================================================================================
     labelText = ctk.CTkLabel(detailedProjectFrame, text="Project name: " + name, font=font(20), fg_color=color, text_color="white")
     labelText.place(relx=0.02, rely=0.05, anchor="w")

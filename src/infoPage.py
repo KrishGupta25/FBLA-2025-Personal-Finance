@@ -6,6 +6,7 @@ from pymongo import MongoClient
 import pyglet
 
 # =========================== import all required functions ======================================================================================================================================================
+
 from errorPage import error
 from success import success
 
@@ -64,8 +65,9 @@ def info(root, email, password, delete):
     backButton.place(relx=.02, rely=0.001, anchor="nw")
     backButton.bind("<Enter>", on_enter)
     backButton.bind("<Leave>", on_leave)
+    
 
-# =========================== function to insert data input from the user into the database ======================================================================================================================================================
+    # =========================== function to insert data input from the user into the database ======================================================================================================================================================
     def exit():
         first = firstNameEntry.get()
         last = lastNameEntry.get()
@@ -88,6 +90,6 @@ def info(root, email, password, delete):
                 projectNames.insert_one({"_id":i, "projectName": "Empty " + str(i)})
             success("User Was Successfully Added To The Database", root)
 
-# =========================== create sign-up button ======================================================================================================================================================
+    # =========================== create sign-up button ======================================================================================================================================================
     loginButton = ctk.CTkButton(infoFrame, text="Sign up", font=font(25), command= exit, fg_color=accent, hover_color="#63C28D", text_color=color)
     loginButton.place(relx=0.5, rely=0.875, anchor="center")

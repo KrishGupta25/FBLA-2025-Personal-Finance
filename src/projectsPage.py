@@ -10,6 +10,7 @@ cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.e
 db = cluster["main"]
 loginInfo = db["loginInfo"]
 
+
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
     def __init__(self):
@@ -86,3 +87,7 @@ def Projects(root, email):
             command=lambda i=i: detailedProject(projectsFrame, email, str(i))
         )
         button.place(relx=relx, rely=rely, anchor="center")
+
+    
+
+                

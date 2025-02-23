@@ -5,8 +5,8 @@ import customtkinter as ctk
 from pymongo import MongoClient
 import pyglet
 from datetime import datetime
-
 #=========================== import all required functions ======================================================================================================================================================
+
 from errorPage import error
 from success import success
 
@@ -14,6 +14,7 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
+
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -35,6 +36,7 @@ def on_enter(e):
 def on_leave(e):
     e.widget['foreground'] = 'white'
 
+
 #=========================== function to create edit item frame ======================================================================================================================================================
 def removeItem(root, listbox,tempLabel, user, switch, projectid):
 
@@ -53,6 +55,8 @@ def removeItem(root, listbox,tempLabel, user, switch, projectid):
             }
         ]
     }
+
+
 
     transactionInfo = db[user]
     temp = listbox.selection()
