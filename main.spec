@@ -1,12 +1,12 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+datas = [("Quicksand-Bold.ttf", "src")]
 
 a = Analysis(
-    ['src\\main.py'],
-    pathex=[],
+    pathex=[src/main.py],
     binaries=[],
     datas=[],
-    hiddenimports=[],
+    hiddenimports=['src/addTransaction', 'src/dataPage', 'src/detailedProjectPage', 'src/editTransaction', 'src/errorPage', 'src/HomePage', 'src/infoPage', 'src/projectsPage', 'src/removeItem', 'src/report', 'src/signUp', 'src/success'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
