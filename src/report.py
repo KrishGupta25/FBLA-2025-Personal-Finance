@@ -55,7 +55,6 @@ def report(root, close, id):
     data.append(totals_row)
 
     # Create PDF document
-    # Create PDF document
     filename = "FINANCIAL_REPORT.pdf"
     download_folder = os.path.join(os.path.expanduser('~'), 'Downloads')  # Get user's downloads folder
     pdf_filepath = os.path.join(download_folder, filename)
@@ -87,11 +86,9 @@ def report(root, close, id):
     table.setStyle(style)
 
     # Build PDF document
-     # Build PDF document
     elements = [title, spacer, table]  # Include title before the table
     doc.build(elements)
     
 
     close.place_forget()
     success("Successfully Created Report - PDF is in the downloads folder", root)
-    

@@ -7,7 +7,6 @@ import pyglet
 from datetime import datetime
 
 #=========================== import all required functions ======================================================================================================================================================
-
 from errorPage import error
 from success import success
 
@@ -15,7 +14,6 @@ from success import success
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
-
 
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
@@ -38,8 +36,6 @@ def on_leave(e):
     e.widget['foreground'] = 'white'
 
 check = 0
-
-
 
 #=========================== function to create edit item frame ======================================================================================================================================================
 def editItem(root, listbox, tempLabel, user, switch, projectid):

@@ -12,7 +12,6 @@ from datetime import datetime as dt
 from projectsPage import Projects
 
 #=========================== import all required functions ======================================================================================================================================================
-
 from errorPage import error
 from dataPage import yourData
 
@@ -20,6 +19,7 @@ from dataPage import yourData
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
 db = cluster["main"]
 loginInfo = db["loginInfo"]
+
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
     def __init__(self):
@@ -61,17 +61,15 @@ def pickingTransaction(root, email):
     labelText.place(relx=0.5, rely=0.05, anchor="center")
 
 #=========================== no data label ======================================================================================================================================================
-
     noDataText = ctk.CTkLabel(pickingFrame, text="Please enter at least one piece of data \n for income and expense for statistics ", font=font(25), fg_color=color, text_color="white")
     noDataText.place_forget()
+
 #=========================== pie chart 1 ======================================================================================================================================================
     templist = []
-    
     categories = ["Entertainment", "Groceries", "Other", "Rent",  "Transportation", "Utilities" ]
     for t in transactions:
         templist.append(t)
         
-    
     templist = [x for x in templist if x["resources"] != "Income"]
     templist.sort(key=lambda x: x["resources"], reverse=False)
     try:
@@ -79,7 +77,6 @@ def pickingTransaction(root, email):
     except:
         noDataText.place(relx=0.5, rely=0.5, anchor="center")
     else:
-
         total_sum = 0
         for t in templist:
             total_sum += t["amount"]
@@ -152,9 +149,7 @@ def pickingTransaction(root, email):
         canvas.draw()
         canvas.get_tk_widget().place(relx=0.25, rely=0.32, anchor="center")
 
-
-#=========================== pie chart 2 ======================================================================================================================================================templist = []
-        
+#=========================== pie chart 2 ======================================================================================================================================================
         categories1 = ["Income", "Expenses" ]
         templist = []
         transactions = transactionInfo.find()
@@ -223,8 +218,7 @@ def pickingTransaction(root, email):
         canvas1.draw()
         canvas1.get_tk_widget().place(relx=0.75, rely=0.32, anchor="center") 
 
-#=========================== create line graph  ======================================================================================================================================================       
-    
+#=========================== create line graph  ======================================================================================================================================================
     plt.rcParams["font.family"] = "Quicksand"  
     plt.rcParams["font.size"] = 10
     
@@ -269,19 +263,15 @@ def pickingTransaction(root, email):
     for spine in ax2.spines.values():
         spine.set_color(color)
 
-    
-    
 #=========================== side frame ======================================================================================================================================================
     sideFrame = ctk.CTkFrame(root, width= 150, height= 600, fg_color= "#0f1010")
     sideFrame.place(relx= 0, rely= 0, anchor= "nw")
 
 #=========================== create Home button ======================================================================================================================================================
-
     homeButton = ctk.CTkButton(sideFrame, text="  ⌂ Home", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", width=150, anchor="w", height= 50, corner_radius=0, command= lambda: [pickingFrame.place_forget(), pickingTransaction(root, email)])
     homeButton.place(relx=0, rely=0, anchor="nw")
 
 #=========================== create Home button ======================================================================================================================================================
-
     tableButton = ctk.CTkButton(sideFrame, text="  📖 Your Data", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", width=150, anchor="w", height= 50, corner_radius=0, command= lambda: [yourData(pickingFrame ,email)])
     tableButton.place(relx=0, rely=0.083, anchor="nw")
 
@@ -392,8 +382,6 @@ def pickingTransaction(root, email):
                     loginInfo.replace_one({"email": email}, {"email": email, "password": passwordEntry2.get(), "firstName": firstNameEntry.get(), "lastName": lastNameEntry.get(), "preferredName": preferredNameEntry.get()})
                     confirmLabel = ctk.CTkLabel(accountFrame, text="*all changes have been saved, please log out for changes to take effect", font=font(15), text_color=accent, fg_color=color)
                     confirmLabel.place(relx=0.5, rely=.83, anchor="center")
-                
-
 
             confirmButton = ctk.CTkButton(accountFrame, text="Confirm", font=font(25), command = confirm, fg_color=color, hover_color=color)
             confirmButton.place(relx=0.5, rely=0.9, anchor="center")
@@ -411,7 +399,6 @@ def pickingTransaction(root, email):
 
             securityFramelabel = ctk.CTkLabel(securityFrame, text="Please Confirm Your Identity", font=font(35), fg_color=color, text_color="white")
             securityFramelabel.place(relx=0.5, rely=0.02, anchor="n")
-
 
             securitylabel = ctk.CTkLabel(securityFrame, text="Password", font=font(15), fg_color=color, text_color="white")
             securitylabel.place(relx=0.34, rely=0.42, anchor="nw")
@@ -434,7 +421,6 @@ def pickingTransaction(root, email):
             submitButton.place(relx=0.5, rely=0.6, anchor="center")
             submitButton.bind("<Enter>", on_enter)
             submitButton.bind("<Leave>", on_leave)
-
 
 #=========================== create account button ======================================================================================================================================================
         accountButton = ctk.CTkButton(moreFrame, text="   Account", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command = account)
@@ -512,7 +498,6 @@ def pickingTransaction(root, email):
             new_img = imgage.resize((1200,600))
             img = ImageTk.PhotoImage(new_img)
 
-
             # Create a Label Widget to display the text or Image
             label = ctk.CTkLabel(supportFrame, image = img, text="")
             label.place(relx= 0.5, rely= 0.5, anchor= "center")
@@ -556,10 +541,6 @@ def pickingTransaction(root, email):
             nextButton.place(relx=.5, rely=0.95, anchor="center")
             nextButton.bind("<Enter>", on_enter)
             nextButton.bind("<Leave>", on_leave)
-
-#=========================== create support button ======================================================================================================================================================
-        #supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), command= support, fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
-        #supportButton.place(relx=0, rely=.6, anchor="nw")
 
 #=========================== function to logout ======================================================================================================================================================
         def logout():

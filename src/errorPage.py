@@ -1,4 +1,4 @@
-#=========================== import all requ accentpackages ======================================================================================================================================================
+#=========================== import all required packages ======================================================================================================================================================
 import tkinter as tk
 import customtkinter as ctk
 
@@ -14,10 +14,8 @@ class CustomTkinter(tk.Tk):
 def font(size):
     return ("Quicksand", size)
 
-
 #=========================== function for error page ======================================================================================================================================================
 def error(message, root):
-
     newError = ctk.CTkFrame(root, width=1200, height=25, fg_color= accent,corner_radius=0)
     newError.place(relx=0, rely=0, anchor="nw")
 
@@ -26,7 +24,3 @@ def error(message, root):
     label.place(relx=0.5, rely=0.4, anchor="center")
 
     newError.after(4000, newError.place_forget)
-    
-
-
-    

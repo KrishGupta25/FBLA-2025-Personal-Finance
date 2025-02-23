@@ -9,7 +9,6 @@ import os
 import sys
 
 #=========================== import all required functions ======================================================================================================================================================
-
 from errorPage import error
 from addTransaction import addTransaction
 from editTransaction import editItem
@@ -24,12 +23,11 @@ cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.e
 db = cluster["main"]
 loginInfo = db["loginInfo"]
 
-
 #=========================== import custom font ======================================================================================================================================================
 class CustomTkinter(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
-        
+
 #=========================== fucntion to simplify font size ======================================================================================================================================================
 def font(size):
     return ("Quicksand",size)
@@ -90,7 +88,6 @@ def yourData(root, email):
     addtransactionButton.place(relx=0.3, rely=0.91, anchor="center")
     addtransactionButton.bind("<Enter>", on_enter)
     addtransactionButton.bind("<Leave>", on_leave)
-    #test
 
     edittransactionButton = ctk.CTkButton(yourDataFrame, text="Edit transaction", font=font(18), command = lambda:[editItem(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+"collection", 0, 0)], fg_color=color, hover_color=color)
     edittransactionButton.place(relx=0.55, rely=0.91, anchor="center")
@@ -102,7 +99,7 @@ def yourData(root, email):
     removetransactionButton.bind("<Enter>", on_enter)
     removetransactionButton.bind("<Leave>", on_leave)
 
-    #=========================== create report button ======================================================================================================================================================
+#=========================== create report button ======================================================================================================================================================
     reportButton = ctk.CTkButton(yourDataFrame, text="   Create Report", font=font(15), fg_color= color, command=lambda:(report(yourDataFrame, moreFrame, pickingTransactionId)), hover_color=color)
     reportButton.place(relx=.008, rely=.095, anchor="nw")
     reportButton.bind("<Enter>", on_enter)
@@ -139,7 +136,6 @@ def yourData(root, email):
                 name = item["resources"]
                 newName = name[:len(list(search))]
                 if len(list(search)) <= len(list(name)):
-                    # not case sensitive search
                     if search == newName or search.capitalize() == newName:
                         final.append(item)
 
@@ -174,9 +170,6 @@ def yourData(root, email):
             total -= round(transaction["amount"],2)
             total = round(total,2)
     
-        
-        
-
     totalLabel = ctk.CTkLabel(yourDataFrame, text= "Total: " + str(total), font=font(18), fg_color=color, text_color="white")
     totalLabel.place(relx=0.02, rely=0.91, anchor="w")
 
@@ -250,41 +243,31 @@ def yourData(root, email):
 
 #=========================== password check ======================================================================================================================================================
             def confirm():
-                #Checking to see if either entry is empty
                 if passwordEntry2.get() == "":
                     error("Either One Or More Of The Required Fields Are Empty Or Your Entry Has Spaces", accountFrame)
 
-                #Checking to see if either entry has spaces
                 elif passwordEntry2.get().find(" ") > -1:
                     error("Either One Or More Of The Required Fields Are Empty Or Your Entry Has Spaces", accountFrame)
 
-                #Checking to see if there is at least one uppercase character in the password
                 elif any(ele.isupper() for ele in passwordEntry2.get()) == False:
                     error("There Is No Uppercase Letter In Your Password, Please Try Again!", accountFrame)
                 
-                #Checking to see if there is at least one lowercase character in the password
                 elif any(ele.islower() for ele in passwordEntry2.get()) == False:
                     error("There Is No Lowercase Letter In Your Password, Please Try Again!", accountFrame)
             
-                #Checking to see if there is at least one special character in the password
                 elif (passwordEntry2.get().isalnum()) == True:
                     error("There Are No Special Characters In Your Password, Please Try Again!", accountFrame)
 
-                #Checking to see if there is at least one number in the password
                 elif any(ele.isdigit() for ele in passwordEntry2.get()) == False:
                     error("There Is No Number In Your Password, Please Try Again!", accountFrame)
                 
-                #Checking to see if there is at least 8 characters in the password
                 elif len(passwordEntry2.get()) <= 8:
                     error("There Arent 8 Characters In Your Password, Please Try Again!", accountFrame)
 
-                #If all of those checks are passed then replace all the changed values
                 else:
                     loginInfo.replace_one({"email": email}, {"email": email, "password": passwordEntry2.get(), "firstName": firstNameEntry.get(), "lastName": lastNameEntry.get(), "preferredName": preferredNameEntry.get()})
                     confirmLabel = ctk.CTkLabel(accountFrame, text="*all changes have been saved, please log out for changes to take effect", font=font(15), text_color=accent, fg_color=color)
                     confirmLabel.place(relx=0.5, rely=.83, anchor="center")
-                
-
 
             confirmButton = ctk.CTkButton(accountFrame, text="Confirm", font=font(25), command = confirm, fg_color=color, hover_color=color)
             confirmButton.place(relx=0.5, rely=0.9, anchor="center")
@@ -302,7 +285,6 @@ def yourData(root, email):
 
             securityFramelabel = ctk.CTkLabel(securityFrame, text="Please Confirm Your Identity", font=font(35), fg_color=color, text_color="white")
             securityFramelabel.place(relx=0.5, rely=0.02, anchor="n")
-
 
             securitylabel = ctk.CTkLabel(securityFrame, text="Password", font=font(15), fg_color=color, text_color="white")
             securitylabel.place(relx=0.34, rely=0.42, anchor="nw")
@@ -325,7 +307,6 @@ def yourData(root, email):
             submitButton.place(relx=0.5, rely=0.6, anchor="center")
             submitButton.bind("<Enter>", on_enter)
             submitButton.bind("<Leave>", on_leave)
-
 
 #=========================== create account button ======================================================================================================================================================
         accountButton = ctk.CTkButton(moreFrame, text="   Account", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command = account)
@@ -389,11 +370,8 @@ def yourData(root, email):
             backButton.bind("<Enter>", on_enter)
             backButton.bind("<Leave>", on_leave)
 
-            # Create an object of tkinter ImageTk
             def resource_path(relative_path):
-                """ Get absolute path to resource, works for dev and for PyInstaller """
                 try:
-                    # PyInstaller creates a temp folder and stores path in _MEIPASS
                     base_path = sys._MEIPASS
                 except Exception:
                     base_path = os.path.abspath(".")
@@ -403,8 +381,6 @@ def yourData(root, email):
             new_img = imgage.resize((1200,600))
             img = ImageTk.PhotoImage(new_img)
 
-
-            # Create a Label Widget to display the text or Image
             label = ctk.CTkLabel(supportFrame, image = img, text="")
             label.place(relx= 0.5, rely= 0.5, anchor= "center")
 
@@ -424,12 +400,8 @@ def yourData(root, email):
                 backButton.bind("<Enter>", on_enter)
                 backButton.bind("<Leave>", on_leave)
 
-                # Create an object of tkinter ImageTk
-                
                 def resource_path(relative_path):
-                    """ Get absolute path to resource, works for dev and for PyInstaller """
                     try:
-                        # PyInstaller creates a temp folder and stores path in _MEIPASS
                         base_path = sys._MEIPASS
                     except Exception:
                         base_path = os.path.abspath(".")
@@ -439,7 +411,6 @@ def yourData(root, email):
                 new_img = imgage.resize((1200,600))
                 img = ImageTk.PhotoImage(new_img)
 
-                # Create a Label Widget to display the text or Image
                 label = ctk.CTkLabel(supportFrame, image = img, text="")
                 label.place(relx= 0.5, rely= 0.5, anchor= "center")
 
@@ -447,10 +418,6 @@ def yourData(root, email):
             nextButton.place(relx=.5, rely=0.95, anchor="center")
             nextButton.bind("<Enter>", on_enter)
             nextButton.bind("<Leave>", on_leave)
-
-#=========================== create support button ======================================================================================================================================================
-        #supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), command= support, fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
-        #supportButton.place(relx=0, rely=.6, anchor="nw")
 
 #=========================== function to logout ======================================================================================================================================================
         def logout():

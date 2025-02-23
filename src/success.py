@@ -22,7 +22,6 @@ def on_enter(e):
 def on_leave(e):
     e.widget['foreground'] = 'white'
 
-
 #=========================== function for error page ======================================================================================================================================================
 def success(message, root):
     newSuccess = ctk.CTkFrame(root, width=1200, height=25, fg_color= accent, corner_radius=0)
