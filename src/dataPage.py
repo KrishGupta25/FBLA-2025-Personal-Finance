@@ -156,9 +156,6 @@ def yourData(root, email):
 
     
     searchEntry.bind("<KeyRelease>", on_key_press)
-          
-    #filterButton = ctk.CTkButton(yourDataFrame, text="filter", font=font(15), command= lambda:(filter(yourDataFrame, listbox)), fg_color=accent, hover_color="#63C28D", text_color=color)
-    #filterButton.place(relx=0.7, rely=0.075, anchor="center")
 
     transactions = transactionInfo.find()
     total = 0
