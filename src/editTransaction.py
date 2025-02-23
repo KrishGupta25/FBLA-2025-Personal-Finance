@@ -56,7 +56,6 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
         ]
     }
     
-    print(str(user)+"collectionprojectNames"+ str(projectid))
   
     transactionInfo = db[user]
     global check

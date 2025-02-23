@@ -56,7 +56,6 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
     }
 
     transactionInfo = db[str(user)]
-    print(user)
     global check
     if check == 0:
         check = 1

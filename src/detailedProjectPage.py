@@ -72,7 +72,6 @@ def detailedProject(root, email, id):
     }
 
     # Execute the query
-    print(str(pickingTransactionId)+"collectionprojectNames"+ str(id))
     transactions = transactionInfo.find(query)
 
 #=========================== home page frame ======================================================================================================================================================

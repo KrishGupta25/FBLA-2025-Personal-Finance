@@ -79,7 +79,7 @@
  [],
  False,
  False,
- 1739945966,
+ 1740273696,
  [('run.exe',
    'c:\\Users\\firep\\vsc_folders\\FBLA-2025-Personal-Finance\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')],
