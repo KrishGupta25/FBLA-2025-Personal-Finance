@@ -109,8 +109,7 @@ def pickingTransaction(root, email):
         fig, ax = plt.subplots(facecolor= color)  # Dark grey background for the figure
         ax.set_facecolor(color)  # Dark grey background for the plot area
         
-        fig.set_figwidth(pickingFrame.winfo_width()*6)
-        fig.set_figheight(pickingFrame.winfo_height()*4)
+        
 
         # Create the pie chart
         wedges, texts, idk1 = ax.pie(
@@ -150,7 +149,7 @@ def pickingTransaction(root, email):
         # Embed the Matplotlib figure in CustomTkinter
         canvas = FigureCanvasTkAgg(fig, master=pickingFrame)
         canvas.draw()
-        canvas.get_tk_widget().place(relx=0.25, rely=0.32, anchor="center")
+        canvas.get_tk_widget().place(relx=0.25, rely=0.32, relwidth= .6, relheight= .6, anchor="center")
 
 
 #=========================== pie chart 2 ======================================================================================================================================================templist = []
@@ -221,7 +220,7 @@ def pickingTransaction(root, email):
         # Embed the Matplotlib figure in CustomTkinter
         canvas1 = FigureCanvasTkAgg(fig1, master=pickingFrame)
         canvas1.draw()
-        canvas1.get_tk_widget().place(relx=0.75, rely=0.32, anchor="center") 
+        canvas1.get_tk_widget().place(relx=0.75, rely=0.32, relwidth= .6, relheight= .6, anchor="center") 
 
 #=========================== create line graph  ======================================================================================================================================================       
     
@@ -252,7 +251,7 @@ def pickingTransaction(root, email):
     balances = [item for item in sorted_total_list]
 
 # Create the line graph
-    fig2, ax2 = plt.subplots(figsize=(pickingFrame.winfo_width()*15.5, pickingFrame.winfo_height()*4))  # Create a figure and axis
+    fig2, ax2 = plt.subplots()  # Create a figure and axis
     ax2.plot(dates, balances, marker='o', linestyle='-', label="Balance Over Time", color = accent)
         
     ax2.set_title("Change in Balance Over Time", color = 'white',)
@@ -260,7 +259,7 @@ def pickingTransaction(root, email):
     fig2.autofmt_xdate()
     canvas2 = FigureCanvasTkAgg(fig2, master=pickingFrame)
     canvas2.draw()
-    canvas2.get_tk_widget().place(relx= 0.035, rely= 0.8, anchor= "w")
+    canvas2.get_tk_widget().place(relx= 0.035, rely= 0.8, relwidth= 1.05, relheight= .6, anchor= "w")
     fig2.patch.set_facecolor(color) 
     ax2.set_facecolor(color)
     ax2.set_xticks([])
