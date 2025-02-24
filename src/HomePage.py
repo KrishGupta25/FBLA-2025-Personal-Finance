@@ -56,10 +56,6 @@ def pickingTransaction(root, email):
     pickingFrame = ctk.CTkFrame(root, fg_color= color)
     pickingFrame.place(relx= 0, rely= 0, relwidth= 1, relheight= 1)
 
-#=========================== welcomes user to home page ======================================================================================================================================================
-    labelText = ctk.CTkLabel(pickingFrame, text="Hello, " + user, font=font(25), fg_color=color, text_color="white")
-    labelText.place(relx=0.5, rely=0.05, anchor="center")
-
 #=========================== no data label ======================================================================================================================================================
 
     noDataText = ctk.CTkLabel(pickingFrame, text="Please enter at least one piece of data \n for income and expense for statistics ", font=font(25), fg_color=color, text_color="white")
@@ -259,7 +255,7 @@ def pickingTransaction(root, email):
     fig2.autofmt_xdate()
     canvas2 = FigureCanvasTkAgg(fig2, master=pickingFrame)
     canvas2.draw()
-    canvas2.get_tk_widget().place(relx= 0.035, rely= 0.8, relwidth= 1.05, relheight= .6, anchor= "w")
+    canvas2.get_tk_widget().place(relx= 0.035, rely= 0.8, relwidth= 1.05, relheight= .55, anchor= "w")
     fig2.patch.set_facecolor(color) 
     ax2.set_facecolor(color)
     ax2.set_xticks([])
@@ -268,10 +264,14 @@ def pickingTransaction(root, email):
     for spine in ax2.spines.values():
         spine.set_color(color)
 
+
+#=========================== welcomes user to home page ======================================================================================================================================================
+    labelText = ctk.CTkLabel(pickingFrame, text="Hello, " + user, font=font(25), fg_color=color, text_color="white")
+    labelText.place(relx=0.55, rely=0.05, anchor="center")
     
     
 #=========================== side frame ======================================================================================================================================================
-    sideFrame = ctk.CTkFrame(root, width= 150, height= 600, fg_color= "#0f1010")
+    sideFrame = ctk.CTkFrame(root, fg_color= "#0f1010")
     sideFrame.place(relx= 0, rely= 0, relwidth= 1/8, relheight= 1, anchor= "nw")
 
 #=========================== create Home button ======================================================================================================================================================
@@ -484,7 +484,7 @@ def pickingTransaction(root, email):
             moreFrame.place(relx= .975, rely= .08, relwidth= 5/32, relheight= 1/4, anchor= "ne")
 
 #=========================== create more frame ======================================================================================================================================================
-    moreFrame = ctk.CTkFrame(pickingFrame, width= 187.5, height= 150, fg_color= "#1e2121")
+    moreFrame = ctk.CTkFrame(pickingFrame, fg_color= "#1e2121")
 
 #=========================== create button to open up the more frame ======================================================================================================================================================
     moreButton = ctk.CTkButton(pickingFrame, text="⚙", font=font(25), command= more, fg_color=color, hover_color=color, width=0)
