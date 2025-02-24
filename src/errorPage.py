@@ -18,8 +18,8 @@ def font(size):
 #=========================== function for error page ======================================================================================================================================================
 def error(message, root):
 
-    newError = ctk.CTkFrame(root, width=1200, height=25, fg_color= accent,corner_radius=0)
-    newError.place(relx=0, rely=0, anchor="nw")
+    newError = ctk.CTkFrame(root, fg_color= accent,corner_radius=0)
+    newError.place(relx=0, rely=0, relwidth= 1, relheight= 1/24, anchor="nw")
 
     label = ctk.CTkLabel(newError, text=message, font=font(15), fg_color= accent, text_color="white")
     label.configure(anchor="center")

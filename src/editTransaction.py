@@ -75,7 +75,7 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
             selection = listbox.item(temp, option="values")
 
             editTransactionFrame = ctk.CTkFrame(root, width=500, height=600, fg_color=color, border_color="#1e2121", border_width=4)
-            editTransactionFrame.place(relx=1, rely=0, anchor="ne")
+            editTransactionFrame.place(relx=1, rely=0, relwidth= 10/21, relheight= 1, anchor="ne")
             editTransactionFrame.focus_set()
 
             def back():
@@ -94,8 +94,8 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
             amountText = ctk.CTkLabel(editTransactionFrame, text="Amount", font=font(15), fg_color=color, text_color="white")
             amountText.place(relx=0.12, rely=0.15, anchor="w")
 
-            amountEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            amountEntry.place(relx=0.5, rely=0.2, anchor="center")
+            amountEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), justify="center", fg_color=color, text_color="white")
+            amountEntry.place(relx=0.5, rely=0.2, relwidth= 4/5, relheight= 1/15, anchor="center")
             amountEntry.insert(0, selection[0])
             amountEntry.bind('<FocusIn>', lambda x: amountEntry.select_range(0, "end"))
 
@@ -126,16 +126,16 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
             dateText = ctk.CTkLabel(editTransactionFrame, text="Date", font=font(15), fg_color=color, text_color="white")
             dateText.place(relx=0.12, rely=0.55, anchor="w")
 
-            dateEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            dateEntry.place(relx=0.5, rely=0.6, anchor="center")
+            dateEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), justify="center", fg_color=color, text_color="white")
+            dateEntry.place(relx=0.5, rely=0.6, relwidth= 4/5, relheight= 1/15, anchor="center")
             dateEntry.insert(0, selection[2])
             dateEntry.bind('<FocusIn>', lambda x: dateEntry.select_range(0, "end"))
 
             optionalInfoText = ctk.CTkLabel(editTransactionFrame, text="Additional Info", font=font(15), fg_color=color, text_color="white")
             optionalInfoText.place(relx=0.12, rely=0.75, anchor="w")
 
-            optionalInfoEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), width=400, height=40, justify="center", fg_color=color, text_color="white")
-            optionalInfoEntry.place(relx=0.5, rely=0.8, anchor="center")
+            optionalInfoEntry = ctk.CTkEntry(editTransactionFrame, font=font(15), justify="center", fg_color=color, text_color="white")
+            optionalInfoEntry.place(relx=0.5, rely=0.8, relwidth= 4/5, relheight= 1/15, anchor="center")
             optionalInfoEntry.insert(0, selection[3])
             optionalInfoEntry.bind('<FocusIn>', lambda x: optionalInfoEntry.select_range(0, "end"))
 

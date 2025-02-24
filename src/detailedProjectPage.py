@@ -79,8 +79,8 @@ def detailedProject(root, email, id):
 
 
 #=========================== home page frame ======================================================================================================================================================
-    detailedProjectFrame = ctk.CTkFrame(root, width= 1050, height= 600, fg_color= color)
-    detailedProjectFrame.place(relx= 0, rely= 0, anchor= "nw")
+    detailedProjectFrame = ctk.CTkFrame(root, fg_color= color)
+    detailedProjectFrame.place(relx= 0, rely= 0, relwidth= 1, relheight= 1, anchor= "nw")
 
 #=========================== listbox style ======================================================================================================================================================
     style = ttk.Style()
@@ -90,17 +90,17 @@ def detailedProject(root, email, id):
     style.map('Treeview', background=[('selected', '#292929')])
 
 #=========================== create listbox ======================================================================================================================================================
-    listbox = ttk.Treeview(detailedProjectFrame, selectmode="extended",columns=("c1", "c2", "c3", "c4"),show="headings", height= 5)
-    listbox.column("# 1", anchor="center", width = 315)
+    listbox = ttk.Treeview(detailedProjectFrame, selectmode="extended",columns=("c1", "c2", "c3", "c4"),show="headings")
+    listbox.column("# 1", anchor="center")
     listbox.heading("# 1", text="Amount")
-    listbox.column("# 2", anchor="center", width = 315)
+    listbox.column("# 2", anchor="center")
     listbox.heading("# 2", text="Type")
-    listbox.column("# 3", anchor="center", width = 315)
+    listbox.column("# 3", anchor="center")
     listbox.heading("# 3", text="Date")
-    listbox.column("# 4", anchor="center", width = 315)
+    listbox.column("# 4", anchor="center")
     listbox.heading("# 4", text="Additional Info")
 
-    listbox.place(relx=.5, rely=.5, anchor="center")
+    listbox.place(relx=.5, rely=.5, relwidth= .9, relheight= .715, anchor="center")
 
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
     addtransactionButton = ctk.CTkButton(detailedProjectFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(detailedProjectFrame, listbox, totalLabel, str(pickingTransactionId)+"collection", 1, id)], fg_color=color, hover_color=color)
@@ -132,8 +132,8 @@ def detailedProject(root, email, id):
     searchLabel = ctk.CTkLabel(detailedProjectFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
     searchLabel.place(relx=0.29, rely=0.075, anchor="center")
 
-    searchEntry = ctk.CTkEntry(detailedProjectFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by type", fg_color=color, text_color="white")
-    searchEntry.place(relx= 0.5, rely= 0.075, anchor= "center")
+    searchEntry = ctk.CTkEntry(detailedProjectFrame, font= font(15), justify= "left", placeholder_text="Search by type", fg_color=color, text_color="white")
+    searchEntry.place(relx= 0.5, rely= 0.075,  relwidth= 8/21, relheight= 4/105,anchor= "center")
     final = list()
 
     def on_key_press(event):
@@ -190,14 +190,14 @@ def detailedProject(root, email, id):
             name = item["projectName"]
 
     def changeName():
-        changeNameFrame = ctk.CTkFrame(root, width= 400, height= 200, fg_color= "#0f1010")
-        changeNameFrame.place(relx= .03, rely= .14, anchor= "nw")
+        changeNameFrame = ctk.CTkFrame(root, fg_color= "#0f1010")
+        changeNameFrame.place(relx= .03, rely= .14, relwidth= 8/21, relheight= 4/21, anchor= "nw")
 
         changeNameLabel = ctk.CTkLabel(changeNameFrame, text= "Enter new project name:", font=font(15), fg_color=color, text_color="white")
-        changeNameLabel.place(relx=0.14, rely=0.16, anchor="nw")
+        changeNameLabel.place(relx=0.14, rely=0.16, relwidth= 2/7, relheight= 4/105, anchor="nw")
 
-        changeNameEntry = ctk.CTkEntry(changeNameFrame, font=font(15), width=300, height=40, justify="center", fg_color=color, text_color="white")
-        changeNameEntry.place(relx=0.5, rely=0.4, anchor="center")
+        changeNameEntry = ctk.CTkEntry(changeNameFrame, font=font(15), justify="center", fg_color=color, text_color="white")
+        changeNameEntry.place(relx=0.5, rely=0.4, relwidth= 3/4, relheight= 1/5, anchor="center")
         changeNameEntry.insert(0, name)
         changeNameEntry.bind('<FocusIn>', lambda x: changeNameEntry.select_range(0, "end"))
 

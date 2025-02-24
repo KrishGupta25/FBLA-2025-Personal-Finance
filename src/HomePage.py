@@ -53,8 +53,8 @@ def pickingTransaction(root, email):
     transactions = transactionInfo.find() 
 
 #=========================== home page frame ======================================================================================================================================================
-    pickingFrame = ctk.CTkFrame(root, width= 1200, height= 600, fg_color= color)
-    pickingFrame.place(relx= 0, rely= 0)
+    pickingFrame = ctk.CTkFrame(root, fg_color= color)
+    pickingFrame.place(relx= 0, rely= 0, relwidth= 1, relheight= 1)
 
 #=========================== welcomes user to home page ======================================================================================================================================================
     labelText = ctk.CTkLabel(pickingFrame, text="Hello, " + user, font=font(25), fg_color=color, text_color="white")
@@ -109,8 +109,8 @@ def pickingTransaction(root, email):
         fig, ax = plt.subplots(facecolor= color)  # Dark grey background for the figure
         ax.set_facecolor(color)  # Dark grey background for the plot area
         
-        fig.set_figwidth(6)
-        fig.set_figheight(4)
+        fig.set_figwidth(pickingFrame.winfo_width()*6)
+        fig.set_figheight(pickingFrame.winfo_height()*4)
 
         # Create the pie chart
         wedges, texts, idk1 = ax.pie(
@@ -180,8 +180,8 @@ def pickingTransaction(root, email):
         fig1, ax1 = plt.subplots(facecolor= color)  # Dark grey background for the figure
         ax1.set_facecolor(color)  # Dark grey background for the plot area
         
-        fig1.set_figwidth(6)
-        fig1.set_figheight(4)
+        fig1.set_figwidth(pickingFrame.winfo_width()*6)
+        fig1.set_figheight(pickingFrame.winfo_height()*4)
 
         # Create the pie chart
         wedges1, texts, idk2 = ax1.pie(
@@ -252,7 +252,7 @@ def pickingTransaction(root, email):
     balances = [item for item in sorted_total_list]
 
 # Create the line graph
-    fig2, ax2 = plt.subplots(figsize=(15.5, 4))  # Create a figure and axis
+    fig2, ax2 = plt.subplots(figsize=(pickingFrame.winfo_width()*15.5, pickingFrame.winfo_height()*4))  # Create a figure and axis
     ax2.plot(dates, balances, marker='o', linestyle='-', label="Balance Over Time", color = accent)
         
     ax2.set_title("Change in Balance Over Time", color = 'white',)
@@ -273,7 +273,7 @@ def pickingTransaction(root, email):
     
 #=========================== side frame ======================================================================================================================================================
     sideFrame = ctk.CTkFrame(root, width= 150, height= 600, fg_color= "#0f1010")
-    sideFrame.place(relx= 0, rely= 0, anchor= "nw")
+    sideFrame.place(relx= 0, rely= 0, relwidth= 1/8, relheight= 1, anchor= "nw")
 
 #=========================== create Home button ======================================================================================================================================================
 
@@ -310,8 +310,8 @@ def pickingTransaction(root, email):
                 password = item["password"]
                 
 #=========================== create account frame ======================================================================================================================================================
-            accountFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
-            accountFrame.place(relx= 0, rely= 0, anchor= "nw")
+            accountFrame = ctk.CTkFrame(root, fg_color= color, bg_color= color)
+            accountFrame.place(relx= 0, rely= 0, relwidth= 1, relheight= 1, anchor= "nw")
 
             accountlabel = ctk.CTkLabel(accountFrame, text="Acount Details", font=font(35), fg_color=color, text_color="white")
             accountlabel.place(relx=0.5, rely=0.02, anchor="n")
@@ -320,8 +320,8 @@ def pickingTransaction(root, email):
             passwordLabel2 = ctk.CTkLabel(accountFrame, text="Password", font=font(15), fg_color=color, text_color="white")
             passwordLabel2.place(relx=0.335, rely=0.16, anchor="nw")
             
-            passwordEntry2 = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
-            passwordEntry2.place(relx= 0.5, rely= 0.25, anchor= "center")
+            passwordEntry2 = ctk.CTkEntry(accountFrame, font= font(15), justify= "center", fg_color=color, text_color="white")
+            passwordEntry2.place(relx= 0.5, rely= 0.25, relwidth= 1/3, relheight= 1/15, anchor= "center")
             passwordEntry2.insert(0, password)
             passwordEntry2.bind('<FocusIn>', lambda x: passwordEntry2.select_range(0, "end"))
 
@@ -329,8 +329,8 @@ def pickingTransaction(root, email):
             firstNameLabel = ctk.CTkLabel(accountFrame, text="First Name", font=font(15), fg_color=color, text_color="white")
             firstNameLabel.place(relx=0.335, rely=0.33, anchor="nw")
             
-            firstNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
-            firstNameEntry.place(relx= 0.5, rely= 0.42, anchor= "center")
+            firstNameEntry = ctk.CTkEntry(accountFrame, font= font(15), justify= "center", fg_color=color, text_color="white")
+            firstNameEntry.place(relx= 0.5, rely= 0.42, relwidth= 1/3, relheight= 1/15, anchor= "center")
             firstNameEntry.insert(0, first)
             firstNameEntry.bind('<FocusIn>', lambda x: firstNameEntry.select_range(0, "end"))
 
@@ -338,8 +338,8 @@ def pickingTransaction(root, email):
             lastNameLabel = ctk.CTkLabel(accountFrame, text="Last Name", font=font(15), fg_color=color, text_color="white")
             lastNameLabel.place(relx=0.335, rely=0.5, anchor="nw")
             
-            lastNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
-            lastNameEntry.place(relx= 0.5, rely= 0.59, anchor= "center")
+            lastNameEntry = ctk.CTkEntry(accountFrame, font= font(15), justify= "center", fg_color=color, text_color="white")
+            lastNameEntry.place(relx= 0.5, rely= 0.59, relwidth= 1/3, relheight= 1/15, anchor= "center")
             lastNameEntry.insert(0, last)
             lastNameEntry.bind('<FocusIn>', lambda x: lastNameEntry.select_range(0, "end"))
 
@@ -347,8 +347,8 @@ def pickingTransaction(root, email):
             preferredNameLabel = ctk.CTkLabel(accountFrame, text="Preferred Name", font=font(15), fg_color=color, text_color="white")
             preferredNameLabel.place(relx=0.335, rely=0.67, anchor="nw")
             
-            preferredNameEntry = ctk.CTkEntry(accountFrame, font= font(15), width= 400, height= 40, justify= "center", fg_color=color, text_color="white")
-            preferredNameEntry.place(relx= 0.5, rely= 0.76, anchor= "center")
+            preferredNameEntry = ctk.CTkEntry(accountFrame, font= font(15), justify= "center", fg_color=color, text_color="white")
+            preferredNameEntry.place(relx= 0.5, rely= 0.76, relwidth= 1/3, relheight= 1/15, anchor= "center")
             preferredNameEntry.insert(0, preferred)
             preferredNameEntry.bind('<FocusIn>', lambda x: preferredNameEntry.select_range(0, "end"))
 
@@ -401,8 +401,8 @@ def pickingTransaction(root, email):
             confirmButton.bind("<Leave>", on_leave)
 
 #=========================== create security frame over account frame ======================================================================================================================================================
-            securityFrame = ctk.CTkFrame(accountFrame, width=1200, height=600, fg_color= color, bg_color= color)
-            securityFrame.place(relx= 0, rely= 0, anchor= "nw")
+            securityFrame = ctk.CTkFrame(accountFrame, fg_color= color, bg_color= color)
+            securityFrame.place(relx= 0, rely= 0, relwidth= 1, relheight= 1, anchor= "nw")
 
             back1Button = ctk.CTkButton(securityFrame, text="⌂", font=font(40), command= lambda: [securityFrame.place_forget(), accountFrame.place_forget()], fg_color=color, hover_color=color, width=0, height=0)
             back1Button.place(relx=.02, rely=0.001, anchor="nw")
@@ -416,8 +416,8 @@ def pickingTransaction(root, email):
             securitylabel = ctk.CTkLabel(securityFrame, text="Password", font=font(15), fg_color=color, text_color="white")
             securitylabel.place(relx=0.34, rely=0.42, anchor="nw")
 
-            passwordEntry = ctk.CTkEntry(securityFrame, font= font(15), placeholder_text= "Password", width= 400, height= 40, justify= "center", show= "*", fg_color=color, text_color="white")
-            passwordEntry.place(relx= 0.5, rely= 0.5, anchor= "center")
+            passwordEntry = ctk.CTkEntry(securityFrame, font= font(15), placeholder_text= "Password", justify= "center", show= "*", fg_color=color, text_color="white")
+            passwordEntry.place(relx= 0.5, rely= 0.5, relwidth= 1/3, relheight= 1/15, anchor= "center")
 
 #=========================== function for submittion ======================================================================================================================================================
             def submit():
@@ -437,23 +437,8 @@ def pickingTransaction(root, email):
 
 
 #=========================== create account button ======================================================================================================================================================
-        accountButton = ctk.CTkButton(moreFrame, text="   Account", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command = account)
-        accountButton.place(relx=0, rely=0, anchor="nw")
-
-#=========================== create settings page ======================================================================================================================================================
-        def settings():
-            moreFrame.place_forget()
-
-            settingFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
-            settingFrame.place(relx= 0, rely= 0, anchor= "nw")
-
-            settingslabel = ctk.CTkLabel(settingFrame, text="Settings", font=font(35), fg_color=color, text_color="white")
-            settingslabel.place(relx=0.5, rely=0.02, anchor="n")
-
-            backButton = ctk.CTkButton(settingFrame, text="⌂", font=font(40), command= settingFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
-            backButton.place(relx=.02, rely=0.001, anchor="nw")
-            backButton.bind("<Enter>", on_enter)
-            backButton.bind("<Leave>", on_leave)
+        accountButton = ctk.CTkButton(moreFrame, text="   Account", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", anchor="w", corner_radius=0, command = account)
+        accountButton.place(relx=0, rely=0, relwidth= 1, relheight= 1/3, anchor="nw")
 
 #=========================== create about frame ======================================================================================================================================================
         def about():
@@ -481,85 +466,8 @@ def pickingTransaction(root, email):
             backButton.bind("<Leave>", on_leave)
 
 #=========================== create about button ======================================================================================================================================================
-        aboutButton = ctk.CTkButton(moreFrame, text="   About", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= about)
-        aboutButton.place(relx=0, rely=.33, anchor="nw")
-
-#=========================== create about frame ======================================================================================================================================================
-        def support():
-            moreFrame.place_forget()
-            supportFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
-            supportFrame.place(relx= 0, rely= 0, anchor= "nw")
-
-            supportlabel = ctk.CTkLabel(supportFrame, text="Support page", font=font(35), fg_color=color, text_color="white")
-            supportlabel.place(relx=0.5, rely=0.02, anchor="n")
-
-            backButton = ctk.CTkButton(supportFrame, text="⌂", font=font(40), command= supportFrame.place_forget, fg_color=color, hover_color=color, width=0, height=0)
-            backButton.place(relx=.02, rely=0.001, anchor="nw")
-            backButton.bind("<Enter>", on_enter)
-            backButton.bind("<Leave>", on_leave)
-
-            # Create an object of tkinter ImageTk
-            def resource_path(relative_path):
-                """ Get absolute path to resource, works for dev and for PyInstaller """
-                try:
-                    # PyInstaller creates a temp folder and stores path in _MEIPASS
-                    base_path = sys._MEIPASS
-                except Exception:
-                    base_path = os.path.abspath(".")
-
-                return os.path.join(base_path, relative_path)
-            imgage = Image.open(resource_path("./src/loginImage.png"))
-            new_img = imgage.resize((1200,600))
-            img = ImageTk.PhotoImage(new_img)
-
-
-            # Create a Label Widget to display the text or Image
-            label = ctk.CTkLabel(supportFrame, image = img, text="")
-            label.place(relx= 0.5, rely= 0.5, anchor= "center")
-
-            def suport2(place_forget):
-                supportFrame2 = ctk.CTkFrame(supportFrame, width=1200, height=600, fg_color= color, bg_color= color)
-                supportFrame2.place(relx= 0, rely= 0, anchor= "nw")
-
-                supportlabel = ctk.CTkLabel(supportFrame2, text="Support page", font=font(35), fg_color=color, text_color="white")
-                supportlabel.place(relx=0.5, rely=0.02, anchor="n")
-
-                def back():
-                    place_forget.place_forget()
-                    supportFrame2.place_forget()
-
-                backButton = ctk.CTkButton(supportFrame2, text="⌂", font=font(40), command= back, fg_color=color, hover_color=color, width=0, height=0)
-                backButton.place(relx=.02, rely=0.001, anchor="nw")
-                backButton.bind("<Enter>", on_enter)
-                backButton.bind("<Leave>", on_leave)
-
-                # Create an object of tkinter ImageTk
-                
-                def resource_path(relative_path):
-                    """ Get absolute path to resource, works for dev and for PyInstaller """
-                    try:
-                        # PyInstaller creates a temp folder and stores path in _MEIPASS
-                        base_path = sys._MEIPASS
-                    except Exception:
-                        base_path = os.path.abspath(".")
-
-                    return os.path.join(base_path, relative_path)
-                imgage = Image.open(resource_path("./src/mainImage.png"))
-                new_img = imgage.resize((1200,600))
-                img = ImageTk.PhotoImage(new_img)
-
-                # Create a Label Widget to display the text or Image
-                label = ctk.CTkLabel(supportFrame, image = img, text="")
-                label.place(relx= 0.5, rely= 0.5, anchor= "center")
-
-            nextButton = ctk.CTkButton(supportFrame, text="Next", font=font(25), command= lambda:(suport2(supportFrame)), fg_color=color, hover_color=color, width=0)
-            nextButton.place(relx=.5, rely=0.95, anchor="center")
-            nextButton.bind("<Enter>", on_enter)
-            nextButton.bind("<Leave>", on_leave)
-
-#=========================== create support button ======================================================================================================================================================
-        #supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), command= support, fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
-        #supportButton.place(relx=0, rely=.6, anchor="nw")
+        aboutButton = ctk.CTkButton(moreFrame, text="   About", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= about)
+        aboutButton.place(relx=0, rely=.33, relwidth= 1, relheight= 1/3, anchor="nw")
 
 #=========================== function to logout ======================================================================================================================================================
         def logout():
@@ -567,14 +475,14 @@ def pickingTransaction(root, email):
             pickingFrame.place_forget()
 
 #=========================== create logout button ======================================================================================================================================================
-        logOutButton = ctk.CTkButton(moreFrame, text="   Log out", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0, command= logout)
-        logOutButton.place(relx=0, rely=.66, anchor="nw")
+        logOutButton = ctk.CTkButton(moreFrame, text="   Log out", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= logout)
+        logOutButton.place(relx=0, rely=.66, relwidth= 1, relheight= 1/3, anchor="nw")
 
 #=========================== algorithm to open and close more frame ======================================================================================================================================================
         if moreFrame.winfo_ismapped():
             moreFrame.place_forget()
         else:
-            moreFrame.place(relx= .975, rely= .08, anchor= "ne")
+            moreFrame.place(relx= .975, rely= .08, relwidth= 5/32, relheight= 1/4, anchor= "ne")
 
 #=========================== create more frame ======================================================================================================================================================
     moreFrame = ctk.CTkFrame(pickingFrame, width= 187.5, height= 150, fg_color= "#1e2121")

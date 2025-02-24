@@ -59,7 +59,7 @@ def yourData(root, email):
 
 #=========================== home page frame ======================================================================================================================================================
     yourDataFrame = ctk.CTkFrame(root, width= 1050, height= 600, fg_color= color)
-    yourDataFrame.place(relx= 0.125, rely= 0, anchor= "nw")
+    yourDataFrame.place(relx= 0.125, rely= 0, relwidth= 7/8 , relheight= 1, anchor= "nw")
 
 #=========================== welcomes user to home page ======================================================================================================================================================
     labelText = ctk.CTkLabel(yourDataFrame, text="Welcome, " + user, font=font(20), fg_color=color, text_color="white")
@@ -73,17 +73,17 @@ def yourData(root, email):
     style.map('Treeview', background=[('selected', '#292929')])
 
 #=========================== create listbox ======================================================================================================================================================
-    listbox = ttk.Treeview(yourDataFrame, selectmode="extended",columns=("c1", "c2", "c3", "c4"),show="headings", height= 5)
-    listbox.column("# 1", anchor="center", width = 315)
+    listbox = ttk.Treeview(yourDataFrame, selectmode="extended",columns=("c1", "c2", "c3", "c4"),show="headings")
+    listbox.column("# 1", anchor="center")
     listbox.heading("# 1", text="Amount")
-    listbox.column("# 2", anchor="center", width = 315)
+    listbox.column("# 2", anchor="center")
     listbox.heading("# 2", text="Type")
-    listbox.column("# 3", anchor="center", width = 315)
+    listbox.column("# 3", anchor="center")
     listbox.heading("# 3", text="Date")
-    listbox.column("# 4", anchor="center", width = 315)
+    listbox.column("# 4", anchor="center")
     listbox.heading("# 4", text="Additional Info")
 
-    listbox.place(relx=.5, rely=.5, anchor="center")
+    listbox.place(relx=.5, rely=.5, relwidth= .9, relheight= .715, anchor="center")
 
 #=========================== add/edit/remove/view transactionanization buttons ======================================================================================================================================================
     addtransactionButton = ctk.CTkButton(yourDataFrame, text="Add transaction", font=font(18), command = lambda:[addTransaction(yourDataFrame, listbox, totalLabel, str(pickingTransactionId)+ "collection", 0, 0)], fg_color=color, hover_color=color)
@@ -125,8 +125,8 @@ def yourData(root, email):
     searchLabel = ctk.CTkLabel(yourDataFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
     searchLabel.place(relx=0.29, rely=0.075, anchor="center")
 
-    searchEntry = ctk.CTkEntry(yourDataFrame, font= font(15), width= 400, height= 20, justify= "left", placeholder_text="Search by type", fg_color=color, text_color="white")
-    searchEntry.place(relx= 0.5, rely= 0.075, anchor= "center")
+    searchEntry = ctk.CTkEntry(yourDataFrame, font= font(15),justify= "left", placeholder_text="Search by type", fg_color=color, text_color="white")
+    searchEntry.place(relx= 0.5, rely= 0.075, relwidth= 8/21, relheight= 4/105, anchor= "center")
     final = list()
 
     def on_key_press(event):
@@ -160,9 +160,6 @@ def yourData(root, email):
 
     
     searchEntry.bind("<KeyRelease>", on_key_press)
-          
-    #filterButton = ctk.CTkButton(yourDataFrame, text="filter", font=font(15), command= lambda:(filter(yourDataFrame, listbox)), fg_color=accent, hover_color="#63C28D", text_color=color)
-    #filterButton.place(relx=0.7, rely=0.075, anchor="center")
 
     transactions = transactionInfo.find()
     total = 0
@@ -448,10 +445,6 @@ def yourData(root, email):
             nextButton.bind("<Enter>", on_enter)
             nextButton.bind("<Leave>", on_leave)
 
-#=========================== create support button ======================================================================================================================================================
-        #supportButton = ctk.CTkButton(moreFrame, text="   Support", font=font(15), command= support, fg_color= "#1e2121", hover_color="#2a2e2e", width=2000, anchor="w", height= 50, corner_radius=0)
-        #supportButton.place(relx=0, rely=.6, anchor="nw")
-
 #=========================== function to logout ======================================================================================================================================================
         def logout():
             moreFrame.place_forget()
@@ -469,9 +462,3 @@ def yourData(root, email):
 
 #=========================== create more frame ======================================================================================================================================================
     moreFrame = ctk.CTkFrame(yourDataFrame, width= 187.5, height= 150, fg_color= "#1e2121")
-
-#=========================== create button to open up the more frame ======================================================================================================================================================
-    moreButton = ctk.CTkButton(yourDataFrame, text="⚙", font=font(25), command= more, fg_color=color, hover_color=color, width=0)
-    moreButton.place(relx=.975, rely=0.06, anchor="e")
-    moreButton.bind("<Enter>", on_enter)
-    moreButton.bind("<Leave>", on_leave)

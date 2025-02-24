@@ -44,19 +44,12 @@ def Projects(root, email):
     transactions = transactionInfo.find()
 
 #=========================== home page frame ======================================================================================================================================================
-    projectsFrame = ctk.CTkFrame(root, width= 1050, height= 600, fg_color= color)
-    projectsFrame.place(relx= 0.125, rely= 0, anchor= "nw")
+    projectsFrame = ctk.CTkFrame(root, fg_color= color)
+    projectsFrame.place(relx= 0.125, rely= 0, relwidth= 7/8, relheight= 1, anchor= "nw")
 
 #=========================== welcomes user to home page ======================================================================================================================================================
     labelText = ctk.CTkLabel(projectsFrame, text="Welcome, " + user, font=font(20), fg_color=color, text_color="white")
     labelText.place(relx=0.5, rely=0.05, anchor="center")
-
-#=========================== listbox style ======================================================================================================================================================
-    style = ttk.Style()
-    style.theme_use("clam")
-    style.configure("Treeview", fieldbackground= color, background = color, foreground= "white", font= ("Quicksand", 12), rowheight= 100, highlightbackground = color, highlightcolor= accent)
-    style.configure("Treeview.Heading", background = color, foreground= "white", borderwidth= 0, font= ("Quicksand", 12))
-    style.map('Treeview', background=[('selected', '#292929')])
 
 #=========================== create project storage boxes ======================================================================================================================================================
     projectNamesData = db[str(pickingTransactionId) + "projectNames"]
@@ -80,13 +73,11 @@ def Projects(root, email):
             font=(font(18)),
             fg_color="#0f1010",
             hover_color="#2a2e2e",
-            width=175,
-            height=100,
             corner_radius=0,
             anchor="center",
             command=lambda i=i: detailedProject(projectsFrame, email, str(i))
         )
-        button.place(relx=relx, rely=rely, anchor="center")
+        button.place(relx=relx, rely=rely, relwidth= 1/6, relheight= 1/6, anchor="center")
 
     
 
