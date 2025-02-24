@@ -25,8 +25,8 @@ def on_leave(e):
 
 #=========================== function for error page ======================================================================================================================================================
 def success(message, root):
-    newSuccess = ctk.CTkFrame(root, width=1200, height=25, fg_color= accent, corner_radius=0)
-    newSuccess.place(relx=0, rely=0, anchor="nw")
+    newSuccess = ctk.CTkFrame(root, fg_color= accent, corner_radius=0)
+    newSuccess.place(relx=0, rely=0, relwidth= 1, relheight= 1/24, anchor="nw")
 
     label = ctk.CTkLabel(newSuccess, text=message, font=font(15), fg_color=accent, text_color="white")
     label.configure(anchor="center")

@@ -47,15 +47,15 @@ def signUp(root):
    
     emailLabel = ctk.CTkLabel(signupFrame, text="Email", font=font(15), fg_color=color, text_color="white")
     emailLabel.place(relx=0.335, rely=0.36, anchor="nw")
-    emailEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Name@domain.com", width=400, height=40, justify="center", fg_color=color, text_color="white")
-    emailEntry.place(relx=0.5, rely=0.45, anchor="center")
+    emailEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Name@domain.com", justify="center", fg_color=color, text_color="white")
+    emailEntry.place(relx=0.5, rely=0.45, relwidth= 1/3, relheight= 1/15, anchor="center")
 
     #=========================== Password entry box and text above entry box ======================================================================================================================================================
    
     passwordLabel = ctk.CTkLabel(signupFrame, text="Password", font=font(15), fg_color=color, text_color="white")
     passwordLabel.place(relx=0.335, rely=0.56, anchor="nw")
-    passwordEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Password (must have at least 8 characters)", width=400, height=40, justify="center", show="*", fg_color=color, text_color="white")
-    passwordEntry.place(relx=0.5, rely=0.65, anchor="center")
+    passwordEntry = ctk.CTkEntry(signupFrame, font=font(15), placeholder_text="Password (must have at least 8 characters)", justify="center", show="*", fg_color=color, text_color="white")
+    passwordEntry.place(relx=0.5, rely=0.65, relwidth= 1/3, relheight= 1/15, anchor="center")
 
 
     tooltip = ctk.CTkLabel(signupFrame, text="ⓘ", font=font(15), fg_color=color, text_color="white")
