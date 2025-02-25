@@ -11,6 +11,7 @@ from datetime import datetime
 
 from errorPage import error
 from success import success
+import globalVar
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -38,7 +39,6 @@ def on_enter(e):
 def on_leave(e):
     e.widget['foreground'] = 'white'
 
-check = 0
 
 
 
@@ -64,17 +64,16 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
 
     transactionInfo = db[str(user)]
     print(user)
-    global check
-    if check == 0:
-        check = 1
+    if globalVar.check == 0:
+        globalVar.check = 1
         addTransactionFrame = ctk.CTkFrame(root, fg_color=color, border_color="#1e2121", border_width=4)
         addTransactionFrame.place(relx=1, rely=0, relwidth= 10/21, relheight= 1, anchor="ne")
         addTransactionFrame.focus_set()
 
         def back():
-            global check
+    
             addTransactionFrame.place_forget()
-            check = 0
+            globalVar.check = 0
 
         backButton = ctk.CTkButton(addTransactionFrame, text="x", font=font(20), command=back, fg_color=color, hover_color=color, width=0, height=0)
         backButton.place(relx=.04, rely=0.02, anchor="nw")
@@ -85,7 +84,7 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
         amountEntryText.place(relx=0.12, rely=0.15, anchor="w")
 
         amountEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Amount", justify="center", fg_color=color, text_color="white")
-        amountEntry.place(relx=0.5, rely=0.2, relwidth= 8/21, relheight= 4/105,anchor="center")
+        amountEntry.place(relx=0.5, rely=0.2, relwidth= 16/21, relheight= 6/105,anchor="center")
 
         categoryText = ctk.CTkLabel(addTransactionFrame, text="Category", font=font(15), fg_color=color, text_color="white")
         categoryText.place(relx=0.12, rely=0.35, anchor="w")
@@ -97,7 +96,7 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
             border_color="#565B5E",  # Match border color of other entries
             border_width=2,
         )
-        categoryFrame.place(relx=0.5, rely=0.4, relwidth= 8/21, relheight= 4/105, anchor="center")
+        categoryFrame.place(relx=0.5, rely=0.4, relwidth= 16/21, relheight= 6/105, anchor="center")
         categories = ["Income", "Rent", "Groceries", "Utilities", "Transportation", "Entertainment", "Other"]
         categoryDropdown = ctk.CTkOptionMenu(
             categoryFrame,
@@ -108,23 +107,23 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
             button_color=accent,
             button_hover_color="#1c5c3c",
         )
-        categoryDropdown.place(relx=0.5, rely=0.5, anchor="center")
+        categoryDropdown.place(relx=0.5, rely=0.5, relwidth= .9, relheight= .8, anchor="center")
         categoryDropdown.set("Select a category")  # Set default option
 
         dateText = ctk.CTkLabel(addTransactionFrame, text="Date", font=font(15), fg_color=color, text_color="white")
         dateText.place(relx=0.12, rely=0.55, anchor="w")
         
         dateEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Enter a date", justify="center", fg_color=color, text_color="white", state="normal")
-        dateEntry.place(relx=0.5, rely=0.6, relwidth= 8/21, relheight= 4/105, anchor="center")
+        dateEntry.place(relx=0.5, rely=0.6, relwidth= 16/21, relheight= 6/105, anchor="center")
 
-        optionalInfoText = ctk.CTkLabel(addTransactionFrame, text="Enter Any Extra Information", font=font(15), fg_color=color, text_color="white")
+        optionalInfoText = ctk.CTkLabel(addTransactionFrame, text="Additional Info", font=font(15), fg_color=color, text_color="white")
         optionalInfoText.place(relx=0.12, rely=0.75, anchor="w")
 
         optionalInfoEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Optional Info", justify="center", fg_color=color, text_color="white")
-        optionalInfoEntry.place(relx=0.5, rely=0.8, relwidth= 8/21, relheight= 4/105, anchor="center")
+        optionalInfoEntry.place(relx=0.5, rely=0.8, relwidth= 16/21, relheight= 6/105, anchor="center")
 
         def submit():
-            global check
+    
             if switch == 0:
                 orgs = transactionInfo.find()
             else:
@@ -162,7 +161,7 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
             elif len(optionalInfoEntry.get()) > 25:
                 error("Please Enter A Shorter Description", root)
             else:
-                check = 0
+                globalVar.check = 0
                 if switch == 0:
                     transactionInfo.insert_one({"amount": round(float(amountEntry.get()), 2), "resources": categoryDropdown.get(), "Date": dateEntry.get(), "extraInfo": optionalInfoEntry.get()})
                 else:
@@ -214,6 +213,6 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
         submitButton.bind("<Enter>", on_enter)
         submitButton.bind("<Leave>", on_leave)
     else:
-        error("Please Close The Existing 'Add Organization' Page First", root)
+        error("Please Close The Existing Frame First", root)
 
 

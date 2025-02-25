@@ -36,7 +36,7 @@ def on_leave(e):
 #=========================== Create Main Frame ===========================
 mainFrame = ctk.CTk(fg_color=color)
 mainFrame.geometry("1200x600+180+120")
-mainFrame.resizable(width=False, height=False)
+#mainFrame.resizable(width=False, height=False)
 
 #=========================== Create Login Frame ===========================
 loginFrame = ctk.CTkFrame(mainFrame, fg_color=color)

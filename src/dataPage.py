@@ -18,6 +18,7 @@ from removeItem import removeItem
 from report import report
 from success import success
 from datetime import datetime
+import globalVar
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -56,6 +57,7 @@ def yourData(root, email):
     
     transactionInfo = db[str(pickingTransactionId)+"collection"]
     transactions = transactionInfo.find()
+    globalVar.check = 0
 
 #=========================== home page frame ======================================================================================================================================================
     yourDataFrame = ctk.CTkFrame(root, width= 1050, height= 600, fg_color= color)

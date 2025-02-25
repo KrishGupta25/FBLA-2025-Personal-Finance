@@ -15,6 +15,7 @@ from projectsPage import Projects
 
 from errorPage import error
 from dataPage import yourData
+import globalVar
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -50,7 +51,8 @@ def pickingTransaction(root, email):
         pickingTransactionId = item["_id"]
     
     transactionInfo = db[str(pickingTransactionId)+"collection"]
-    transactions = transactionInfo.find() 
+    transactions = transactionInfo.find()
+    globalVar.check = 0 
 
 #=========================== home page frame ======================================================================================================================================================
     pickingFrame = ctk.CTkFrame(root, fg_color= color)
@@ -276,17 +278,17 @@ def pickingTransaction(root, email):
 
 #=========================== create Home button ======================================================================================================================================================
 
-    homeButton = ctk.CTkButton(sideFrame, text="  ⌂ Home", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", width=150, anchor="w", height= 50, corner_radius=0, command= lambda: [pickingFrame.place_forget(), pickingTransaction(root, email)])
-    homeButton.place(relx=0, rely=0, anchor="nw")
+    homeButton = ctk.CTkButton(sideFrame, text="  ⌂ Home", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= lambda: [pickingFrame.place_forget(), pickingTransaction(root, email)])
+    homeButton.place(relx=0, rely=0, relwidth= 1, relheight= 1/12, anchor="nw")
 
 #=========================== create Home button ======================================================================================================================================================
 
-    tableButton = ctk.CTkButton(sideFrame, text="  📖 Your Data", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", width=150, anchor="w", height= 50, corner_radius=0, command= lambda: [yourData(pickingFrame ,email)])
-    tableButton.place(relx=0, rely=0.083, anchor="nw")
+    tableButton = ctk.CTkButton(sideFrame, text="  📖 Your Data", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= lambda: [yourData(pickingFrame ,email)])
+    tableButton.place(relx=0, rely=0.083, relwidth= 1, relheight= 1/12, anchor="nw")
 
 #=========================== create Projects Button ======================================================================================================================================================
-    projectsButton = ctk.CTkButton(sideFrame, text="  📂 Projects", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", width=150, anchor="w", height= 50, corner_radius=0, command= lambda: [Projects(pickingFrame ,email)])
-    projectsButton.place(relx=0, rely=0.166, anchor="nw")
+    projectsButton = ctk.CTkButton(sideFrame, text="  📂 Projects", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= lambda: [Projects(pickingFrame ,email)])
+    projectsButton.place(relx=0, rely=0.166, relwidth= 1, relheight= 1/12, anchor="nw")
 
 #=========================== find users first and last name ======================================================================================================================================================
     temp = loginInfo.find({"email": email})
@@ -472,6 +474,7 @@ def pickingTransaction(root, email):
         def logout():
             moreFrame.place_forget()
             pickingFrame.place_forget()
+            sideFrame.place_forget()
 
 #=========================== create logout button ======================================================================================================================================================
         logOutButton = ctk.CTkButton(moreFrame, text="   Log out", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= logout)

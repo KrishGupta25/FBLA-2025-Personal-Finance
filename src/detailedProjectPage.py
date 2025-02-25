@@ -130,10 +130,10 @@ def detailedProject(root, email, id):
         count+= 1
 
     searchLabel = ctk.CTkLabel(detailedProjectFrame, text= "🔎", font=font(20), fg_color=color, text_color="white")
-    searchLabel.place(relx=0.29, rely=0.075, anchor="center")
+    searchLabel.place(relx=0.49, rely=0.075, anchor="center")
 
     searchEntry = ctk.CTkEntry(detailedProjectFrame, font= font(15), justify= "left", placeholder_text="Search by type", fg_color=color, text_color="white")
-    searchEntry.place(relx= 0.5, rely= 0.075,  relwidth= 8/21, relheight= 4/105,anchor= "center")
+    searchEntry.place(relx= 0.7, rely= 0.075,  relwidth= 8/21, relheight= 4/105,anchor= "center")
     final = list()
 
     def on_key_press(event):

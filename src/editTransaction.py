@@ -10,6 +10,7 @@ from datetime import datetime
 
 from errorPage import error
 from success import success
+import globalVar
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -37,8 +38,6 @@ def on_enter(e):
 def on_leave(e):
     e.widget['foreground'] = 'white'
 
-check = 0
-
 
 
 #=========================== function to create edit item frame ======================================================================================================================================================
@@ -63,15 +62,14 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
     print(str(user)+"collectionprojectNames"+ str(projectid))
   
     transactionInfo = db[user]
-    global check
-    if check == 0:
+    if globalVar.check == 0:
         temp = listbox.selection()
         if len(temp) == 0:
             error("Please Select An Transaction To Edit", root)
         elif len(temp) > 1:
             error("You Can Only Select One Transaction To Edit At a Time", root)
         else:
-            check = 1
+            globalVar.check = 1
             selection = listbox.item(temp, option="values")
 
             editTransactionFrame = ctk.CTkFrame(root, width=500, height=600, fg_color=color, border_color="#1e2121", border_width=4)
@@ -79,9 +77,8 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
             editTransactionFrame.focus_set()
 
             def back():
-                global check
                 editTransactionFrame.place_forget()
-                check = 0
+                globalVar.check = 0
 
             backButton = ctk.CTkButton(editTransactionFrame, text="x", font=font(20), command=back, fg_color=color, hover_color=color, width=0, height=0)
             backButton.place(relx=.04, rely=0.02, anchor="nw")
@@ -110,7 +107,7 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
             border_color="#565B5E",  # Match border color of other entries
             border_width=2,
             )
-            categoryFrame.place(relx=0.5, rely=0.4, anchor="center")
+            categoryFrame.place(relx=0.5, rely=0.4, relwidth= 16/21, relheight= 6/105, anchor="center")
             categories = ["Income", "Rent", "Groceries", "Utilities", "Transportation", "Entertainment", "Other"]
             categoryDropdown = ctk.CTkOptionMenu(
             categoryFrame,
@@ -121,7 +118,7 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
             button_color=accent,
             button_hover_color="#1c5c3c",
             )
-            categoryDropdown.place(relx=0.5, rely=0.5, anchor="center")
+            categoryDropdown.place(relx=0.5, rely=0.5, relwidth= .9, relheight= .8, anchor="center")
             categoryDropdown.set(selection[1])  # Set default option
             dateText = ctk.CTkLabel(editTransactionFrame, text="Date", font=font(15), fg_color=color, text_color="white")
             dateText.place(relx=0.12, rely=0.55, anchor="w")
@@ -140,7 +137,6 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
             optionalInfoEntry.bind('<FocusIn>', lambda x: optionalInfoEntry.select_range(0, "end"))
 
             def submit():
-                global check
                 date = list(dateEntry.get())
                 if switch == 0:
                     orgs = transactionInfo.find()
@@ -200,7 +196,7 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
                     for item in sortedData:
                         listbox.insert(parent='', index='end', text= "", iid= count, values=(item["amount"], item["resources"], item["Date"], item["extraInfo"]))
                         count+= 1
-                    check = 0
+                    globalVar.check = 0
 
                     if switch == 0:
                         transactions = transactionInfo.find()
@@ -224,4 +220,4 @@ def editItem(root, listbox, tempLabel, user, switch, projectid):
             submitButton.bind("<Enter>", on_enter)
             submitButton.bind("<Leave>", on_leave)
     else:
-        error("Please Close The Existing 'Edit Transaction' Page First", root)
+        error("Please Close The Existing Frame First", root)

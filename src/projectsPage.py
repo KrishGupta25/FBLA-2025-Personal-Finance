@@ -4,6 +4,7 @@ from tkinter import ttk
 import customtkinter as ctk
 from pymongo import MongoClient
 from detailedProjectPage import detailedProject
+import globalVar
 
 #=========================== establish connection to database ======================================================================================================================================================
 cluster = MongoClient("mongodb+srv://fireplatypus375:0TgN3YyiObPpHtmQ@fblamain.emmytgc.mongodb.net/")
@@ -42,6 +43,7 @@ def Projects(root, email):
     
     transactionInfo = db[str(pickingTransactionId)+"collection"]
     transactions = transactionInfo.find()
+    globalVar.check = 0
 
 #=========================== home page frame ======================================================================================================================================================
     projectsFrame = ctk.CTkFrame(root, fg_color= color)
