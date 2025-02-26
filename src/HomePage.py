@@ -474,7 +474,7 @@ def pickingTransaction(root, email):
         def logout():
             moreFrame.place_forget()
             pickingFrame.place_forget()
-            sideFrame.place_forget()
+            sideFrame.destroy()
 
 #=========================== create logout button ======================================================================================================================================================
         logOutButton = ctk.CTkButton(moreFrame, text="   Log out", font=font(15), fg_color= "#1e2121", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= logout)
