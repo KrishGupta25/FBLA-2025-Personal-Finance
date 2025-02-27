@@ -189,29 +189,53 @@ def detailedProject(root, email, id):
         if int(item["_id"]) == int(id):
             name = item["projectName"]
 
+    global open_check
+    open_check = 0
     def changeName():
-        changeNameFrame = ctk.CTkFrame(root, fg_color= "#0f1010")
-        changeNameFrame.place(relx= .03, rely= .14, relwidth= 8/21, relheight= 4/21, anchor= "nw")
+        global open_check
 
-        changeNameLabel = ctk.CTkLabel(changeNameFrame, text= "Enter new project name:", font=font(15), fg_color=color, text_color="white")
-        changeNameLabel.place(relx=0.14, rely=0.16, anchor="nw")
+        if open_check == 0:
+            open_check = 1
 
-        changeNameEntry = ctk.CTkEntry(changeNameFrame, font=font(15), justify="center", fg_color=color, text_color="white")
-        changeNameEntry.place(relx=0.5, rely=0.55, relwidth= 3/4, relheight= 1/5, anchor="center")
-        changeNameEntry.insert(0, name)
-        changeNameEntry.bind('<FocusIn>', lambda x: changeNameEntry.select_range(0, "end"))
+            changeNameFrame = ctk.CTkFrame(root, fg_color= "#0f1010")
+            changeNameFrame.place(relx= .03, rely= .14, relwidth= 8/21, relheight= 4/21, anchor= "nw")
 
-        def submit():
-            projectnames.replace_one({"_id": int(id)}, {"_id": int(id), "projectName": changeNameEntry.get()})
-            changeNameFrame.place_forget()
-            success("Project name changed", root)
-            labelText.configure(text="Project name: " + changeNameEntry.get())
+            changeNameLabel = ctk.CTkLabel(changeNameFrame, text= "Enter new project name:", font=font(15), fg_color=color, text_color="white")
+            changeNameLabel.place(relx=0.14, rely=0.16, anchor="nw")
 
-        submitButton = ctk.CTkButton(changeNameFrame, text="Submit", font=font(18), command=submit, fg_color="#0f1010", hover_color="#0f1010", text_color="white")
-        submitButton.place(relx=0.5, rely=0.85, anchor="center")
-        submitButton.bind("<Enter>", on_enter)
-        submitButton.bind("<Leave>", on_leave)
+            changeNameEntry = ctk.CTkEntry(changeNameFrame, font=font(15), justify="center", fg_color=color, text_color="white")
+            changeNameEntry.place(relx=0.5, rely=0.55, relwidth= 3/4, relheight= 1/5, anchor="center")
+            changeNameEntry.insert(0, name)
+            changeNameEntry.bind('<FocusIn>', lambda x: changeNameEntry.select_range(0, "end"))
 
+            def back():
+                changeNameFrame.destroy()
+                global open_check
+                open_check = 0
+
+            backButton = ctk.CTkButton(changeNameFrame, text="x", font=font(20), command= back, fg_color=color, hover_color=color, width=0, height=0)
+            backButton.place(relx=.9, rely=0.02, anchor="nw")
+            backButton.bind("<Enter>", on_enter)
+            backButton.bind("<Leave>", on_leave)
+
+            def submit():
+                if len(changeNameEntry.get()) > 0:
+                    projectnames.replace_one({"_id": int(id)}, {"_id": int(id), "projectName": changeNameEntry.get()})
+                    changeNameFrame.place_forget()
+                    success("Project name changed", root)
+                    labelText.configure(text="Project name: " + changeNameEntry.get())
+                    global open_check
+                    open_check = 0
+                else:
+                    error("Please enter a project name", root)
+
+            submitButton = ctk.CTkButton(changeNameFrame, text="Submit", font=font(18), command=submit, fg_color="#0f1010", hover_color="#0f1010", text_color="white")
+            submitButton.place(relx=0.5, rely=0.85, anchor="center")
+            submitButton.bind("<Enter>", on_enter)
+            submitButton.bind("<Leave>", on_leave)
+
+        else:
+            error("You already have the edit project frame open", root)
         
 
     reportButton = ctk.CTkButton(root, text="   Change project name", font=font(15), fg_color= color, command=changeName, hover_color=color)
