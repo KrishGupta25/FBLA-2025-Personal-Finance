@@ -222,49 +222,49 @@ def pickingTransaction(root, email):
 
 #=========================== create line graph  ======================================================================================================================================================       
     
-    plt.rcParams["font.family"] = "Quicksand"  
-    plt.rcParams["font.size"] = 10
-    
-    transactions = transactionInfo.find()
-    transaction_dates = []
-    for t in transactions:
-        transaction_dates.append(t)
-    
-    sorted_data = sorted(transaction_dates, key=lambda x: dt.strptime(x["Date"], "%m/%d/%Y"))
-
-    # Assign numerical values based on chronological order
-    for index, item in enumerate(sorted_data, start=1):
-        item["time_num"] = index
-    
-    sorted_total = 0
-    sorted_total_list = []
-    dates = [dt.strptime(item["Date"], "%m/%d/%Y") for item in sorted_data]
-    for data in sorted_data:
-        if data["resources"] == "Income":
-            sorted_total += data["amount"]
-        else:
-            sorted_total -= data["amount"]
-        sorted_total_list.append(sorted_total)
+        plt.rcParams["font.family"] = "Quicksand"  
+        plt.rcParams["font.size"] = 10
         
-    balances = [item for item in sorted_total_list]
-
-# Create the line graph
-    fig2, ax2 = plt.subplots()  # Create a figure and axis
-    ax2.plot(dates, balances, marker='o', linestyle='-', label="Balance Over Time", color = accent)
+        transactions = transactionInfo.find()
+        transaction_dates = []
+        for t in transactions:
+            transaction_dates.append(t)
         
-    ax2.set_title("Change in Balance Over Time", color = 'white',)
-    ax2.grid(True)
-    fig2.autofmt_xdate()
-    canvas2 = FigureCanvasTkAgg(fig2, master=pickingFrame)
-    canvas2.draw()
-    canvas2.get_tk_widget().place(relx= 0.035, rely= 0.8, relwidth= 1.05, relheight= .55, anchor= "w")
-    fig2.patch.set_facecolor(color) 
-    ax2.set_facecolor(color)
-    ax2.set_xticks([])
-    ax2.set_xticklabels([])
-    ax2.tick_params(axis='y', colors='white')
-    for spine in ax2.spines.values():
-        spine.set_color(color)
+        sorted_data = sorted(transaction_dates, key=lambda x: dt.strptime(x["Date"], "%m/%d/%Y"))
+
+        # Assign numerical values based on chronological order
+        for index, item in enumerate(sorted_data, start=1):
+            item["time_num"] = index
+        
+        sorted_total = 0
+        sorted_total_list = []
+        dates = [dt.strptime(item["Date"], "%m/%d/%Y") for item in sorted_data]
+        for data in sorted_data:
+            if data["resources"] == "Income":
+                sorted_total += data["amount"]
+            else:
+                sorted_total -= data["amount"]
+            sorted_total_list.append(sorted_total)
+            
+        balances = [item for item in sorted_total_list]
+
+    # Create the line graph
+        fig2, ax2 = plt.subplots()  # Create a figure and axis
+        ax2.plot(dates, balances, marker='o', linestyle='-', label="Balance Over Time", color = accent)
+            
+        ax2.set_title("Change in Balance Over Time", color = 'white',)
+        ax2.grid(True)
+        fig2.autofmt_xdate()
+        canvas2 = FigureCanvasTkAgg(fig2, master=pickingFrame)
+        canvas2.draw()
+        canvas2.get_tk_widget().place(relx= 0.035, rely= 0.8, relwidth= 1.05, relheight= .55, anchor= "w")
+        fig2.patch.set_facecolor(color) 
+        ax2.set_facecolor(color)
+        ax2.set_xticks([])
+        ax2.set_xticklabels([])
+        ax2.tick_params(axis='y', colors='white')
+        for spine in ax2.spines.values():
+            spine.set_color(color)
 
 
 #=========================== welcomes user to home page ======================================================================================================================================================
@@ -444,8 +444,8 @@ def pickingTransaction(root, email):
 #=========================== create about frame ======================================================================================================================================================
         def about():
             moreFrame.place_forget()
-            aboutFrame = ctk.CTkFrame(pickingFrame, width=1200, height=600, fg_color= color, bg_color= color)
-            aboutFrame.place(relx= 0, rely= 0, anchor= "nw")
+            aboutFrame = ctk.CTkFrame(pickingFrame, fg_color= color, bg_color= color)
+            aboutFrame.place(relx= 0.125, rely= 0, relwidth= 7/8 , relheight= 1, anchor= "nw")
 
             AboutUslabel = ctk.CTkLabel(aboutFrame, text="About Us ", font=font(35), fg_color=color, text_color="white")
             AboutUslabel.place(relx=0.5, rely=0.02, anchor="n")

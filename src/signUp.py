@@ -36,8 +36,8 @@ def on_leave(e):
 #=========================== creates new page for signing up ======================================================================================================================================================
 def signUp(root):
     #Create new sign up frame over login page
-    signupFrame = ctk.CTkFrame(root, width=1200, height=600, fg_color=color)
-    signupFrame.place(relx=0, rely=0)
+    signupFrame = ctk.CTkFrame(root, fg_color=color)
+    signupFrame.place(relx=0, rely=0, relwidth= 1, relheight = 1)
 
     #Creates signup to xxxx label
     loginLabel = ctk.CTkLabel(signupFrame, text="Sign up for BudgetBuddy", font=font(50), fg_color=color, text_color="white")

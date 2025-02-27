@@ -113,7 +113,7 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
         dateText = ctk.CTkLabel(addTransactionFrame, text="Date", font=font(15), fg_color=color, text_color="white")
         dateText.place(relx=0.12, rely=0.55, anchor="w")
         
-        dateEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Enter a date", justify="center", fg_color=color, text_color="white", state="normal")
+        dateEntry = ctk.CTkEntry(addTransactionFrame, font=font(15), placeholder_text="Enter date in mm/dd/yyyy format", justify="center", fg_color=color, text_color="white", state="normal")
         dateEntry.place(relx=0.5, rely=0.6, relwidth= 16/21, relheight= 6/105, anchor="center")
 
         optionalInfoText = ctk.CTkLabel(addTransactionFrame, text="Additional Info", font=font(15), fg_color=color, text_color="white")
