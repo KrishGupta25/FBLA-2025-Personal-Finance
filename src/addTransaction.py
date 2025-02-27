@@ -70,6 +70,9 @@ def addTransaction(root, listbox, tempLabel, user, switch, projectid):
         addTransactionFrame.place(relx=1, rely=0, relwidth= 10/21, relheight= 1, anchor="ne")
         addTransactionFrame.focus_set()
 
+        addTransactiontext = ctk.CTkLabel(addTransactionFrame, text="Add Transaction", font=font(20), fg_color=color, text_color="white")
+        addTransactiontext.place(relx=0.5, rely=0.05, anchor="center")
+
         def back():
     
             addTransactionFrame.place_forget()
