@@ -278,7 +278,7 @@ def pickingTransaction(root, email):
 
 #=========================== create Home button ======================================================================================================================================================
 
-    homeButton = ctk.CTkButton(sideFrame, text="  ⌂ Home", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= lambda: [pickingFrame.place_forget(), pickingTransaction(root, email)])
+    homeButton = ctk.CTkButton(sideFrame, text="  ⌂ Home", font=font(18), fg_color= "#0f1010", hover_color="#2a2e2e", anchor="w", corner_radius=0, command= lambda: [pickingFrame.destroy(), pickingTransaction(root, email), sideFrame.destroy()])
     homeButton.place(relx=0, rely=0, relwidth= 1, relheight= 1/12, anchor="nw")
 
 #=========================== create Home button ======================================================================================================================================================
